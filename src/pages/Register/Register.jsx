@@ -25,7 +25,7 @@ const Register = () => {
 
         <input
           type="text"
-          className="my-2 w-full p-3 rounded-lg outline-none"
+          className="mt-6 my-2 w-full p-3 rounded-lg outline-none"
           placeholder="Name"
         />
         <input
