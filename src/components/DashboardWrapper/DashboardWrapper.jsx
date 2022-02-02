@@ -4,9 +4,9 @@ import Topbar from "../Topbar/Topbar";
 
 const DashboardWrapper = ({ children }) => {
   return (
-    <div>
+    <div className="flex min-h-screen">
       <Sidebar />
-      <div>
+      <div className="px-[320px] flex-1 py-8 px-6">
         <Topbar />
         {children}
       </div>
