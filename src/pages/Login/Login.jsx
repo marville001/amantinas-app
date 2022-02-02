@@ -27,12 +27,12 @@ const Login = () => {
 
         <input
           type="email"
-          className="mt-6 my-2 w-full p-3 rounded-lg outline-none text-xl"
+          className="mt-6 my-2 w-full p-3 rounded-lg outline-none text-lg"
           placeholder="Your email"
         />
         <input
           type="password"
-          className="my-2 w-full p-3 rounded-lg outline-none text-xl"
+          className="my-2 w-full p-3 rounded-lg outline-none text-lg"
           placeholder="Your password"
         />
 
