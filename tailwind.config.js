@@ -1,9 +1,14 @@
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "light-blue": "#effafb",
+        "primary-blue": "#21bdca",
+        "sky-blue": "#25d5e6",
+        "dark-color": "#0e5359",
+      },
+    },
   },
   plugins: [],
-}
+};

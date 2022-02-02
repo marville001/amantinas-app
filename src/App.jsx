@@ -1,9 +1,16 @@
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+
+import Login from "./pages/Login/Login"
+import Register from "./pages/Register/Register"
 
 const App = () => {
   return (
-      <div className="bg-indigo-200 min-h-screen">
-          <h4>App</h4>
+      <div className="bg-[#effafb] min-h-screen">
+          <Routes>
+              <Route exact path="/" element={<Login/>} />
+              <Route exact path="/register" element={<Register/>} />
+          </Routes>
       </div>
   );
 };
