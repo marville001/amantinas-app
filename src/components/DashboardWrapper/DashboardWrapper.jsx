@@ -6,7 +6,7 @@ const DashboardWrapper = ({ children }) => {
   return (
     <div className="flex min-h-screen">
       <Sidebar />
-      <div className="pl-[320px] flex-1 px-6 py-8 bg-red-300">
+      <div className="pl-[320px] flex-1 px-6 py-8">
         <Topbar />
         {children}
       </div>
