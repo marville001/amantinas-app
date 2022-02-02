@@ -25,22 +25,22 @@ const Register = () => {
 
         <input
           type="text"
-          className="mt-6 my-2 w-full p-3 rounded-lg outline-none"
+          className="mt-6  text-lg my-2 w-full p-3 rounded-lg outline-none"
           placeholder="Name"
         />
         <input
           type="email"
-          className="my-2 w-full p-3 rounded-lg outline-none"
+          className=" text-lg my-2 w-full p-3 rounded-lg outline-none"
           placeholder="Email"
         />
         <input
           type="password"
-          className="my-2 w-full p-3 rounded-lg outline-none"
+          className=" text-lg my-2 w-full p-3 rounded-lg outline-none"
           placeholder="Password"
         />
         <input
           type="password"
-          className="my-2 w-full p-3 rounded-lg outline-none"
+          className=" text-lg my-2 w-full p-3 rounded-lg outline-none"
           placeholder="Confirm password"
         />
 
