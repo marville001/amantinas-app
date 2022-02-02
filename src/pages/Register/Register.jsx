@@ -10,16 +10,16 @@ const Register = () => {
           Sign up to Amantinas.
         </h1>
         <div className="flex space-x-5 my-6 justify-center">
-          <div className="cursor-pointer p-2 px-6 rounded-lg bg-primary-blue text-white text-xl flex justify-center items-center">
-            <FaGoogle className="text-white font-bold text-2xl mr-2" /> Sign up
-            with Google
+        <div className="cursor-pointer p-2 px-12 rounded-lg bg-primary-blue text-white flex justify-center items-center">
+            <FaGoogle className="text-white font-bold text-3xl mr-2" /> 
+            <span className="text-sm">Sign up with Google</span>
           </div>
           <div className="cursor-pointer p-3 px-4 rounded-lg bg-white font-bold text-primary-blue">
             <FaFacebookF className="text-primary-blue font-bold text-4xl mr-2" />
           </div>
         </div>
 
-        <p className="text-lg mt-10 text-center">
+        <p className="text-sm mt-10 text-center">
           Or sign up using your email address
         </p>
 
@@ -68,14 +68,14 @@ const Register = () => {
         <button className="cursor-pointer mt-6 w-full py-3 px-6 rounded-lg bg-primary-blue text-white text-md flex justify-center items-center">
           SIGN UP
         </button>
-        <p className="text-slate-700 mt-6 text-center">OR</p>
+        {/* <p className="text-slate-700 mt-6 text-center">OR</p> */}
 
-        <Link
+        {/* <Link
           to="/"
           className="cursor-pointer mt-6 w-full py-3  px-6 rounded-lg bg-primary-blue text-white text-md flex justify-center items-center"
         >
           SIGN IN
-        </Link>
+        </Link> */}
       </div>
     </div>
   );
