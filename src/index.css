@@ -22,3 +22,7 @@
 .board::-webkit-scrollbar {
   width: 5px !important;
 }
+
+.board-container::-webkit-scrollbar{
+  display: none !important;
+}
