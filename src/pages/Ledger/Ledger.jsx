@@ -1,14 +1,13 @@
 import React from "react";
 import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper";
 
-import { HiOutlineDownload } from "react-icons/hi";
 import DataTable from "../../components/DataTable/DataTable";
 
 const Ledger = () => {
   return (
     <DashboardWrapper>
       <DataTable
-        title="activities"
+        title="Activities"
         btnText="Add Transaction"
         columnTitles={[
           "Account",

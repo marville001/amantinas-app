@@ -36,9 +36,9 @@ const DataTable = ({ title, btnText, columnTitles }) => {
           </div>
         ))}
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col ">
         {[1, 2, 3].map((idx) => (
-          <div className="flex py-3">
+          <div className="flex py-3 hover:bg-light-blue cursor-pointer">
             <div className="px-3">
               <input type="checkbox" className="w-4 h-4 mt-1" />
             </div>
