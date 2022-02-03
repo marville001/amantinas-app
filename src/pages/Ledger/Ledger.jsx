@@ -5,7 +5,7 @@ import DataTable from "../../components/DataTable/DataTable";
 
 const Ledger = () => {
   return (
-    <DashboardWrapper>
+    <DashboardWrapper title={"Ledger"}>
       <DataTable
         title="Activities"
         btnText="Add Transaction"

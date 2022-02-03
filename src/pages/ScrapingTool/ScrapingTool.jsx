@@ -3,7 +3,7 @@ import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper
 
 const ScrapingTool = () => {
   return (
-    <DashboardWrapper>
+    <DashboardWrapper title="Scraping Tool">
       <div className="my-6 bg-white rounded-xl p-4 max-w-6xl">
         <h2 className="text-md font-bold mb-2 ml-3 fo text-dark-color">
           Scraping
