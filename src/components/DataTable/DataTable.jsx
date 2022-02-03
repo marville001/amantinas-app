@@ -1,23 +1,33 @@
 import React from "react";
 import { HiOutlineDownload } from "react-icons/hi";
 
-const DataTable = ({ title, btnText, columnTitles }) => {
+const DataTable = ({
+  title,
+  btnText,
+  columnTitles,
+  showDownload = true,
+  searchable = true,
+}) => {
   return (
-    <div className="my-6 bg-white rounded-xl p-4 max-w-6xl">
+    <div className="bg-white rounded-xl p-4 max-w-6xl">
       <h2 className="text-md font-bold mb-2 ml-3 fo text-dark-color">
         {title}
       </h2>
       <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-color bg-dark-color" />
       <div className="flex justify-between my-6 mt-10">
-        <input
-          type="search"
-          className="border px-2 py-2 min-w-[300px] text-sm rounded-md placeholder:text-sm outline-none"
-          placeholder={`Search ${title}`}
-        />
-        <div className="flex space-x-4">
-          <div className="cursor-pointer border-brown-color border-2 p-1 rounded-md grid place-items-center">
-            <HiOutlineDownload className="w-8 h-6 text-brown-color" />
-          </div>
+        {searchable && (
+          <input
+            type="search"
+            className="border px-2 py-2 min-w-[300px] text-sm rounded-md placeholder:text-sm outline-none"
+            placeholder={`Search ${title}`}
+          />
+        )}
+        <div className="flex space-x-4 ml-auto">
+          {showDownload && (
+            <div className="cursor-pointer border-brown-color border-2 p-1 rounded-md grid place-items-center">
+              <HiOutlineDownload className="w-8 h-6 text-brown-color" />
+            </div>
+          )}
           <button className="bg-primary-blue p-2 px-10 w-full text-white rounded-md uppercase text-xs">
             {btnText}
           </button>
