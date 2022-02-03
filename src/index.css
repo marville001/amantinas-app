@@ -6,7 +6,9 @@
   width: 5px !important;
   display: none;
 }
-.sidebar::-webkit-scrollbar-track {
+.sidebar::-webkit-scrollbar-track,
+.board::-webkit-scrollbar-track
+ {
   background: #f1f1f1;
 }
 .sidebar::-webkit-scrollbar-thumb {
@@ -15,4 +17,8 @@
 }
 .sidebar::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.board::-webkit-scrollbar {
+  width: 5px !important;
 }
