@@ -16,7 +16,7 @@ import ProjectBoards from "./pages/ProjectBoards/ProjectBoards";
 
 const App = () => {
   return (
-    <div className="bg-[#effafb] min-h-screen">
+    <div className="bg-[#effafb] min-h-screen max-w-[1560px] mx-auto">
       <Routes>
         <Route exact path="/" element={<Login />} />
         <Route exact path="/login" element={<Navigate to="/" />} />
