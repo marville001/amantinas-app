@@ -1,6 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import CashFlowChart from "../../components/CashFlowChart/CashFlowChart";
 import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper";
+
+import { HiOutlinePlusCircle } from "react-icons/hi";
 
 const Home = () => {
   return (
@@ -75,6 +78,38 @@ const Home = () => {
                 <h3 className="text-brown-color">Managed Homes</h3>
                 <div className="text-md font-bold text-dark-color">4</div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex my-6 gap-5 justify-end">
+          <div className="bg-white p-4 flex-1 lg:flex-none lg:min-w-[280px] rounded-xl">
+            <h2 className="text-md mb-2 text-center font-bold text-dark-color">
+              Project Boards
+            </h2>
+            <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-color bg-dark-color" />
+
+            <div className="flex cursor-pointer items-center justify-center w-full pt-6 text-primary-blue">
+              <HiOutlinePlusCircle className="w-24 h-24" />
+            </div>
+          </div>
+          <div className="bg-white p-4 flex-1 lg:flex-none py-4 lg:min-w-[280px] rounded-xl">
+            <h2 className="text-md mb-2 text-center font-bold text-dark-color">
+              Time
+            </h2>
+            <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-color bg-dark-color" />
+
+            <div className="flex flex-col items-center my-4 mx-6">
+              <button className="bg-primary-blue p-2 px-10 w-full text-white rounded-xl uppercase text-xs">
+                Time In
+              </button>
+              <h4 className="text-3xl my-2 text-brown-color ">15:37:00</h4>
+              <Link
+                to="/my-activities"
+                className="text-center bg-primary-blue p-2 px-10 w-full text-white rounded-xl uppercase text-xs"
+              >
+                View Activities
+              </Link>
             </div>
           </div>
         </div>
