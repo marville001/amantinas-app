@@ -94,7 +94,7 @@ const ProjectBoards = () => {
           {boardData.map((board, idx) => (
             <div
               key={board.name}
-              className="board min-w-[300px] bg-white p-2 flex flex-col max-h-[900px] overflow-y-auto rounded-3xl"
+              className="board min-w-[300px] bg-white p-2 flex flex-col pb-16 max-h-[900px] overflow-y-auto rounded-3xl"
             >
               <Droppable droppableId={idx.toString()}>
                 {(provided, snapshot) => (
