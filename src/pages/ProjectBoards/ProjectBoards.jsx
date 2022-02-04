@@ -72,6 +72,7 @@ const ProjectBoards = () => {
       re.source.index,
       1
     );
+    console.log({ dragItem, dest: re.destination });
     newBoardData[parseInt(re.destination.droppableId)].items.splice(
       re.destination.index,
       0,
@@ -84,8 +85,9 @@ const ProjectBoards = () => {
       title={`Project Boards - ${selectedBoard && selectedBoard}`}
     >
       <ScrollContainer
+        ignoreElements=".board-item"
         className="
-      my-10 flex space-x-8 overflow-x-scroll board-container   
+      my-10 flex space-x-8 overflow-x-auto board-container select-none  
       "
       >
         <DragDropContext onDragEnd={onDragEnd}>
@@ -107,10 +109,11 @@ const ProjectBoards = () => {
                           index={idx}
                           draggableId={item.id.toString()}
                           key={item.id}
-                          className="w-[90%] mx-auto"
+                          className="w-[90%] mx-auto "
                         >
                           {(provided) => (
                             <div
+                              className="board-item"
                               ref={provided.innerRef}
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}

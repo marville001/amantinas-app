@@ -4,8 +4,11 @@ import CashFlowChart from "../../components/CashFlowChart/CashFlowChart";
 import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper";
 
 import { HiOutlinePlusCircle } from "react-icons/hi";
+import { useState } from "react";
+import AddBoardModal from "../../components/Modals/AddBoardModal";
 
 const Home = () => {
+  const [newBoardModalOpen, setNewBoardModalOpen] = useState(false);
   return (
     <DashboardWrapper>
       <div className="my-6">
@@ -89,7 +92,10 @@ const Home = () => {
             </h2>
             <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-color bg-dark-color" />
 
-            <div className="flex cursor-pointer items-center justify-center w-full pt-6 text-primary-blue">
+            <div
+              onClick={() => setNewBoardModalOpen(true)}
+              className="flex cursor-pointer items-center justify-center w-full pt-6 text-primary-blue"
+            >
               <HiOutlinePlusCircle className="w-24 h-24" />
             </div>
           </div>
@@ -114,6 +120,13 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      <AddBoardModal
+        title={"New Board"}
+        size="lg"
+        isOpen={newBoardModalOpen}
+        closeModal={() => setNewBoardModalOpen(false)}
+      />
     </DashboardWrapper>
   );
 };
