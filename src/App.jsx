@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 
@@ -32,7 +32,7 @@ const App = () => {
     return () => {
       window.removeEventListener("resize", () => {});
     };
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="bg-[#effafb] min-h-screen max-w-[1560px] mx-auto">
