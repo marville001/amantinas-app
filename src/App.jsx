@@ -19,7 +19,9 @@ import { SIDEBAR } from "./redux/types";
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("Heey");
+    if (document.body.clientWidth < 1024) {
+      dispatch({ type: SIDEBAR.CLOSE });
+    }
     window.addEventListener("resize", (e) => {
       let width = document.body.clientWidth;
       if (width < 1024) {

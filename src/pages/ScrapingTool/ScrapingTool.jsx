@@ -9,13 +9,14 @@ const ScrapingTool = () => {
           Scraping
         </h2>
         <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-color bg-dark-color" />
-        <div className="grid lg:grid-cols-2  gap-8 lg:max-w-4xl mx-auto my-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2  gap-8 lg:max-w-4xl mx-auto my-10">
           <div className="flex flex-col space-y-6">
             <div className="flex flex-col space-y-1">
               <p className=" text-brown-color font-medium">Country</p>
               <select
                 type="text"
-                className="border text-primary-blue border-primary-blue outline-none bg-light-blue rounded-md p-2"
+                className="border text-primary-blue border-primary-blue 
+                outline-none bg-light-blue rounded-md p-2"
               >
                 <option value="one">One</option>
                 <option value="one">Two</option>
@@ -90,7 +91,7 @@ const ScrapingTool = () => {
                 <div className="flex flex-col w-full">
                   <input
                     type="text"
-                    className="border border-primary-blue outline-none text-primary-blue bg-light-blue rounded-md p-2"
+                    className="border w-full border-primary-blue outline-none text-primary-blue bg-light-blue rounded-md p-2"
                   />
                   <p className="text-brown-color">Max</p>
                 </div>
@@ -103,14 +104,14 @@ const ScrapingTool = () => {
                 <div className="flex flex-col w-full">
                   <input
                     type="text"
-                    className="border border-primary-blue outline-none bg-light-blue rounded-md p-2 text-primary-blue"
+                    className="border w-full border-primary-blue outline-none bg-light-blue rounded-md p-2 text-primary-blue"
                   />
                   <p className="text-brown-color">Min</p>
                 </div>
                 <div className="flex flex-col w-full">
                   <input
                     type="text"
-                    className="border border-primary-blue outline-none bg-light-blue rounded-md p-2 text-primary-blue"
+                    className="border w-full border-primary-blue outline-none bg-light-blue rounded-md p-2 text-primary-blue"
                   />
                   <p className="text-brown-color">Max</p>
                 </div>
@@ -122,7 +123,7 @@ const ScrapingTool = () => {
                 <p className=" text-brown-color font-medium">Bedrooms</p>
                 <input
                   type="text"
-                  className="border border-primary-blue outline-none bg-light-blue rounded-md p-2 text-primary-blue"
+                  className="border  w-full border-primary-blue outline-none bg-light-blue rounded-md p-2 text-primary-blue"
                 />
                 <p className="text-brown-color">Min</p>
               </div>
@@ -130,7 +131,7 @@ const ScrapingTool = () => {
                 <p className=" text-brown-color font-medium">Bathrooms</p>
                 <input
                   type="text"
-                  className="border border-primary-blue outline-none bg-light-blue rounded-md p-2 text-primary-blue"
+                  className="border  w-full border-primary-blue outline-none bg-light-blue rounded-md p-2 text-primary-blue"
                 />
                 <p className="text-brown-color">Max</p>
               </div>
