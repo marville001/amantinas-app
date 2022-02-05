@@ -7,6 +7,7 @@ const DataTable = ({
   columnTitles,
   showDownload = true,
   searchable = true,
+  btnAction = () => {},
 }) => {
   return (
     <div className="bg-white rounded-xl p-4 max-w-6xl overflow-hidden">
@@ -28,7 +29,10 @@ const DataTable = ({
               <HiOutlineDownload className="w-8 h-6 text-brown-color" />
             </div>
           )}
-          <button className="bg-primary-blue p-2 px-10 w-full text-white rounded-md uppercase text-xs">
+          <button
+            onClick={btnAction}
+            className="bg-primary-blue p-2 px-10 w-full text-white rounded-md uppercase text-xs"
+          >
             {btnText}
           </button>
         </div>

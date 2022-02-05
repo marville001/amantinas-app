@@ -40,10 +40,6 @@ export default function Modal({ isOpen, closeModal, size, children, title }) {
           >
             <div
               className={`
-              absolute
-              left-1/2
-              top-1/4
-              -translate-x-1/2
                 inline-block w-full 
                 ${
                   size && size === "sm"
