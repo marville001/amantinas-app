@@ -1,28 +1,9 @@
 import React from "react";
-import CashFlowChart from "../../components/CashFlowChart/CashFlowChart";
-import CustomDatePicker from "../../components/CustomDatePicker/CustomDatePicker";
 import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper";
 
 const ScrapingTool = () => {
   return (
     <DashboardWrapper title="Scraping Tool">
-      <div className="my-8 p-10 max-w-2xl bg-white rounded-xl mx-auto">
-        <h2 className="text-md font-bold mb-2 ml-3 fo text-dark-color">
-          Overview
-        </h2>
-        <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-color bg-dark-color" />
-
-        <div className="my-6 flex space-x-3">
-          <p className="text-dark-color font-medium">From</p>
-          <CustomDatePicker />
-          <p className="text-dark-color font-medium">To</p>
-          <CustomDatePicker />
-        </div>
-        <div className="h-64 w-full pb-10">
-          <CashFlowChart />
-          <hr />
-        </div>
-      </div>
       <div className="my-6 bg-white rounded-xl p-4 max-w-6xl">
         <h2 className="text-md font-bold mb-2 ml-3 fo text-dark-color">
           Scraping
