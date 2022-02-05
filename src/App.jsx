@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 
@@ -13,8 +13,27 @@ import ManagedProperties from "./pages/ManagedProperties/ManagedProperties";
 import ArchivedData from "./pages/ArchivedData/ArchivedData";
 import Users from "./pages/Users/Users";
 import ProjectBoards from "./pages/ProjectBoards/ProjectBoards";
+import { useDispatch } from "react-redux";
+import { SIDEBAR } from "./redux/types";
 
 const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    console.log("Heey");
+    window.addEventListener("resize", (e) => {
+      let width = document.body.clientWidth;
+      if (width < 1024) {
+        dispatch({ type: SIDEBAR.CLOSE });
+      } else {
+        dispatch({ type: SIDEBAR.OPEN });
+      }
+    });
+
+    return () => {
+      window.removeEventListener("resize", () => {});
+    };
+  }, []);
+
   return (
     <div className="bg-[#effafb] min-h-screen max-w-[1560px] mx-auto">
       <Routes>

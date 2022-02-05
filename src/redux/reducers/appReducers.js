@@ -1,7 +1,7 @@
 import { SIDEBAR } from "../types";
 
 const initialState = {
-  sidebarOpen: false,
+  sidebarOpen: true,
 };
 
 const appReducer = (state = initialState, action) => {

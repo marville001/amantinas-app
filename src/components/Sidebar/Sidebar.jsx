@@ -1,11 +1,18 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { HiOutlineViewGrid } from "react-icons/hi";
+import { HiOutlineViewGrid, HiOutlineXCircle } from "react-icons/hi";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { SIDEBAR } from "../../redux/types";
 
 const SideLink = ({ to = "/home", icon: Icon, text }) => {
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
   return (
     <Link
+      onClick={() => {
+        dispatch({ type: SIDEBAR.CLOSE });
+      }}
       to={to}
       className={`${
         pathname === to ? "bg-primary-blue" : "bg-slate-100 "
@@ -33,13 +40,25 @@ const SideLink = ({ to = "/home", icon: Icon, text }) => {
 };
 
 const Sidebar = () => {
+  const { sidebarOpen } = useSelector((state) => state.appState);
+  const dispatch = useDispatch();
   return (
-    <div className="w-[300px] fixed overflow-y-auto h-screen bg-dark-color px-8 py-6 sidebar">
-      <div className="flex items-center justify-center space-x-5">
+    <div
+      className={`w-[300px] fixed ${
+        sidebarOpen ? "translate-x-0" : "-translate-x-full"
+      }  overflow-y-auto h-screen bg-dark-color px-8 py-6 sidebar duration-300 transition-all ease-linear z-10`}
+    >
+      <div className="flex items-center justify-center space-x-5 relative">
         <div className="bg-sky-blue rounded-full w-8 h-8 grid place-items-center font-normal text-2xl text-white">
           A
         </div>
         <span className="text-sky-blue text-xl">AMANTINAS</span>
+        <HiOutlineXCircle
+          onClick={() => {
+            dispatch({ type: SIDEBAR.CLOSE });
+          }}
+          className="lg:hidden text-2xl font-bold text-primary-blue absolute -right-5 mr-4 cursor-pointer"
+        />
       </div>
 
       {/* List links */}
