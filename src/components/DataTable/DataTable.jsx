@@ -9,16 +9,16 @@ const DataTable = ({
   searchable = true,
 }) => {
   return (
-    <div className="bg-white rounded-xl p-4 max-w-6xl">
+    <div className="bg-white rounded-xl p-4 max-w-6xl overflow-hidden">
       <h2 className="text-md font-bold mb-2 ml-3 fo text-dark-color">
         {title}
       </h2>
       <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-color bg-dark-color" />
-      <div className="flex justify-between my-6 mt-10">
+      <div className="flex flex-col-reverse md:flex-row justify-between my-6 mt-10">
         {searchable && (
           <input
             type="search"
-            className="border px-2 py-2 min-w-[300px] text-sm rounded-md placeholder:text-sm outline-none"
+            className="border mt-4 md:mt-0 px-2 py-2 min-w-[300px] text-sm rounded-md placeholder:text-sm outline-none"
             placeholder={`Search ${title}`}
           />
         )}
@@ -35,32 +35,36 @@ const DataTable = ({
       </div>
 
       {/* Table Start*/}
-      {/* Title */}
-      <div className="flex border-2 border-opacity-70 overflow-x-auto border-brown-color py-3 bg-light-blue items-center">
-        <div className="px-3 flex items-center">
-          <input type="checkbox" className="w-4 h-4 mt-1" />
-        </div>
-        {columnTitles?.map((col, idx) => (
-          <div key={idx} className="flex-1 px-4">
-            <h3>{col}</h3>
+
+      <div className="overflow-x-auto">
+        {/* Title */}
+        <div className="flex lg:border-2 lg:border-opacity-70  lg:border-brown-color py-3 bg-fixed bg-light-blue items-center">
+          <div className="px-1 lg:px-3 flex items-center">
+            <input type="checkbox" className="w-3 h-3 lg:w-3 lg:h-3 mt-1" />
           </div>
-        ))}
-      </div>
-      <div className="flex flex-col ">
-        {[1, 2, 3].map((idx) => (
-          <div className="flex py-3 hover:bg-light-blue cursor-pointer">
-            <div className="px-3">
-              <input type="checkbox" className="w-4 h-4 mt-1" />
+          {columnTitles?.map((col, idx) => (
+            <div key={idx} className="flex-1 px-2 lg:px-4">
+              <h3>{col}</h3>
             </div>
-            {columnTitles?.map((col, idx) => (
-              <div key={idx} className="flex-1 px-4">
-                <p className="text-sm font-light">{col}</p>
+          ))}
+        </div>
+
+        {/* Data */}
+        <div className="flex flex-col">
+          {[1, 2, 3].map((idx) => (
+            <div className="flex py-3 hover:bg-light-blue cursor-pointer">
+              <div className="px-1 lg:px-3">
+                <input type="checkbox" className="w-3 h-3 lg:w-3 lg:h-3 mt-1" />
               </div>
-            ))}
-          </div>
-        ))}
+              {columnTitles?.map((col, idx) => (
+                <div key={idx} className="flex-1 px-2 lg:px-4">
+                  <p className="text-sm font-light">{col}</p>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
-      {/* Data */}
 
       {/* Table End*/}
     </div>
