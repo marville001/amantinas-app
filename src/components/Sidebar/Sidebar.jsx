@@ -11,7 +11,9 @@ const SideLink = ({ to = "/home", icon: Icon, text }) => {
   return (
     <Link
       onClick={() => {
-        dispatch({ type: SIDEBAR.CLOSE });
+        if (document.body.clientWidth < 1024) {
+          dispatch({ type: SIDEBAR.CLOSE });
+        }
       }}
       to={to}
       className={`${
