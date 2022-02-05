@@ -85,7 +85,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="flex my-6 gap-5 justify-end">
+        <div className="flex flex-col sm:flex-row my-6 gap-5 justify-end">
           <div className="bg-white p-4 flex-1 lg:flex-none lg:min-w-[280px] rounded-xl">
             <h2 className="text-md mb-2 text-center font-bold text-dark-color">
               Project Boards
