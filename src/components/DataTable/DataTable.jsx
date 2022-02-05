@@ -44,7 +44,7 @@ const DataTable = ({
           </div>
           {columnTitles?.map((col, idx) => (
             <div key={idx} className="flex-1 px-2 lg:px-4">
-              <h3>{col}</h3>
+              <h3 className="text-sm lg:text-lg">{col}</h3>
             </div>
           ))}
         </div>
