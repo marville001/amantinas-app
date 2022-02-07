@@ -18,8 +18,6 @@ const Users = () => {
         />
       </div>
       <AddUserModal
-        title={"New User"}
-        size="sm"
         isOpen={addUserModalOpen}
         closeModal={() => setAddUserModalOpen(false)}
       />
