@@ -24,7 +24,7 @@ const ArchivedData = () => {
             <HomeCard />
           </div>
         ) : (
-          <div className="px-12 flex flex-col space-y-2">
+          <div className="md:px-12 flex flex-col space-y-2">
             <ListCard />
             <ListCard />
             <ListCard />
