@@ -5,7 +5,7 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
   const [sundayFree, setSundayFree] = useState(true)
   return (
     <Modal title="New User" size="xl" isOpen={isOpen} closeModal={closeModal}>
-      <div className="flex items-center space-x-3 -my-6 ">
+      <div className="flex sm:items-center sm:space-x-3  flex-col sm:flex-row -mt-6 ">
         <div className="flex flex-1 flex-col space-y-2">
           <label className="text-white text-xl">First Name</label>
           <input
@@ -16,7 +16,7 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
         "
           />
         </div>
-        <div className="flex flex-1 flex-col space-y-2 my-4">
+        <div className="flex flex-1 flex-col space-y-2 my-2 sm:my-4">
           <label className="text-white text-xl">Last Name</label>
           <input
             type="text"
@@ -27,8 +27,8 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
           />
         </div>
       </div>
-      <div className="flex items-center space-x-3">
-        <div className="flex flex-1 flex-col space-y-2 my-4">
+      <div className="flex sm:items-center sm:space-x-3  flex-col sm:flex-row">
+        <div className="flex flex-1 flex-col space-y-2 my-2 sm:my-4">
           <label className="text-white text-xl">Email</label>
           <input
             type="email"
@@ -38,7 +38,7 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
         "
           />
         </div>
-        <div className="flex flex-1 flex-col space-y-2 my-4">
+        <div className="flex flex-1 flex-col space-y-2 my-2 sm:my-4">
           <label className="text-white text-xl">Role</label>
           <select
             type="text"
@@ -52,21 +52,21 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col space-y-2 my-4">
+      <div className="flex flex-1 flex-col space-y-2 my-2 sm:my-4">
         <label className="text-white text-xl">Schedule</label>
 
         <div className="flex flex-col items-center space-y-3 border p-3 rounded-sm">
           <div className="flex flex-col space-y-1 w-full">
             <p className=" text-white font-light">Monday - Friday</p>
-            <div className="flex gap-5">
-              <div className="flex flex-col w-full">
+            <div className="flex gap-5 flex-col sm:flex-row">
+              <div className="flex flex-col-reverse sm:flex-col w-full">
                 <input
                   type="time"
                   className="border w-full border-primary-blue outline-none bg-light-blue rounded-md p-2 text-primary-blue"
                 />
                 <p className="text-white text-xs mt-1">From</p>
               </div>
-              <div className="flex flex-col w-full">
+              <div className="flex flex-col-reverse sm:flex-col w-full">
                 <input
                   type="time"
                   className="border w-full border-primary-blue outline-none text-primary-blue bg-light-blue rounded-md p-2"
@@ -78,15 +78,15 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
 
           <div className="flex flex-col space-y-1 w-full">
             <p className=" text-white font-light">Saturday</p>
-            <div className="flex gap-5">
-              <div className="flex flex-col w-full">
+            <div className="flex gap-5 flex-col sm:flex-row">
+              <div className="flex flex-col-reverse sm:flex-col w-full">
                 <input
                   type="time"
                   className="border w-full border-primary-blue outline-none bg-light-blue rounded-md p-2 text-primary-blue"
                 />
                 <p className="text-white text-xs mt-1">From</p>
               </div>
-              <div className="flex flex-col w-full">
+              <div className="flex flex-col-reverse sm:flex-col w-full">
                 <input
                   type="time"
                   className="border w-full border-primary-blue outline-none text-primary-blue bg-light-blue rounded-md p-2"
@@ -102,8 +102,8 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
               <input checked={sundayFree} onChange={e=>setSundayFree(e.target.checked)} type="checkbox" className="w-4 h-4" />{" "}
               <span className="text-white ml-2">Free</span>
             </div>
-            <div className="flex gap-5">
-              <div className="flex flex-col w-full">
+            <div className="flex gap-5 flex-col sm:flex-row">
+              <div className="flex flex-col-reverse sm:flex-col w-full">
                 <input
                   type="time"
                   disabled={sundayFree}
@@ -111,7 +111,7 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                 />
                 <p className="text-white text-xs mt-1">From</p>
               </div>
-              <div className="flex flex-col w-full">
+              <div className="flex flex-col-reverse sm:flex-col w-full">
                 <input
                   type="time"
                   disabled={sundayFree}
