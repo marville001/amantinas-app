@@ -4,8 +4,6 @@ import HomeCard from "../../components/HomeCard/HomeCard";
 import CashFlowChart from "../../components/CashFlowChart/CashFlowChart";
 import CustomDatePicker from "../../components/CustomDatePicker/CustomDatePicker";
 import ListCard from "../../components/ListCard/ListCard";
-import { HiViewList } from "react-icons/hi";
-import { VIEW_TYPE } from "../../redux/types";
 import ViewTypeHeader from "../../components/ViewTypeHeader/ViewTypeHeader";
 import { useSelector } from "react-redux";
 
