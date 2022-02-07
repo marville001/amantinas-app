@@ -54,6 +54,13 @@ const ScrapingTool = () => {
               </select>
             </div>
             <div className="flex flex-col space-y-1">
+              <p className=" text-brown-color font-medium">Address (single home search)</p>
+              <input
+                type="text"
+                className="border border-primary-blue outline-none bg-light-blue rounded-md p-2 text-primary-blue"
+              />
+            </div>
+            <div className="flex flex-col space-y-1">
               <p className=" text-brown-color font-medium">Since</p>
               <select
                 type="text"
