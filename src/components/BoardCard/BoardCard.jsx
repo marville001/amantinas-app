@@ -6,7 +6,7 @@ const BoardCard = () => {
   return (
     <div className="shadow-md p-2 rounded-lg pb-5">
       <img
-        className="w-full h-40 rounded-lg"
+        className="w-full h-32 sm:h-40 rounded-lg"
         src="https://media.istockphoto.com/photos/home-with-blue-siding-and-stone-faade-on-base-of-home-picture-id1272128530?b=1&k=20&m=1272128530&s=170667a&w=0&h=k9lT5-DEmkmehDb-EKRHoP1-op2DTgz4ibiWGXmj7h8="
         alt=""
       />
