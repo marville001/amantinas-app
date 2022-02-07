@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { HiOutlineViewGrid, HiOutlineXCircle } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { SIDEBAR } from "../../redux/types";
+import SuggestionModal from "../Modals/SuggestionModal";
 
 const SideLink = ({ to = "/home", icon: Icon, text }) => {
   const { pathname } = useLocation();
@@ -43,7 +44,11 @@ const SideLink = ({ to = "/home", icon: Icon, text }) => {
 
 const Sidebar = () => {
   const { sidebarOpen } = useSelector((state) => state.appState);
+
+  const [suggModalOpen, setSuggModalOpen] = useState(false);
+
   const dispatch = useDispatch();
+
   return (
     <div
       className={`w-[300px] fixed ${
@@ -99,7 +104,31 @@ const Sidebar = () => {
           icon={HiOutlineViewGrid}
           text="Project Boards"
         />
+
+        <div
+          onClick={() => {
+            if (document.body.clientWidth < 1024) {
+              dispatch({ type: SIDEBAR.CLOSE });
+            }
+
+            setSuggModalOpen(true);
+          }}
+          className={`bg-white active:bg-primary-blue px-8 py-3 rounded-md cursor-pointer flex items-center space-x-3 overflow-hidden relative group`}
+        >
+          <HiOutlineViewGrid
+            className={`text-primary-blue group-active:text-white text-2xl`}
+          />
+          <span
+            className={`text-primary-blue tracking-wider group-active:text-white  text-sm font-bold`}
+          >
+            Suggestions
+          </span>
+        </div>
       </div>
+      <SuggestionModal
+        isOpen={suggModalOpen}
+        closeModal={() => setSuggModalOpen(false)}
+      />
     </div>
   );
 };
