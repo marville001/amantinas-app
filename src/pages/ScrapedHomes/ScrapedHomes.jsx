@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper";
 import HomeCard from "../../components/HomeCard/HomeCard";
 
-import { HiViewList, HiViewGrid } from "react-icons/hi";
 import ListCard from "../../components/ListCard/ListCard";
+import { useSelector } from "react-redux";
+import ViewTypeHeader from "../../components/ViewTypeHeader/ViewTypeHeader";
 
 const ScrapedHomes = () => {
-  const [viewType, setViewType] = useState("cards");
+  const { viewType } = useSelector((state) => state.appState);
 
   return (
     <DashboardWrapper title="Scraping Homes">
@@ -16,33 +17,7 @@ const ScrapedHomes = () => {
         </h2>
         <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-color bg-dark-color" />
 
-        <div className="py-4 flex justify-end px-12 items-center space-x-2">
-          <div
-            className={`${
-              viewType === "cards" &&
-              "bg-primary-blue text-white p-1 rounded-md"
-            }`}
-          >
-            <HiViewGrid
-              onClick={() => setViewType("cards")}
-              className={`${
-                viewType === "list" && "cursor-pointer text-xl text-dark-color"
-              }`}
-            />
-          </div>
-          <div
-            className={`${
-              viewType === "list" && "bg-primary-blue text-white p-1 rounded-md"
-            }`}
-          >
-            <HiViewList
-              onClick={() => setViewType("list")}
-              className={`${
-                viewType === "cards" && "cursor-pointer text-xl text-dark-color"
-              }`}
-            />
-          </div>
-        </div>
+        <ViewTypeHeader />
 
         {viewType === "cards" ? (
           <div className="px-12 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-16">

@@ -1,7 +1,8 @@
-import { SIDEBAR } from "../types";
+import { SIDEBAR, VIEW_TYPE } from "../types";
 
 const initialState = {
   sidebarOpen: true,
+  viewType: "cards",
 };
 
 const appReducer = (state = initialState, action) => {
@@ -12,6 +13,13 @@ const appReducer = (state = initialState, action) => {
       return {
         ...state,
         sidebarOpen: false,
+      };
+    case VIEW_TYPE.CARDS:
+      return { ...state, viewType: "cards" };
+    case VIEW_TYPE.LIST:
+      return {
+        ...state,
+        viewType: "list",
       };
     default:
       return { ...state };

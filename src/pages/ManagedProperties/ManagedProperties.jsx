@@ -3,8 +3,14 @@ import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper
 import HomeCard from "../../components/HomeCard/HomeCard";
 import CashFlowChart from "../../components/CashFlowChart/CashFlowChart";
 import CustomDatePicker from "../../components/CustomDatePicker/CustomDatePicker";
+import ListCard from "../../components/ListCard/ListCard";
+import { HiViewList } from "react-icons/hi";
+import { VIEW_TYPE } from "../../redux/types";
+import ViewTypeHeader from "../../components/ViewTypeHeader/ViewTypeHeader";
+import { useSelector } from "react-redux";
 
 const ManagedProperties = () => {
+  const { viewType } = useSelector((state) => state.appState);
   return (
     <DashboardWrapper title="Managed Properties">
       <div className="my-8 p-10 max-w-2xl bg-white rounded-xl mx-auto">
@@ -34,12 +40,27 @@ const ManagedProperties = () => {
         </h2>
         <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-color bg-dark-color" />
 
-        <div className=" px-12 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-16">
-          <HomeCard />
-          <HomeCard />
-          <HomeCard />
-          <HomeCard />
-        </div>
+        <ViewTypeHeader />
+
+        {viewType === "cards" ? (
+          <div className="px-12 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-16">
+            <HomeCard />
+            <HomeCard />
+            <HomeCard />
+            <HomeCard />
+            <HomeCard />
+            <HomeCard />
+          </div>
+        ) : (
+          <div className="px-12 flex flex-col space-y-2">
+            <ListCard />
+            <ListCard />
+            <ListCard />
+            <ListCard />
+            <ListCard />
+            <ListCard />
+          </div>
+        )}
       </div>
     </DashboardWrapper>
   );
