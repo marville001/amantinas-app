@@ -3,6 +3,7 @@ import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper
 import HomeCard from "../../components/HomeCard/HomeCard";
 
 import { HiViewList, HiViewGrid } from "react-icons/hi";
+import ListCard from "../../components/ListCard/ListCard";
 
 const ScrapedHomes = () => {
   const [viewType, setViewType] = useState("cards");
@@ -53,8 +54,13 @@ const ScrapedHomes = () => {
             <HomeCard />
           </div>
         ) : (
-          <div className="px-12 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-16">
-            <h4>List</h4>
+          <div className="px-12 flex flex-col space-y-2">
+            <ListCard />
+            <ListCard />
+            <ListCard />
+            <ListCard />
+            <ListCard />
+            <ListCard />
           </div>
         )}
       </div>
