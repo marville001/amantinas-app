@@ -1,6 +1,6 @@
 import React from "react";
 import { HiDotsVertical, HiOutlineLocationMarker } from "react-icons/hi";
-import { FaBabyCarriage, FaCar } from "react-icons/fa";
+import {  BiBath, BiBed } from "react-icons/bi";
 
 const HomeCard = () => {
   return (
@@ -23,11 +23,11 @@ const HomeCard = () => {
       <div className="flex justify-between pr-5">
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-2 my-2">
-            <FaCar className="text-md text-primary-blue cursor-pointer" />
+            <BiBed className="text-md text-primary-blue cursor-pointer" />
             <p className="text-dark-color text-sm font-light">5</p>
           </div>
           <div className="flex items-center space-x-2 my-2">
-            <FaBabyCarriage className="text-md text-primary-blue cursor-pointer" />
+            <BiBath className="text-md text-primary-blue cursor-pointer " />
             <p className="text-dark-color text-sm font-light">5</p>
           </div>
         </div>
