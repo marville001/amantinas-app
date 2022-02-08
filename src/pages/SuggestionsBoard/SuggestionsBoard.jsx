@@ -12,10 +12,12 @@ const initialData = [
       {
         id: 1,
         title: "Company website redesign.",
+        vote: 4,
       },
       {
         id: 2,
         title: "Mobile app login process prototype.",
+        vote: 40,
       },
     ],
   },
@@ -25,6 +27,7 @@ const initialData = [
       {
         id: 3,
         title: "Research and strategy for upcoming project.",
+        vote: 15,
       },
     ],
   },
@@ -34,10 +37,12 @@ const initialData = [
       {
         id: 4,
         title: "Dashboard layout redesign.",
+        vote: 26,
       },
       {
         id: 5,
         title: "Social media posts",
+        vote: 10,
       },
     ],
   },
@@ -47,7 +52,6 @@ const SuggestionsBoard = () => {
   const [suggModalOpen, setSuggModalOpen] = useState(false);
   const [boardData, setBoardData] = useState(initialData);
 
-  console.log({ boardData });
 
   const onDragEnd = (re) => {
     if (!re.destination) return;
@@ -85,7 +89,7 @@ const SuggestionsBoard = () => {
       "
       >
         <DragDropContext onDragEnd={onDragEnd}>
-          {boardData.map((board, idx) => (
+          {[...boardData].map((board, idx) => (
             <div
               key={board.name}
               className="board flex-1 min-w-[200px] sm:min-w-[300px] bg-white p-2 flex flex-col pb-16 max-h-[900px] overflow-y-auto rounded-3xl"
@@ -93,8 +97,8 @@ const SuggestionsBoard = () => {
               <Droppable droppableId={idx.toString()}>
                 {(provided, snapshot) => (
                   <div {...provided.droppableProps} ref={provided.innerRef}>
-                    <h2 className="text-md font-light ml-3 fo text-dark-color">
-                      {board.name} - {board.name}
+                    <h2 className="text-md text-center py-3 font-light ml-3 fo text-dark-color">
+                      {board.name}
                     </h2>
                     <hr className="border-0 h-[2px] my-2 mb-8 opacity-50 border-dark-color bg-dark-color" />
                     {board.items.length > 0 &&
@@ -112,7 +116,7 @@ const SuggestionsBoard = () => {
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
                             >
-                              <SuggestionBoardCard />
+                              <SuggestionBoardCard item={item} />
                             </div>
                           )}
                         </Draggable>
@@ -124,7 +128,7 @@ const SuggestionsBoard = () => {
           ))}
         </DragDropContext>
       </ScrollContainer>
-      
+
       <SuggestionModal
         isOpen={suggModalOpen}
         closeModal={() => setSuggModalOpen(false)}
