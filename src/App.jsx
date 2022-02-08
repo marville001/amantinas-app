@@ -15,6 +15,7 @@ import Users from "./pages/Users/Users";
 import ProjectBoards from "./pages/ProjectBoards/ProjectBoards";
 import { useDispatch } from "react-redux";
 import { SIDEBAR } from "./redux/types";
+import SuggestionsBoard from "./pages/SuggestionsBoard/SuggestionsBoard";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -57,6 +58,7 @@ const App = () => {
         <Route exact path="/archived-data" element={<ArchivedData />} />
         <Route exact path="/users" element={<Users />} />
         <Route exact path="/project-boards" element={<ProjectBoards />} />
+        <Route exact path="/suggestions-boards" element={<SuggestionsBoard />} />
       </Routes>
     </div>
   );
