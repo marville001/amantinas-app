@@ -1,5 +1,6 @@
 import React from "react";
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 const Register = () => {
@@ -68,14 +69,13 @@ const Register = () => {
         <button className="cursor-pointer mt-6 w-full py-3 px-6 rounded-lg bg-primary-blue text-white text-md flex justify-center items-center">
           SIGN UP
         </button>
-        {/* <p className="text-slate-700 mt-6 text-center">OR</p> */}
-
-        {/* <Link
+        <Link
           to="/"
-          className="cursor-pointer mt-6 w-full py-3  px-6 rounded-lg bg-primary-blue text-white text-md flex justify-center items-center"
+          className="
+           py-3  px-6 rounded-lg text-primary-blue text-sm flex justify-center items-center"
         >
-          SIGN IN
-        </Link> */}
+          click to sign in
+        </Link>
       </div>
     </div>
   );
