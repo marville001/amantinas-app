@@ -7,11 +7,11 @@ const Register = () => {
     <div className="flex justify-center">
       <div className="form px-6 sm:w-[400px] py-12">
         <h1 className="text-4xl text-center font-medium text-dark-color">
-          Sign up to Amantinas.
+          Sign Up
         </h1>
         <div className="flex space-x-5 my-6 justify-center">
         <div className="cursor-pointer p-2 px-4 sm:px-12 rounded-lg bg-primary-blue text-white flex justify-center items-center">
-            <FaGoogle className="text-white font-bold text-xl sm:text-3xl mr-2" /> 
+            <FaGoogle className="text-white font-bold text-lg sm:text-2xl mr-2" /> 
             <span className="text-sm">Sign up with Google</span>
           </div>
           <div className="cursor-pointer p-3 px-4 rounded-lg bg-white font-bold text-primary-blue">
