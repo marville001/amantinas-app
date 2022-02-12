@@ -7,7 +7,7 @@ const parseError = (error) => {
         return error.message;
     }
 
-    return "An error occurred";
+    return "An error occurred. Please try again";
 };
 
 export default parseError;
