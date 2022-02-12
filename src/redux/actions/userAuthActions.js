@@ -12,7 +12,7 @@ export const getLoggedInUser = () => async (dispatch) => {
             const data = await get("auth/me");
             dispatch({
                 type: USER_LOGIN.SUCCESS,
-                admin: data.user,
+                user: data.user,
             });
         } catch (error) {
             localStorage.removeItem("token");
@@ -39,14 +39,16 @@ export const userLoginAction =
             localStorage.setItem("token", data.token);
             dispatch({
                 type: USER_LOGIN.SUCCESS,
-                admin: data.admin,
+                user: data.user,
             });
+            return { success: true };
         } catch (error) {
             if (localStorage.token) localStorage.removeItem("token");
             dispatch({
                 type: USER_LOGIN.FAIL,
                 error: parseError(error),
             });
+            return { success: false, message: parseError(error) };
         }
     };
 
@@ -58,22 +60,24 @@ export const userRegisterAction =
             const data = await post(
                 `${
                     type === "google"
-                        ? "auth/login/google"
+                        ? "auth/register/google"
                         : type === "facebook"
-                        ? "auth/login/facebook"
-                        : "auth/login"
+                        ? "auth/register/facebook"
+                        : "auth/register"
                 }`,
                 details
             );
-
+            localStorage.setItem("token", data.token);
             dispatch({
                 type: USER_REGISTER.SUCCESS,
-                admin: data.admin,
+                user: data.user,
             });
+            return { success: true };
         } catch (error) {
             dispatch({
                 type: USER_REGISTER.FAIL,
                 error: parseError(error),
             });
+            return { success: false, message: parseError(error) };
         }
     };

@@ -12,7 +12,7 @@ export const getLoggedInAdmin = () => async (dispatch) => {
             const data = await get("admin-auth/me", "admin");
             dispatch({
                 type: ADMIN_LOGIN.SUCCESS,
-                admin: data.user,
+                admin: data.admin,
             });
         } catch (error) {
             localStorage.removeItem("adminToken");
@@ -30,12 +30,15 @@ export const adminLoginAction = (details) => async (dispatch) => {
             type: ADMIN_LOGIN.SUCCESS,
             admin: data.admin,
         });
+        return { success: true };
     } catch (error) {
         if (localStorage.adminToken) localStorage.removeItem("adminToken");
         dispatch({
             type: ADMIN_LOGIN.FAIL,
             error: parseError(error),
         });
+
+        return { success: false, message: parseError(error) };
     }
 };
 
@@ -48,10 +51,12 @@ export const createAdminAction = (details) => async (dispatch) => {
             type: CREATE_ADMIN.SUCCESS,
             admin: data.admin,
         });
+        return { success: true };
     } catch (error) {
         dispatch({
             type: CREATE_ADMIN.FAIL,
             error: parseError(error),
         });
+        return { success: false, message: parseError(error) };
     }
 };

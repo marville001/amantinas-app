@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 
-import { FaFacebookF, FaGoogle } from "react-icons/fa";
+import { FaFacebookF, FaGoogle, FaSpinner } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { userLoginAction } from "../../redux/actions/userAuthActions";
 
 const Login = () => {
+    const { user, loading } = useSelector((state) => state.userAuthState);
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const [error, setError] = useState("");
+
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const responseGoogle = (response) => {
@@ -15,6 +25,23 @@ const Login = () => {
     const responseFacebook = (response) => {
         console.log(response);
     };
+
+    const handleEmailSubmit = async () => {
+        setError("");
+        const obj = { email, password };
+
+        const res = await dispatch(userLoginAction(obj));
+        if (!res.success) {
+            setError(res.message);
+            return;
+        }
+    };
+
+    useEffect(() => {
+        if (user._id) {
+            navigate("/home");
+        }
+    }, [user, navigate]);
 
     return (
         <div className="flex justify-center">
@@ -60,21 +87,33 @@ const Login = () => {
                     />
                 </div>
 
-                <p className="text-sm mt-10 text-center">
-                    Or sign in using your email address
-                </p>
+                <div className="mt-10">
+                    {error && (
+                        <div className="bg-red-200 text-sm my-4 p-2 rounded-lg text-center text-red-500">
+                            {error}!
+                        </div>
+                    )}
+
+                    <p className="text-sm text-center">
+                        Or sign up using your email address
+                    </p>
+                </div>
 
                 <input
                     type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="mt-6 my-2 w-full p-3 rounded-lg outline-none text-lg"
                     placeholder="Your email"
                 />
                 <input
                     type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className="my-2 w-full p-3 rounded-lg outline-none text-lg"
                     placeholder="Your password"
                 />
-
+                {error}
                 <div className="flex justify-center space-x-5 mt-5">
                     <label className="cursor-pointer flex items-center text-md">
                         <input
@@ -94,10 +133,18 @@ const Login = () => {
                 </div>
 
                 <button
-                    onClick={() => navigate("/home")}
-                    className="cursor-pointer mt-6 w-full py-3 px-6 rounded-lg bg-primary-blue text-white text-md flex justify-center items-center"
+                    disabled={loading || email === "" || password === ""}
+                    onClick={handleEmailSubmit}
+                    className="disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer mt-6 w-full py-3 px-6 rounded-lg bg-primary-blue text-white text-md flex justify-center items-center"
                 >
-                    SIGN IN
+                    {loading ? (
+                        <>
+                            <FaSpinner className="animate-spin mr-4" />{" "}
+                            Loading...
+                        </>
+                    ) : (
+                        <span>SIGN IN</span>
+                    )}
                 </button>
                 {/* <p className="text-slate-700 mt-6 text-center">OR</p> */}
 

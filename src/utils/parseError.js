@@ -1,10 +1,13 @@
 const parseError = (error) => {
-    console.log({ error });
-    if (error.errors) {
-        return "An error";
+    if (error.response?.data?.message) {
+        return error.response?.data?.message;
+    }
+
+    if (error.message) {
+        return error.message;
     }
 
     return "An error occurred";
 };
 
-export default parseError
+export default parseError;
