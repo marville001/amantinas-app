@@ -40,6 +40,6 @@
     select,
     select[multiple],
     textarea {
-        @apply w-full border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring-indigo-500;
+        @apply w-full border-gray-300 outline-none rounded-lg shadow-sm focus:border-indigo-500 focus:ring-indigo-500;
     }
 }
