@@ -59,6 +59,7 @@ const App = () => {
         <Route exact path="/users" element={<Users />} />
         <Route exact path="/project-boards" element={<ProjectBoards />} />
         <Route exact path="/suggestions-boards" element={<SuggestionsBoard />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>
   );
