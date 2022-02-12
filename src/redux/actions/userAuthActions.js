@@ -3,7 +3,7 @@ import { get, post } from "../../utils/http";
 import parseError from "../../utils/parseError";
 
 export const getLoggedInUser = () => async (dispatch) => {
-    const token = localStorage.adminToken;
+    const token = localStorage.token;
 
     if (token) {
         console.log({ token });
