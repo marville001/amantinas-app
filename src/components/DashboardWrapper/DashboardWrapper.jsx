@@ -16,8 +16,9 @@ const DashboardWrapper = ({ children, title }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        dispatch(getLoggedInUser());
-    }, [dispatch]);
+        if (localStorage.token && !userAuthState.user?._id)
+            dispatch(getLoggedInUser());
+    }, [dispatch, userAuthState.user?._id]);
 
     useEffect(() => {
         if (!localStorage.token) {

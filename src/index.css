@@ -2,28 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .sidebar::-webkit-scrollbar {
-  width: 5px !important;
-  display: none;
+    width: 5px !important;
+    display: none;
 }
 .sidebar::-webkit-scrollbar-track,
-.board::-webkit-scrollbar-track
- {
-  background: #f1f1f1;
+.board::-webkit-scrollbar-track {
+    background: #f1f1f1;
 }
 .sidebar::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 2px;
+    background: #888;
+    border-radius: 2px;
 }
 .sidebar::-webkit-scrollbar-thumb:hover {
-  background: #555;
+    background: #555;
 }
 
 .board::-webkit-scrollbar {
-  width: 5px !important;
+    width: 5px !important;
 }
 
-.board-container::-webkit-scrollbar{
-  display: none !important;
+.board-container::-webkit-scrollbar {
+    display: none !important;
+}
+
+@layer base {
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="number"],
+    input[type="date"],
+    input[type="datetime-local"],
+    input[type="month"],
+    input[type="week"],
+    input[type="time"],
+    input[type="search"],
+    select,
+    select[multiple],
+    textarea {
+        @apply w-full border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring-indigo-500;
+    }
 }

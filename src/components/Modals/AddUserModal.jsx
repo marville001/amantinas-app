@@ -47,7 +47,9 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
         ring-dark-color text-dark-color
         "
           >
-            <option value="investor">Investor</option>
+            <option value="">Select Role</option>
+            <option value="manager">Manager</option>
+            <option value="employee">Employee</option>
           </select>
         </div>
       </div>
