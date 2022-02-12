@@ -42,4 +42,9 @@
     textarea {
         @apply w-full border-gray-300 outline-none rounded-lg shadow-sm focus:border-indigo-500 focus:ring-indigo-500;
     }
+
+    input[type="checkbox"],
+    input[type="radio"]{
+        @apply rounded-sm border-gray-300;
+    }
 }

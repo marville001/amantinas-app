@@ -43,6 +43,12 @@ const Login = () => {
         }
     }, [user, navigate]);
 
+    useEffect(() => {
+        if (localStorage.token) {
+            navigate("/home");
+        }
+    }, [navigate]);
+
     return (
         <div className="flex justify-center">
             <div className="form px-6 sm:w-[400px] py-12">
