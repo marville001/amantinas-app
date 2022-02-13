@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaFacebookF, FaGoogle, FaSpinner } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { userRegisterAction } from "../../redux/actions/userAuthActions";
+import { userLogoutAction, userRegisterAction } from "../../redux/actions/userAuthActions";
 
 const Register = () => {
     const { user, isCreatingUser } = useSelector(
@@ -46,6 +46,10 @@ const Register = () => {
             navigate("/home");
         }
     }, [user, navigate]);
+
+    useEffect(() => {
+        dispatch(userLogoutAction());
+    }, [dispatch]);
 
     return (
         <div className="flex justify-center">

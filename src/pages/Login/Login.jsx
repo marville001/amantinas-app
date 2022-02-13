@@ -5,7 +5,10 @@ import FacebookLogin from "react-facebook-login";
 import { FaFacebookF, FaGoogle, FaSpinner } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { userLoginAction } from "../../redux/actions/userAuthActions";
+import {
+    userLoginAction,
+    userLogoutAction,
+} from "../../redux/actions/userAuthActions";
 
 const Login = () => {
     const { user, loading } = useSelector((state) => state.userAuthState);
@@ -48,6 +51,10 @@ const Login = () => {
             navigate("/home");
         }
     }, [navigate]);
+
+    useEffect(() => {
+        dispatch(userLogoutAction());
+    }, [dispatch]);
 
     return (
         <div className="flex justify-center">
