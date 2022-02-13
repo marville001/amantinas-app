@@ -20,7 +20,7 @@ const Users = () => {
         <DashboardWrapper title="Users">
             <div className="my-6 bg-white rounded-xl p-2 max-w-6xl">
                 <DataTable
-                    title="Activities"
+                    title="Users"
                     btnText="Add User"
                     columnTitles={[
                         "firstname",
