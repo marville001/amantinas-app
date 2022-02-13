@@ -82,7 +82,6 @@ const Login = () => {
 
                     <FacebookLogin
                         appId="1088597931155576"
-                        autoLoad={true}
                         callback={responseFacebook}
                         fields="name,email,picture"
                         cssClass="cursor-pointer p-3 px-4 rounded-lg bg-white font-bold text-primary-blue"
