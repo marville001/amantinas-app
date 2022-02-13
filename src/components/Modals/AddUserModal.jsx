@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import Modal from "./Modal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUserAction } from "../../redux/actions/usersActions";
+import { FaSpinner } from "react-icons/fa";
 
 const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
+    const { isCreatingUser } = useSelector((state) => state.usersState);
+
     const [sundayFree, setSundayFree] = useState(true);
     const [firstname, setFirstName] = useState("");
     const [lastname, setLastName] = useState("");
@@ -228,10 +231,18 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
             </div>
             <div className="flex  space-y-2 my-4 justify-center">
                 <button
+                    disabled={isCreatingUser}
                     onClick={handleCreateUser}
-                    className="uppercase px-16 tracking-wider py-2 bg-dark-color text-white text-lg rounded-md mt-8"
+                    className="disabled:opacity-50 disabled:cursor-not-allowed uppercase px-16 tracking-wider py-2 bg-dark-color text-white text-lg rounded-md mt-8 flex items-center"
                 >
-                    Create
+                    {isCreatingUser ? (
+                        <>
+                            <FaSpinner className="animate-spin mr-4" />{" "}
+                            <span className="capitalize">Loading...</span>
+                        </>
+                    ) : (
+                        <span>Create</span>
+                    )}
                 </button>
             </div>
         </Modal>
