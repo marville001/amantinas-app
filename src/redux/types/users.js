@@ -4,6 +4,8 @@ export const USER_LOGIN = {
     FAIL: "USER_LOGIN_FAIL",
 };
 
+export const USER_LOGOUT ="USER_LOGOUT"
+
 export const USER_REGISTER = {
     REQUEST: "USER_REGISTER_REQUEST",
     SUCCESS: "USER_REGISTER_SUCCESS",

@@ -1,4 +1,4 @@
-import { USER_LOGIN, USER_REGISTER } from "../types/users";
+import { USER_LOGIN, USER_LOGOUT, USER_REGISTER } from "../types/users";
 
 const initialState = {
     user: {},
@@ -12,6 +12,7 @@ const userAuthReducer = (state = initialState, action) => {
         case USER_LOGIN.SUCCESS:
             return { ...state, loading: false, user: action.user };
         case USER_LOGIN.FAIL:
+        case USER_LOGOUT:
             return { ...state, loading: false, user: {} };
 
         case USER_REGISTER.REQUEST:

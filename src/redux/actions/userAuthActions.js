@@ -1,4 +1,4 @@
-import { USER_LOGIN, USER_REGISTER } from "../types/users";
+import { USER_LOGIN, USER_LOGOUT, USER_REGISTER } from "../types/users";
 import { get, post } from "../../utils/http";
 import parseError from "../../utils/parseError";
 
@@ -51,6 +51,13 @@ export const userLoginAction =
             return { success: false, message: parseError(error) };
         }
     };
+
+export const userLogout = () => async (dispatch) => {
+    localStorage.removeItem("token");
+    dispatch({
+        type: USER_LOGOUT,
+    });
+};
 
 export const userRegisterAction =
     (details, type = "email") =>
