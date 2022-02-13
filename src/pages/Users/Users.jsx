@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { FaSpider, FaSpinner } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper";
 import DataTable from "../../components/DataTable/DataTable";
@@ -6,7 +7,7 @@ import AddUserModal from "../../components/Modals/AddUserModal";
 import { loadUsersAction } from "../../redux/actions/usersActions";
 
 const Users = () => {
-    const { users } = useSelector((state) => state.usersState);
+    const { users, loading } = useSelector((state) => state.usersState);
     const [addUserModalOpen, setAddUserModalOpen] = useState(false);
 
     const dispatch = useDispatch();
@@ -21,12 +22,23 @@ const Users = () => {
                 <DataTable
                     title="Activities"
                     btnText="Add User"
-                    columnTitles={["firstname", "lastname", "role", "email", "Notes"]}
+                    columnTitles={[
+                        "firstname",
+                        "lastname",
+                        "role",
+                        "email",
+                        "Notes",
+                    ]}
                     searchable={false}
                     showDownload={false}
                     data={users}
                     btnAction={() => setAddUserModalOpen(true)}
                 />
+                {loading && (
+                    <div className="flex justify-center my-4">
+                        <FaSpinner className="animate-spin mr-4 text-2xl" />
+                    </div>
+                )}
             </div>
             <AddUserModal
                 isOpen={addUserModalOpen}
