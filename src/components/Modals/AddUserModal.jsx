@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Modal from "./Modal";
+import { useDispatch } from "react-redux";
+import { addUserAction } from "../../redux/actions/usersActions";
 
 const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
     const [sundayFree, setSundayFree] = useState(true);
@@ -14,24 +16,47 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
     const [sunFromTime, setSunFromTime] = useState("");
     const [sunToTime, setSunToTime] = useState("");
 
-    const handleCloseModal = ()=>{
-      setFirstName("")
-      setLastName("")
-      setEmail("")
-      setRole("")
-      setWeekDayFromTime("")
-      setWeekDayToTime("")
-      setSatFromTime("")
-      setSatToTime("")
-      setSunFromTime("")
-      setSunToTime("")
-      closeModal()
-      
-    }
+    const dispatch = useDispatch();
 
-    const handleCreateUser = ()=>{
-      
-    }
+    const handleCloseModal = () => {
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setRole("");
+        setWeekDayFromTime("");
+        setWeekDayToTime("");
+        setSatFromTime("");
+        setSatToTime("");
+        setSunFromTime("");
+        setSunToTime("");
+        closeModal();
+    };
+
+    const handleCreateUser = async () => {
+        const obj = {
+            firstname,
+            lastname,
+            email,
+            role,
+            weekDayFromTime,
+            weekDayToTime,
+            satFromTime,
+            satToTime,
+        };
+        if (sundayFree) {
+            obj.sundayFree = true;
+        } else {
+            obj.sunFromTime = sunFromTime;
+            obj.sunToTime = sunToTime;
+        }
+
+        const res = await dispatch(addUserAction(obj));
+        if (!res.success) {
+            alert(res.message);
+        } else {
+            handleCloseModal();
+        }
+    };
 
     return (
         <Modal
@@ -84,7 +109,7 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                     <select
                         type="text"
                         value={role}
-            onChange={e=>setRole(e.target.value)}
+                        onChange={(e) => setRole(e.target.value)}
                         className="
         outline-none p-2 rounded-md bg-light-blue ring-1 
         ring-dark-color text-dark-color
@@ -110,7 +135,9 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                                 <input
                                     type="time"
                                     value={weekDayFromTime}
-            onChange={e=>setWeekDayFromTime(e.target.value)}
+                                    onChange={(e) =>
+                                        setWeekDayFromTime(e.target.value)
+                                    }
                                     className="border w-full border-primary-blue outline-none bg-light-blue rounded-md p-2 text-primary-blue"
                                 />
                                 <p className="text-white text-xs mt-1">From</p>
@@ -119,7 +146,9 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                                 <input
                                     type="time"
                                     value={weekDayToTime}
-            onChange={e=>setWeekDayToTime(e.target.value)}
+                                    onChange={(e) =>
+                                        setWeekDayToTime(e.target.value)
+                                    }
                                     className="border w-full border-primary-blue outline-none text-primary-blue bg-light-blue rounded-md p-2"
                                 />
                                 <p className="text-white text-xs mt-1">To</p>
@@ -134,7 +163,9 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                                 <input
                                     type="time"
                                     value={satFromTime}
-            onChange={e=>setSatFromTime(e.target.value)}
+                                    onChange={(e) =>
+                                        setSatFromTime(e.target.value)
+                                    }
                                     className="border w-full border-primary-blue outline-none bg-light-blue rounded-md p-2 text-primary-blue"
                                 />
                                 <p className="text-white text-xs mt-1">From</p>
@@ -143,7 +174,9 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                                 <input
                                     type="time"
                                     value={satToTime}
-            onChange={e=>setSatToTime(e.target.value)}
+                                    onChange={(e) =>
+                                        setSatToTime(e.target.value)
+                                    }
                                     className="border w-full border-primary-blue outline-none text-primary-blue bg-light-blue rounded-md p-2"
                                 />
                                 <p className="text-white text-xs mt-1">To</p>
@@ -169,7 +202,9 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                                 <input
                                     type="time"
                                     value={sunFromTime}
-            onChange={e=>setSunFromTime(e.target.value)}
+                                    onChange={(e) =>
+                                        setSunFromTime(e.target.value)
+                                    }
                                     disabled={sundayFree}
                                     className="border w-full disabled:bg-slate-300 border-primary-blue outline-none bg-light-blue rounded-md p-2 text-primary-blue"
                                 />
@@ -179,7 +214,9 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                                 <input
                                     type="time"
                                     value={sunToTime}
-            onChange={e=>setSunToTime(e.target.value)}
+                                    onChange={(e) =>
+                                        setSunToTime(e.target.value)
+                                    }
                                     disabled={sundayFree}
                                     className="border w-full disabled:bg-slate-300 border-primary-blue outline-none text-primary-blue bg-light-blue rounded-md p-2"
                                 />
@@ -190,7 +227,10 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                 </div>
             </div>
             <div className="flex  space-y-2 my-4 justify-center">
-                <button onClick={handleCreateUser} className="uppercase px-16 tracking-wider py-2 bg-dark-color text-white text-lg rounded-md mt-8">
+                <button
+                    onClick={handleCreateUser}
+                    className="uppercase px-16 tracking-wider py-2 bg-dark-color text-white text-lg rounded-md mt-8"
+                >
                     Create
                 </button>
             </div>
