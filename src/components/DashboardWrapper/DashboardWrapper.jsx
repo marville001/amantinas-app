@@ -25,6 +25,7 @@ const DashboardWrapper = ({ children, title }) => {
             navigate("/");
         }
     }, [navigate]);
+    
 
     if (userAuthState?.loading || adminState?.loading) {
         return <LoadingContainer />;
