@@ -18,6 +18,7 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
     const [satToTime, setSatToTime] = useState("");
     const [sunFromTime, setSunFromTime] = useState("");
     const [sunToTime, setSunToTime] = useState("");
+    const [error, setError] = useState("");
 
     const dispatch = useDispatch();
 
@@ -36,6 +37,7 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
     };
 
     const handleCreateUser = async () => {
+        setError("");
         const obj = {
             firstname,
             lastname,
@@ -45,17 +47,16 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
             weekDayToTime,
             satFromTime,
             satToTime,
+            sundayFree,
         };
-        if (sundayFree) {
-            obj.sundayFree = true;
-        } else {
+        if (!sundayFree) {
             obj.sunFromTime = sunFromTime;
             obj.sunToTime = sunToTime;
         }
 
         const res = await dispatch(addUserAction(obj));
         if (!res.success) {
-            alert(res.message);
+            setError(res.message);
         } else {
             handleCloseModal();
         }
@@ -68,6 +69,11 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
             isOpen={isOpen}
             closeModal={handleCloseModal}
         >
+            {error && (
+                <div className="text-center bg-red-200 rounded-lg text-red-500 my-4 text-sm p-1">
+                    {error}
+                </div>
+            )}
             <div className="flex sm:items-center sm:space-x-3  flex-col sm:flex-row -mt-6 ">
                 <div className="flex flex-1 flex-col space-y-2">
                     <label className="text-white text-xl">First Name</label>

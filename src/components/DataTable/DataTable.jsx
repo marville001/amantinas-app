@@ -52,7 +52,9 @@ const DataTable = ({
                     </div>
                     {columnTitles?.map((col, idx) => (
                         <div key={idx} className="flex-1 px-2 lg:px-4">
-                            <h3 className="text-sm lg:text-lg capitalize">{col}</h3>
+                            <h3 className="text-sm lg:text-lg capitalize">
+                                {col}
+                            </h3>
                         </div>
                     ))}
                 </div>
@@ -60,7 +62,7 @@ const DataTable = ({
                 {/* Data */}
                 <div className="flex flex-col">
                     {data.length > 0 &&
-                        data.map((idx) => (
+                        data.map((item, idx) => (
                             <div className="flex py-3 hover:bg-light-blue cursor-pointer">
                                 <div className="px-1 lg:px-3">
                                     <input
@@ -68,16 +70,19 @@ const DataTable = ({
                                         className="w-3 h-3 lg:w-3 lg:h-3 mt-1"
                                     />
                                 </div>
-                                {data?.map((item, idx) => (
-                                    <div
-                                        key={idx}
-                                        className="flex-1 px-2 lg:px-4"
-                                    >
-                                        <p className="text-sm font-light">
-                                            {item[columnTitles[idx]]}
-                                        </p>
-                                    </div>
-                                ))}
+                                {columnTitles?.map((title, idx) => {
+
+                                    return (
+                                        <div
+                                            key={idx}
+                                            className="flex-1 px-2 lg:px-4"
+                                        >
+                                            <p className="text-sm font-light">
+                                                {item[title]}
+                                            </p>
+                                        </div>
+                                    );
+                                })}
                             </div>
                         ))}
                 </div>
