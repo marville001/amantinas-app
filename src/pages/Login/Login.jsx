@@ -47,12 +47,6 @@ const Login = () => {
     }, [user, navigate]);
 
     useEffect(() => {
-        if (localStorage.token) {
-            navigate("/home");
-        }
-    }, [navigate]);
-
-    useEffect(() => {
         dispatch(userLogoutAction());
     }, [dispatch]);
 
