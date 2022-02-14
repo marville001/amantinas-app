@@ -64,7 +64,6 @@ const ScrapingTool = () => {
         }
     };
 
-    console.log({ scrapes });
     return (
         <DashboardWrapper title="Scraping Tool">
             <div className="my-6 bg-white rounded-xl p-4 max-w-6xl">
@@ -78,10 +77,10 @@ const ScrapingTool = () => {
                     </div>
                 )}
                 {success && (
-                  <div className="text-center max-w-4xl mx-auto bg-green-200 rounded-lg text-green-500 my-4 text-sm p-1">
-                      {success}
-                  </div>
-              )}
+                    <div className="text-center max-w-4xl mx-auto bg-green-200 rounded-lg text-green-500 my-4 text-sm p-1">
+                        {success}
+                    </div>
+                )}
                 <div className="grid grid-cols-1 lg:grid-cols-2  gap-8 lg:max-w-4xl mx-auto my-10">
                     <div className="flex flex-col space-y-6">
                         <div className="flex flex-col space-y-1">
