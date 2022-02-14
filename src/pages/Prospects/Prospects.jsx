@@ -46,15 +46,19 @@ const Prospects = () => {
 
                 {viewType === "cards" ? (
                     <div className="px-12 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-16">
-                        {homes?.map((home, idx) => (
-                            <HomeCard key={home._id} home={home} />
-                        ))}
+                        {homes
+                            ?.filter((h) => h.category === "prospect")
+                            .map((home, idx) => (
+                                <HomeCard key={home._id} home={home} />
+                            ))}
                     </div>
                 ) : (
                     <div className="md:px-12 flex flex-col space-y-2">
-                        {homes?.map((home, idx) => (
-                            <ListCard key={home._id} home={home} />
-                        ))}
+                        {homes
+                            ?.filter((h) => h.category === "prospect")
+                            .map((home, idx) => (
+                                <ListCard key={home._id} home={home} />
+                            ))}
                     </div>
                 )}
             </div>
