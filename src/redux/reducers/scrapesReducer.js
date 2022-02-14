@@ -9,11 +9,11 @@ const initialState = {
 const scrapesReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_SCRAPES.REQUEST:
-            return { ...state, loading: true, scrapes: [] };
+            return { ...state, loading: true, };
         case LOAD_SCRAPES.SUCCESS:
             return { ...state, loading: false, scrapes: action.scrapes };
         case LOAD_SCRAPES.FAIL:
-            return { ...state, loading: false, scrapes: [] };
+            return { ...state, loading: false, };
 
         case CREATE_SCRAPE.REQUEST:
             return { ...state, isCreatingScrape: true };

@@ -8,11 +8,11 @@ const initialState = {
 const homesReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_HOMES.REQUEST:
-            return { ...state, loading: true, homes: [] };
+            return { ...state, loading: true, };
         case GET_HOMES.SUCCESS:
             return { ...state, loading: false, homes: action.homes };
         case GET_HOMES.FAIL:
-            return { ...state, loading: false, homes: [] };
+            return { ...state, loading: false, };
 
         case CREATE_HOME.REQUEST:
             return { ...state, isCreatingProspect: true };
