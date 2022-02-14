@@ -1,20 +1,26 @@
 import React from "react";
 import { useState } from "react";
 import { FaSpinner } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper";
+import { createScrapeAction } from "../../redux/actions/scrapesActions";
 
 const ScrapingTool = () => {
+    const { isCreatingScrape, scrapes } = useSelector(
+        (state) => state.scrapeState
+    );
+    const { user } = useSelector((state) => state.userAuthState);
+
     const [country, setCountry] = useState("");
     const [zipcode, setZipCode] = useState("");
     const [state, setState] = useState("");
     const [city, setCity] = useState("");
     const [address, setAddress] = useState("");
     const [since, setSince] = useState("any");
-    const [type, setType] = useState("");
+    const [type, setType] = useState("house");
     const [bedrooms, setBedrooms] = useState("");
     const [bathrooms, setBathrooms] = useState("");
-    const [execute, setExecute] = useState("");
+    const [execute, setExecute] = useState("once");
     const [pricerange, setPriceRange] = useState({
         min: "",
         max: "",
@@ -23,11 +29,15 @@ const ScrapingTool = () => {
         min: "",
         max: "",
     });
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("Successful");
 
     const dispatch = useDispatch();
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
+        setError("");
         const obj = {
+            investorId: user._id,
             country,
             state,
             city,
@@ -41,7 +51,20 @@ const ScrapingTool = () => {
             pricerange: [pricerange.min, pricerange.max],
             squarefeets: [squarefeets.min, squarefeets.max],
         };
+
+        const res = await dispatch(createScrapeAction(obj));
+        if (!res.success) {
+            setError(res.message);
+        } else {
+            setSuccess(res.message);
+
+            setTimeout(() => {
+                setSuccess("");
+            }, 3000);
+        }
     };
+
+    console.log({ scrapes });
     return (
         <DashboardWrapper title="Scraping Tool">
             <div className="my-6 bg-white rounded-xl p-4 max-w-6xl">
@@ -49,6 +72,11 @@ const ScrapingTool = () => {
                     Scraping
                 </h2>
                 <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-color bg-dark-color" />
+                {error && (
+                    <div className="text-center max-w-4xl mx-auto bg-red-200 rounded-lg text-red-500 my-4 text-sm p-1">
+                        {error}
+                    </div>
+                )}
                 <div className="grid grid-cols-1 lg:grid-cols-2  gap-8 lg:max-w-4xl mx-auto my-10">
                     <div className="flex flex-col space-y-6">
                         <div className="flex flex-col space-y-1">
@@ -286,11 +314,11 @@ const ScrapingTool = () => {
 
                         <div className="">
                             <button
-                                disabled={true}
+                                disabled={isCreatingScrape}
                                 onClick={handleSubmit}
                                 className="disabled:opacity-50 disabled:cursor-not-allowed bg-primary-blue flex justify-center items-center p-2 px-10 w-full text-white rounded-md uppercase text-md"
                             >
-                                {true ? (
+                                {isCreatingScrape ? (
                                     <>
                                         <FaSpinner className="animate-spin mr-4" />{" "}
                                         <span className="capitalize">
