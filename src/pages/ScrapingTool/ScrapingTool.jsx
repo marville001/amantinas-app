@@ -6,7 +6,7 @@ import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper
 import { createScrapeAction } from "../../redux/actions/scrapesActions";
 
 const ScrapingTool = () => {
-    const { isCreatingScrape, scrapes } = useSelector(
+    const { isCreatingScrape } = useSelector(
         (state) => state.scrapeState
     );
     const { user } = useSelector((state) => state.userAuthState);
