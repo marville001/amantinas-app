@@ -30,7 +30,7 @@ const ScrapingTool = () => {
         max: "",
     });
     const [error, setError] = useState("");
-    const [success, setSuccess] = useState("Successful");
+    const [success, setSuccess] = useState("");
 
     const dispatch = useDispatch();
 
@@ -77,6 +77,11 @@ const ScrapingTool = () => {
                         {error}
                     </div>
                 )}
+                {success && (
+                  <div className="text-center max-w-4xl mx-auto bg-green-200 rounded-lg text-green-500 my-4 text-sm p-1">
+                      {success}
+                  </div>
+              )}
                 <div className="grid grid-cols-1 lg:grid-cols-2  gap-8 lg:max-w-4xl mx-auto my-10">
                     <div className="flex flex-col space-y-6">
                         <div className="flex flex-col space-y-1">
