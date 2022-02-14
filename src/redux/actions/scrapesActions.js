@@ -10,7 +10,7 @@ export const createScrapeAction = (details) => async (dispatch) => {
             type: CREATE_SCRAPE.SUCCESS,
             scrape: data.scrape,
         });
-        return { success: true };
+        return { success: true, message: data.message };
     } catch (error) {
         dispatch({
             type: CREATE_SCRAPE.FAIL,
