@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaSpider, FaSpinner } from "react-icons/fa";
+import {  FaSpinner } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper";
 import DataTable from "../../components/DataTable/DataTable";
