@@ -48,7 +48,7 @@ const ScrapingTool = () => {
             bedrooms,
             bathrooms,
             execute,
-            priceRange: [pricerange.min, pricerange.max],
+            pricerange: [pricerange.min, pricerange.max],
             squarefeets: [squarefeets.min, squarefeets.max],
         };
 
