@@ -119,7 +119,6 @@ const Login = () => {
                     className="my-2 w-full p-3 rounded-lg outline-none text-lg"
                     placeholder="Your password"
                 />
-                {error}
                 <div className="flex justify-center space-x-5 mt-5">
                     <label className="cursor-pointer flex items-center text-md">
                         <input

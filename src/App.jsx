@@ -16,6 +16,9 @@ import ProjectBoards from "./pages/ProjectBoards/ProjectBoards";
 import { useDispatch } from "react-redux";
 import { SIDEBAR } from "./redux/types";
 import SuggestionsBoard from "./pages/SuggestionsBoard/SuggestionsBoard";
+import AdminHome from "./admin/pages/AdminHome";
+import AdminSuggestionsBoard from "./admin/pages/AdminSuggestionsBoard";
+import AdminLogin from "./admin/pages/AdminLogin";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -59,6 +62,9 @@ const App = () => {
         <Route exact path="/users" element={<Users />} />
         <Route exact path="/project-boards" element={<ProjectBoards />} />
         <Route exact path="/suggestions-boards" element={<SuggestionsBoard />} />
+        <Route exact path="/admin" element={<AdminHome />} />
+        <Route exact path="/admin/login" element={<AdminLogin />} />
+        <Route exact path="/admin/suggestions-boards" element={<AdminSuggestionsBoard />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>

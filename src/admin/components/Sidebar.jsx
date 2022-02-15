@@ -73,47 +73,11 @@ const Sidebar = () => {
             </div>
 
             {/* List links */}
-            <div className="my-12 flex flex-col space-y-8">
-                <SideLink to="/home" icon={HiOutlineViewGrid} text="Home" />
-                <SideLink to="/ledger" icon={HiOutlineViewGrid} text="Ledger" />
+            <div className="my-12 flex flex-col space-y-8 h-full">
+                <SideLink to="/admin" icon={HiOutlineViewGrid} text="Home" />
+                <SideLink to="/admin/users" icon={HiOutlineViewGrid} text="Users" />
                 <SideLink
-                    to="/scraping-tool"
-                    icon={HiOutlineViewGrid}
-                    text="Scraping tool"
-                />
-                <SideLink
-                    to="/scraped-homes"
-                    icon={HiOutlineViewGrid}
-                    text="Scraped homes"
-                />
-                <SideLink
-                    to="/prospects"
-                    icon={HiOutlineViewGrid}
-                    text="Prospects"
-                />
-                <SideLink
-                    to="/active-offers"
-                    icon={HiOutlineViewGrid}
-                    text="Active offers"
-                />
-                <SideLink
-                    to="/managed-properties"
-                    icon={HiOutlineViewGrid}
-                    text="Managed Properties"
-                />
-                <SideLink
-                    to="/archived-data"
-                    icon={HiOutlineViewGrid}
-                    text="Archived data"
-                />
-                <SideLink to="/users" icon={HiOutlineViewGrid} text="Users" />
-                <SideLink
-                    to="/project-boards"
-                    icon={HiOutlineViewGrid}
-                    text="Project Boards"
-                />
-                <SideLink
-                    to="/suggestions-boards"
+                    to="/admin/suggestions-boards"
                     icon={HiOutlineViewGrid}
                     text="Suggestions"
                 />
@@ -122,7 +86,7 @@ const Sidebar = () => {
                         dispatch(userLogoutAction());
                         navigate("/")
                     }}
-                    className="flex select-none justify-center items-center text-white space-x-2 cursor-pointer"
+                    className="absolute bottom-10 inset-x-0 flex select-none justify-center items-center text-white space-x-2 cursor-pointer"
                 >
                     <HiOutlineLogout className="text-2xl" />
                     <span className="text-white uppercase">Logout</span>
