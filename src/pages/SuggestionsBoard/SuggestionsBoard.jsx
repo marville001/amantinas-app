@@ -132,7 +132,7 @@ const SuggestionsBoard = () => {
                                                 <Draggable
                                                     index={idx}
                                                     draggableId={item._id.toString()}
-                                                    key={item.id}
+                                                    key={item._id}
                                                     className="w-[90%] mx-auto"
                                                 >
                                                     {(provided) => (
