@@ -1,6 +1,6 @@
 import { get, post, put } from "../../utils/http";
 import parseError from "../../utils/parseError";
-import { CREATE_SUGGESTION, GET_SUGGESTIONS, SUGGESTION_VOTE } from "../types";
+import { CREATE_SUGGESTION, GET_SUGGESTIONS, SUGGESTION_DRAG, SUGGESTION_VOTE } from "../types";
 
 export const createSuggestionAction = (details) => async (dispatch) => {
     dispatch({ type: CREATE_SUGGESTION.REQUEST });
@@ -50,6 +50,24 @@ export const suggestionVoteAction = (details) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: SUGGESTION_VOTE.FAIL,
+            error: parseError(error),
+        });
+        return { success: false, message: parseError(error) };
+    }
+};
+
+export const suggestionDragAction = (details) => async (dispatch) => {
+    dispatch({ type: SUGGESTION_DRAG.REQUEST });
+    try {
+        const data = await put("suggestions/column", details);
+        dispatch({
+            type: SUGGESTION_DRAG.SUCCESS,
+            suggestion: data.suggestion,
+        });
+        return { success: true };
+    } catch (error) {
+        dispatch({
+            type: SUGGESTION_DRAG.FAIL,
             error: parseError(error),
         });
         return { success: false, message: parseError(error) };

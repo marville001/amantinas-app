@@ -1,4 +1,9 @@
-import { CREATE_SUGGESTION, GET_SUGGESTIONS, SUGGESTION_VOTE } from "../types";
+import {
+    CREATE_SUGGESTION,
+    GET_SUGGESTIONS,
+    SUGGESTION_DRAG,
+    SUGGESTION_VOTE,
+} from "../types";
 
 const initialState = {
     suggestions: [],
@@ -38,6 +43,16 @@ const suggestionsReducer = (state = initialState, action) => {
             };
         case SUGGESTION_VOTE.FAIL:
             return { ...state, isVoting: false };
+
+        case SUGGESTION_DRAG.REQUEST:
+            return { ...state, isUpdatingColumn: true };
+        case SUGGESTION_DRAG.SUCCESS:
+            return {
+                ...state,
+                isUpdatingColumn: false,
+            };
+        case SUGGESTION_DRAG.FAIL:
+            return { ...state, isUpdatingColumn: false };
 
         default:
             return { ...state };
