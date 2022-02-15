@@ -21,8 +21,6 @@ const SuggestionBoardCard = ({ item }) => {
         if (res.success) await dispatch(loadSuggestionsAction());
     };
 
-    console.log(item);
-
     return (
         <div className="p-2 rounded flex my-2">
             <div className="flex flex-col items-center justify-start p-2">

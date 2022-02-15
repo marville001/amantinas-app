@@ -6,34 +6,38 @@ import { useDispatch, useSelector } from "react-redux";
 import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper";
 import SuggestionModal from "../../components/Modals/SuggestionModal";
 import SuggestionBoardCard from "../../components/SuggestionBoardCard/SuggestionBoardCard";
-import { loadSuggestionsAction } from "../../redux/actions/suggestionsActions";
+import {
+    loadSuggestionsAction,
+    suggestionDragAction,
+} from "../../redux/actions/suggestionsActions";
 
 const initialData = [
     {
+        id: "opinion",
         name: "Need Your Opinion",
         items: [],
     },
     {
+        id: "planned",
         name: "Planned",
         items: [],
     },
     {
+        id: "progress",
         name: "In Progress",
         items: [],
     },
 ];
 
 const SuggestionsBoard = () => {
-    const { suggestions } = useSelector(
-        (state) => state.suggestionsState
-    );
+    const { suggestions } = useSelector((state) => state.suggestionsState);
 
     const [suggModalOpen, setSuggModalOpen] = useState(false);
     const [boardData, setBoardData] = useState(initialData);
 
     const dispatch = useDispatch();
 
-    const onDragEnd = (re) => {
+    const onDragEnd = async (re) => {
         if (!re.destination) return;
         let newBoardData = boardData;
         var dragItem =
@@ -44,13 +48,23 @@ const SuggestionsBoard = () => {
             re.source.index,
             1
         );
-        console.log({ dragItem, dest: re.destination });
+
         newBoardData[parseInt(re.destination.droppableId)].items.splice(
             re.destination.index,
             0,
             dragItem
         );
         setBoardData(newBoardData);
+
+        const columns = ["opinion", "planned", "progress"];
+        const destIndex = parseInt(re.destination.droppableId);
+        const column = columns[destIndex];
+
+        await dispatch(
+            suggestionDragAction({ column, suggestionId: dragItem._id })
+        );
+
+        console.log(column);
     };
 
     useEffect(() => {
@@ -71,14 +85,17 @@ const SuggestionsBoard = () => {
 
             const data = [
                 {
+                    id: "opinion",
                     name: "Need Your Opinion",
                     items: [...opinion],
                 },
                 {
+                    id: "planned",
                     name: "Planned",
                     items: [...planned],
                 },
                 {
+                    id: "progress",
                     name: "In Progress",
                     items: [...progress],
                 },
