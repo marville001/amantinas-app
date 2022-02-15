@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Droppable, Draggable, DragDropContext } from "react-beautiful-dnd";
-import { FaSpinner } from "react-icons/fa";
+// import { FaSpinner } from "react-icons/fa";
 import ScrollContainer from "react-indiana-drag-scroll";
 import { useDispatch, useSelector } from "react-redux";
 import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper";
@@ -24,7 +24,7 @@ const initialData = [
 ];
 
 const SuggestionsBoard = () => {
-    const { suggestions, loading } = useSelector(
+    const { suggestions } = useSelector(
         (state) => state.suggestionsState
     );
 
@@ -99,11 +99,11 @@ const SuggestionsBoard = () => {
                 </button>
             </div>
 
-            {loading && (
+            {/* {loading && (
                 <div className="flex justify-center my-4">
                     <FaSpinner className="animate-spin mr-4 text-2xl" />
                 </div>
-            )}
+            )} */}
 
             <ScrollContainer
                 ignoreElements=".board-item"
@@ -115,13 +115,14 @@ const SuggestionsBoard = () => {
                     {[...boardData].map((board, idx) => (
                         <div
                             key={board.name}
-                            className="board flex-1 min-w-[200px] sm:min-w-[300px] bg-white p-2 flex flex-col pb-16 max-h-[900px] overflow-y-auto rounded-3xl"
+                            className="board flex-1 min-w-[200px] sm:min-w-[300px] bg-white p-2 flex flex-col max-h-[900px] overflow-y-auto rounded-3xl"
                         >
                             <Droppable droppableId={idx.toString()}>
                                 {(provided, snapshot) => (
                                     <div
                                         {...provided.droppableProps}
                                         ref={provided.innerRef}
+                                        className="h-full pb-16"
                                     >
                                         <h2 className="text-md text-center py-3 font-light ml-3 fo text-dark-color">
                                             {board.name}
@@ -133,7 +134,6 @@ const SuggestionsBoard = () => {
                                                     index={idx}
                                                     draggableId={item._id.toString()}
                                                     key={item._id}
-                                                    className="w-[90%] mx-auto"
                                                 >
                                                     {(provided) => (
                                                         <div
