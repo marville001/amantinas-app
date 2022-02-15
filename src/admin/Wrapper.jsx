@@ -1,35 +1,33 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { FaSpinner } from "react-icons/fa";
-import { getLoggedInUser } from "../redux/actions/userAuthActions";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Topbar from "../components/Topbar/Topbar";
+import { getLoggedInAdmin } from "../redux/actions/adminActions";
 
 const DashboardWrapper = ({ children, title }) => {
     const { sidebarOpen } = useSelector((state) => state.appState);
-    const userAuthState = useSelector((state) => state.userAuthState);
     const adminState = useSelector((state) => state.adminState);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     if (localStorage.token && !userAuthState.user?._id)
-    //         dispatch(getLoggedInUser());
-    // }, [dispatch, userAuthState.user?._id]);
+    useEffect(() => {
+        if (localStorage.adminToken && !adminState.admin?._id)
+            dispatch(getLoggedInAdmin());
+    }, [dispatch, adminState.admin?._id]);
 
-    // useEffect(() => {
-    //     if (!localStorage.token) {
-    //         navigate("/");
-    //     }
-    // }, [navigate]);
+    useEffect(() => {
+        if (!localStorage.adminToken) {
+            navigate("/admin/login");
+        }
+    }, [navigate]);
     
 
-    // if (userAuthState?.loading || adminState?.loading) {
-    //     return <LoadingContainer />;
-    // }
+    if (adminState?.loading) {
+        return <LoadingContainer />;
+    }
 
     return (
         <div className="flex min-h-screen">

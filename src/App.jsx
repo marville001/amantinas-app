@@ -64,6 +64,7 @@ const App = () => {
         <Route exact path="/suggestions-boards" element={<SuggestionsBoard />} />
         <Route exact path="/admin" element={<AdminHome />} />
         <Route exact path="/admin/login" element={<AdminLogin />} />
+        <Route exact path="/admin/users" element={<AdminHome />} />
         <Route exact path="/admin/suggestions-boards" element={<AdminSuggestionsBoard />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

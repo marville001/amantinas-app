@@ -7,10 +7,10 @@ import {
     SUGGESTION_VOTE,
 } from "../types";
 
-export const createSuggestionAction = (details) => async (dispatch) => {
+export const createSuggestionAction = (details, admin=false) => async (dispatch) => {
     dispatch({ type: CREATE_SUGGESTION.REQUEST });
     try {
-        const data = await post("suggestions", details);
+        const data = await post("suggestions", details, admin ? "admin" : "user");
         dispatch({
             type: CREATE_SUGGESTION.SUCCESS,
             suggestion: data.suggestion,

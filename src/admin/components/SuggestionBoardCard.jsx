@@ -16,9 +16,9 @@ const SuggestionBoardCard = ({ item }) => {
                 vote,
                 userId: admin._id,
                 suggestionId: item._id,
-            })
+            }, "admin")
         );
-        if (res.success) await dispatch(loadSuggestionsAction());
+        if (res.success) await dispatch(loadSuggestionsAction("admin"));
     };
 
     return (

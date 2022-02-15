@@ -4,6 +4,7 @@ import ScrollContainer from 'react-indiana-drag-scroll';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadSuggestionsAction, suggestionDragAction } from '../../redux/actions/suggestionsActions';
 import SuggestionBoardCard from '../components/SuggestionBoardCard';
+import SuggestionModal from '../components/SuggestionModal';
 import DashboardWrapper from '../Wrapper'
 
 const AdminSuggestionsBoard = () => {
@@ -152,10 +153,10 @@ const AdminSuggestionsBoard = () => {
                 </DragDropContext>
             </ScrollContainer>
 
-            {/* <SuggestionModal
+            <SuggestionModal
                 isOpen={suggModalOpen}
                 closeModal={() => setSuggModalOpen(false)}
-            /> */}
+            />
         </DashboardWrapper>
   )
 }
