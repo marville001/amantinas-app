@@ -6,7 +6,6 @@ export const getLoggedInUser = () => async (dispatch) => {
     const token = localStorage.token;
 
     if (token) {
-        console.log({ token });
         dispatch({ type: USER_LOGIN.REQUEST });
         try {
             const data = await get("auth/me");
