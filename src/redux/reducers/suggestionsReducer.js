@@ -24,7 +24,7 @@ const suggestionsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isCreatingSuggestion: false,
-                suggestions: [action.suggestion, ...state.suggestions],
+                suggestions: [...state.suggestions, action.suggestion],
             };
         case CREATE_SUGGESTION.FAIL:
             return { ...state, isCreatingSuggestion: false };

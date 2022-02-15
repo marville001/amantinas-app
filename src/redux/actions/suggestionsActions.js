@@ -38,10 +38,10 @@ export const loadSuggestionsAction = () => async (dispatch) => {
     }
 };
 
-export const suggestionVoteAction = () => async (dispatch) => {
+export const suggestionVoteAction = (details) => async (dispatch) => {
     dispatch({ type: SUGGESTION_VOTE.REQUEST });
     try {
-        const data = await put("suggestions/vote");
+        const data = await put("suggestions/vote", details);
         dispatch({
             type: SUGGESTION_VOTE.SUCCESS,
             suggestion: data.suggestion,
