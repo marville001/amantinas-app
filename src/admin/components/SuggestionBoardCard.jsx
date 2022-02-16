@@ -56,7 +56,7 @@ const SuggestionBoardCard = ({ item }) => {
                         </Menu.Button>
                         <Menu.Items
                             className="absolute right-0
-                         bg-white p-4 shadow-md rounded-md z-50"
+                         bg-white p-4 shadow-md rounded-md z-50 ring-0 outline-none border-0"
                         >
                             <Menu.Item
                                 onClick={() => handleDelete(item._id)}

@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
-import ScrollContainer from 'react-indiana-drag-scroll';
-import { useDispatch, useSelector } from 'react-redux';
-import { loadSuggestionsAction, suggestionDragAction } from '../../redux/actions/suggestionsActions';
-import SuggestionBoardCard from '../components/SuggestionBoardCard';
-import SuggestionModal from '../components/SuggestionModal';
-import DashboardWrapper from '../Wrapper'
+import React, { useEffect, useState } from "react";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import ScrollContainer from "react-indiana-drag-scroll";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    loadSuggestionsAction,
+    suggestionDragAction,
+} from "../../redux/actions/suggestionsActions";
+import SuggestionBoardCard from "../components/SuggestionBoardCard";
+import SuggestionModal from "../components/SuggestionModal";
+import DashboardWrapper from "../Wrapper";
 
 const AdminSuggestionsBoard = () => {
     const { suggestions } = useSelector((state) => state.suggestionsState);
@@ -39,7 +42,10 @@ const AdminSuggestionsBoard = () => {
         const column = columns[destIndex];
 
         await dispatch(
-            suggestionDragAction({ column, suggestionId: dragItem._id }, "admin")
+            suggestionDragAction(
+                { column, suggestionId: dragItem._id },
+                "admin"
+            )
         );
 
         console.log(column);
@@ -80,10 +86,13 @@ const AdminSuggestionsBoard = () => {
             ];
 
             setBoardData(data);
+        } else {
+            setBoardData([]);
         }
     }, [suggestions]);
-  return (
-    <DashboardWrapper title={`Suggestions`}>
+
+    return (
+        <DashboardWrapper title={`Suggestions`}>
             <div className="flex justify-end my-4">
                 <button
                     onClick={() => setSuggModalOpen(true)}
@@ -99,66 +108,71 @@ const AdminSuggestionsBoard = () => {
                 </div>
             )} */}
 
-            <ScrollContainer
-                ignoreElements=".board-item"
-                className="
+            {boardData.length <= 0 ? (
+                <div className="flex justify-center p-12">
+                    <h2>No Suggestion nYet</h2>
+                </div>
+            ) : (
+                <ScrollContainer
+                    ignoreElements=".board-item"
+                    className="
       my-10 flex space-x-8 overflow-x-auto board-container select-none  
       "
-            >
-                <DragDropContext onDragEnd={onDragEnd}>
-                    {[...boardData].map((board, idx) => (
-                        <div
-                            key={board.name}
-                            className="board flex-1 min-w-[200px] sm:min-w-[300px] bg-white p-2 flex flex-col max-h-[900px] overflow-y-auto rounded-3xl"
-                        >
-                            <Droppable droppableId={idx.toString()}>
-                                {(provided, snapshot) => (
-                                    <div
-                                        {...provided.droppableProps}
-                                        ref={provided.innerRef}
-                                        className="h-full pb-16"
-                                    >
-                                        <h2 className="text-md text-center py-3 font-light ml-3 fo text-dark-color">
-                                            {board.name}
-                                        </h2>
-                                        <hr className="border-0 h-[2px] my-2 mb-8 opacity-50 border-dark-color bg-dark-color" />
-                                        {board.items.length > 0 &&
-                                            board.items.map((item, idx) => (
-                                                <Draggable
-                                                    index={idx}
-                                                    draggableId={item._id.toString()}
-                                                    key={item._id}
-                                                >
-                                                    {(provided) => (
-                                                        <div
-                                                            className="board-item"
-                                                            ref={
-                                                                provided.innerRef
-                                                            }
-                                                            {...provided.draggableProps}
-                                                            {...provided.dragHandleProps}
-                                                        >
-                                                            <SuggestionBoardCard
-                                                                item={item}
-                                                            />
-                                                        </div>
-                                                    )}
-                                                </Draggable>
-                                            ))}
-                                    </div>
-                                )}
-                            </Droppable>
-                        </div>
-                    ))}
-                </DragDropContext>
-            </ScrollContainer>
-
+                >
+                    <DragDropContext onDragEnd={onDragEnd}>
+                        {[...boardData].map((board, idx) => (
+                            <div
+                                key={board.name}
+                                className="board flex-1 min-w-[200px] sm:min-w-[300px] bg-white p-2 flex flex-col max-h-[900px] overflow-y-auto rounded-3xl"
+                            >
+                                <Droppable droppableId={idx.toString()}>
+                                    {(provided, snapshot) => (
+                                        <div
+                                            {...provided.droppableProps}
+                                            ref={provided.innerRef}
+                                            className="h-full pb-16"
+                                        >
+                                            <h2 className="text-md text-center py-3 font-light ml-3 fo text-dark-color">
+                                                {board.name}
+                                            </h2>
+                                            <hr className="border-0 h-[2px] my-2 mb-8 opacity-50 border-dark-color bg-dark-color" />
+                                            {board.items.length > 0 &&
+                                                board.items.map((item, idx) => (
+                                                    <Draggable
+                                                        index={idx}
+                                                        draggableId={item._id.toString()}
+                                                        key={item._id}
+                                                    >
+                                                        {(provided) => (
+                                                            <div
+                                                                className="board-item"
+                                                                ref={
+                                                                    provided.innerRef
+                                                                }
+                                                                {...provided.draggableProps}
+                                                                {...provided.dragHandleProps}
+                                                            >
+                                                                <SuggestionBoardCard
+                                                                    item={item}
+                                                                />
+                                                            </div>
+                                                        )}
+                                                    </Draggable>
+                                                ))}
+                                        </div>
+                                    )}
+                                </Droppable>
+                            </div>
+                        ))}
+                    </DragDropContext>
+                </ScrollContainer>
+            )}
             <SuggestionModal
                 isOpen={suggModalOpen}
                 closeModal={() => setSuggModalOpen(false)}
             />
         </DashboardWrapper>
-  )
-}
+    );
+};
 
-export default AdminSuggestionsBoard
+export default AdminSuggestionsBoard;
