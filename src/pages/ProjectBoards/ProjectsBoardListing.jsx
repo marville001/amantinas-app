@@ -25,19 +25,18 @@ const ProjectsBoardListing = () => {
                     <Link
                         to={`/project-boards/${board._id}`}
                         key={board._id}
-                        style={{
-                            background: "url(/card-bg.jpg)",
-                            backgroundSize: "cover",
-                        }}
-                        className="rounded w-full sm:w-auto text-white font-medium px-4 bg-slate-300 py-8 min-w-[200px]"
+                        className="
+                        rounded w-full sm:w-auto text-white font-medium px-4 
+                        bg-gradient-to-br from-dark-color to-primary-blue
+                        bg-slate-300 py-8 min-w-[200px]"
                     >
                         {board.name}
                     </Link>
                 ))}
                 <div
                     onClick={() => setNewBoardModalOpen(true)}
-                    className="cursor-pointer rounded px-8 bg-slate-300 font-light
-                     py-6 flex flex-col items-center text-dark-color"
+                    className="cursor-pointer rounded px-8 bg-white font-light
+                     py-6 flex flex-col items-center text-primary-blue"
                 >
                     <HiOutlinePlusCircle className="w-6 h-6" />
                     <span className="text-sm font-medium">
