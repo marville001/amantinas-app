@@ -1,6 +1,12 @@
 import { get, post, put } from "../../utils/http";
 import parseError from "../../utils/parseError";
-import { CREATE_BOARD, GET_BOARD, GET_BOARDS, UPDATE_COLUMN_NAME } from "../types/users";
+import {
+    CLEAR_BOARD_COLUMN,
+    CREATE_BOARD,
+    GET_BOARD,
+    GET_BOARDS,
+    UPDATE_COLUMN_NAME,
+} from "../types/users";
 
 export const createBoardAction = (details) => async (dispatch) => {
     dispatch({ type: CREATE_BOARD.REQUEST });
@@ -74,4 +80,8 @@ export const updateColumnNameAction = (id, details) => async (dispatch) => {
         });
         return { success: false, message: parseError(error) };
     }
+};
+
+export const clearBoardColumn = () => async (dispatch) => {
+    dispatch({ type: CLEAR_BOARD_COLUMN });
 };

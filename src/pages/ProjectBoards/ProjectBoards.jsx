@@ -4,7 +4,10 @@ import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper
 import ScrollContainer from "react-indiana-drag-scroll";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
-import { getBoardAction } from "../../redux/actions/boardsActions";
+import {
+    clearBoardColumn,
+    getBoardAction,
+} from "../../redux/actions/boardsActions";
 import { useParams } from "react-router-dom";
 
 import ProjectBoardColumn from "../../components/ProjectBoardColumn/ProjectBoardColumn";
@@ -12,7 +15,9 @@ import { FaSpinner } from "react-icons/fa";
 
 const ProjectBoards = () => {
     const { user } = useSelector((state) => state.userAuthState);
-    const { board, columns, isLoadingBoard } = useSelector((state) => state.boardsState);
+    const { board, columns, isLoadingBoard } = useSelector(
+        (state) => state.boardsState
+    );
 
     const [boardData, setBoardData] = useState(columns);
 
@@ -46,8 +51,14 @@ const ProjectBoards = () => {
         setBoardData(columns);
     }, [columns]);
 
+    useEffect(() => {
+        return () => dispatch(clearBoardColumn());
+    }, [dispatch]);
+
     return (
-        <DashboardWrapper title={`Project Boards - ${(board._id && board.name) || ""}`}>
+        <DashboardWrapper
+            title={`Project Boards - ${(board._id && board.name) || ""}`}
+        >
             {isLoadingBoard && (
                 <div>
                     <FaSpinner className="animate-spin" />
@@ -68,7 +79,7 @@ const ProjectBoards = () => {
                             <Droppable droppableId={idx.toString()}>
                                 {(provided, snapshot) => (
                                     <ProjectBoardColumn
-                                    boardId={boardId}
+                                        boardId={boardId}
                                         board={board}
                                         {...provided.droppableProps}
                                         ref={provided.innerRef}

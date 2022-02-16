@@ -3,6 +3,7 @@ import {
     GET_BOARD,
     CREATE_BOARD,
     UPDATE_COLUMN_NAME,
+    CLEAR_BOARD_COLUMN,
 } from "../types/users";
 
 const initialState = {
@@ -22,7 +23,7 @@ const boardsReducer = (state = initialState, action) => {
             return { ...state, loading: false };
 
         case GET_BOARD.REQUEST:
-            return { ...state, isLoadingBoard: true, board: {}, columns: [] };
+            return { ...state, isLoadingBoard: true };
         case GET_BOARD.SUCCESS:
             return {
                 ...state,
@@ -53,6 +54,14 @@ const boardsReducer = (state = initialState, action) => {
             };
         case UPDATE_COLUMN_NAME.FAIL:
             return { ...state, isUpdatingColumnName: false };
+
+        case CLEAR_BOARD_COLUMN:
+            return {
+                ...state,
+                isUpdatingColumnName: false,
+                board: {},
+                columns: [],
+            };
 
         default:
             return { ...state };
