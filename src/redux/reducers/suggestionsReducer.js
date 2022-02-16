@@ -1,5 +1,6 @@
 import {
     CREATE_SUGGESTION,
+    DELETE_SUGGESTION,
     GET_SUGGESTIONS,
     SUGGESTION_DRAG,
     SUGGESTION_VOTE,
@@ -53,6 +54,16 @@ const suggestionsReducer = (state = initialState, action) => {
             };
         case SUGGESTION_DRAG.FAIL:
             return { ...state, isUpdatingColumn: false };
+
+        case DELETE_SUGGESTION.REQUEST:
+            return { ...state, isDeletingSuggestion: true };
+        case DELETE_SUGGESTION.SUCCESS:
+            return {
+                ...state,
+                isDeletingSuggestion: false,
+            };
+        case DELETE_SUGGESTION.FAIL:
+            return { ...state, isDeletingSuggestion: false };
 
         default:
             return { ...state };
