@@ -22,7 +22,7 @@ const boardsReducer = (state = initialState, action) => {
             return { ...state, loading: false };
 
         case GET_BOARD.REQUEST:
-            return { ...state, isLoadingBoard: true };
+            return { ...state, isLoadingBoard: true, board: {}, columns: [] };
         case GET_BOARD.SUCCESS:
             return {
                 ...state,
@@ -49,7 +49,7 @@ const boardsReducer = (state = initialState, action) => {
         case UPDATE_COLUMN_NAME.SUCCESS:
             return {
                 ...state,
-                isUpdatingColumnName: false
+                isUpdatingColumnName: false,
             };
         case UPDATE_COLUMN_NAME.FAIL:
             return { ...state, isUpdatingColumnName: false };
