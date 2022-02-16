@@ -20,7 +20,7 @@ export const createBoardAction = (details) => async (dispatch) => {
     }
 };
 
-export const getBoards = (details) => async (dispatch) => {
+export const getBoardsAction = (details) => async (dispatch) => {
     dispatch({ type: GET_BOARDS.REQUEST });
     try {
         const data = await get(`boards`, details);
@@ -38,7 +38,7 @@ export const getBoards = (details) => async (dispatch) => {
     }
 };
 
-export const getBoard = (id, details) => async (dispatch) => {
+export const getBoardAction = (id, details) => async (dispatch) => {
     dispatch({ type: GET_BOARD.REQUEST });
     try {
         const data = await get(`boards/${id}`, details);
