@@ -1,6 +1,6 @@
-import { get, post } from "../../utils/http";
+import { get, post, put } from "../../utils/http";
 import parseError from "../../utils/parseError";
-import { CREATE_BOARD, GET_BOARD, GET_BOARDS } from "../types/users";
+import { CREATE_BOARD, GET_BOARD, GET_BOARDS, UPDATE_COLUMN_NAME } from "../types/users";
 
 export const createBoardAction = (details) => async (dispatch) => {
     dispatch({ type: CREATE_BOARD.REQUEST });
@@ -51,6 +51,25 @@ export const getBoardAction = (id, details) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: GET_BOARD.FAIL,
+            error: parseError(error),
+        });
+        return { success: false, message: parseError(error) };
+    }
+};
+
+export const updateColumnNameAction = (id, details) => async (dispatch) => {
+    dispatch({ type: UPDATE_COLUMN_NAME.REQUEST });
+    try {
+        const data = await put(`boards/column-name/${id}`, details);
+        dispatch({
+            type: UPDATE_COLUMN_NAME.SUCCESS,
+            board: data.board,
+            column: data.column,
+        });
+        return { success: true };
+    } catch (error) {
+        dispatch({
+            type: UPDATE_COLUMN_NAME.FAIL,
             error: parseError(error),
         });
         return { success: false, message: parseError(error) };

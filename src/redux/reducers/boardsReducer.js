@@ -1,4 +1,9 @@
-import { GET_BOARDS, GET_BOARD, CREATE_BOARD } from "../types/users";
+import {
+    GET_BOARDS,
+    GET_BOARD,
+    CREATE_BOARD,
+    UPDATE_COLUMN_NAME,
+} from "../types/users";
 
 const initialState = {
     boards: [],
@@ -38,6 +43,24 @@ const boardsReducer = (state = initialState, action) => {
             };
         case CREATE_BOARD.FAIL:
             return { ...state, isCreatingBoard: false };
+
+        case UPDATE_COLUMN_NAME.REQUEST:
+            return { ...state, isUpdatingColumnName: true };
+        case UPDATE_COLUMN_NAME.SUCCESS:
+            return {
+                ...state,
+                isUpdatingColumnName: false,
+                columns: [
+                    ...state.columns.map((column) => {
+                        if (column.id === action.column._id) {
+                            return action.column;
+                        }
+                        return column;
+                    }),
+                ],
+            };
+        case UPDATE_COLUMN_NAME.FAIL:
+            return { ...state, isUpdatingColumnName: false };
 
         default:
             return { ...state };
