@@ -1,18 +1,28 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
+import { FaSpinner } from "react-icons/fa";
 import { HiPencil } from "react-icons/hi";
-import { useDispatch } from "react-redux";
-import { updateColumnNameAction } from "../../redux/actions/boardsActions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    getBoardAction,
+    updateColumnNameAction,
+} from "../../redux/actions/boardsActions";
 import BoardCard from "../BoardCard/BoardCard";
 
-const ProjectBoardColumn = ({ board, ...props }) => {
+const ProjectBoardColumn = ({ boardId, board, ...props }) => {
+    const { user } = useSelector((state) => state.userAuthState);
+    const { isUpdatingColumnName } = useSelector((state) => state.boardsState);
+
     const [isEditingName, setIsEditingName] = useState(false);
     const [name, setName] = useState(board.name);
 
     const dispatch = useDispatch();
 
-    const handleSaveName = () => {
-        dispatch(updateColumnNameAction(board._id, { name }));
+    const inputRef = useRef();
+
+    const handleSaveName = async () => {
+        await dispatch(updateColumnNameAction(board._id, { name }));
+        await dispatch(getBoardAction(boardId, { investorId: user?._id }));
     };
     return (
         <div {...props}>
@@ -20,12 +30,16 @@ const ProjectBoardColumn = ({ board, ...props }) => {
                 <div className="flex px-2">
                     <input
                         value={name}
+                        ref={inputRef}
                         onChange={(e) => setName(e.target.value)}
                         className="p-1 text-xs !rounded-md !rounded-r-none"
                         type="text"
                     />
-                    <button onClick={handleSaveName} className="bg-dark-color text-xs p-2 py-1 text-white">
-                        Save
+                    <button
+                        onClick={handleSaveName}
+                        className="bg-dark-color text-xs p-2 py-1 text-white"
+                    >
+                        {isUpdatingColumnName ? <FaSpinner /> : "Save"}
                     </button>
                     <button
                         onClick={() => setIsEditingName(false)}
@@ -40,7 +54,10 @@ const ProjectBoardColumn = ({ board, ...props }) => {
                         {board.name}
                     </h2>
                     <HiPencil
-                        onClick={() => setIsEditingName(true)}
+                        onClick={() => {
+                            setIsEditingName(true);
+                            inputRef.current && inputRef.current.focus();
+                        }}
                         className="mr-4 hidden group-hover:block font-bold text-xl cursor-pointer"
                     />
                 </div>

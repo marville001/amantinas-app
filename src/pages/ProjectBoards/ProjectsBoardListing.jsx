@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { FaSpinner } from "react-icons/fa";
 import { HiOutlinePlusCircle } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -8,7 +9,9 @@ import { getBoardsAction } from "../../redux/actions/boardsActions";
 
 const ProjectsBoardListing = () => {
     const { user } = useSelector((state) => state.userAuthState);
-    const { boards } = useSelector((state) => state.boardsState);
+    const { boards, loading } = useSelector(
+        (state) => state.boardsState
+    );
 
     const [newBoardModalOpen, setNewBoardModalOpen] = useState(false);
     const dispatch = useDispatch();
@@ -17,9 +20,13 @@ const ProjectsBoardListing = () => {
         dispatch(getBoardsAction({ investorId: user?._id }));
     }, [dispatch, user?._id]);
 
-
     return (
         <DashboardWrapper title="My Boards">
+            {loading && (
+                <div>
+                    <FaSpinner className="animate-spin" />
+                </div>
+            )}
             <div className="flex my-10 flex-wrap gap-4">
                 {boards?.map((board) => (
                     <Link
@@ -27,8 +34,7 @@ const ProjectsBoardListing = () => {
                         key={board._id}
                         className="
                         rounded w-full sm:w-auto text-white font-medium px-4 
-                        bg-gradient-to-br from-dark-color to-primary-blue
-                        bg-slate-300 py-8 min-w-[200px]"
+                        bg-dark-color py-8 min-w-[200px]"
                     >
                         {board.name}
                     </Link>

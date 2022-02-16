@@ -8,10 +8,11 @@ import { getBoardAction } from "../../redux/actions/boardsActions";
 import { useParams } from "react-router-dom";
 
 import ProjectBoardColumn from "../../components/ProjectBoardColumn/ProjectBoardColumn";
+import { FaSpinner } from "react-icons/fa";
 
 const ProjectBoards = () => {
     const { user } = useSelector((state) => state.userAuthState);
-    const { board, columns } = useSelector((state) => state.boardsState);
+    const { board, columns, isLoadingBoard } = useSelector((state) => state.boardsState);
 
     const [boardData, setBoardData] = useState(columns);
 
@@ -47,6 +48,11 @@ const ProjectBoards = () => {
 
     return (
         <DashboardWrapper title={`Project Boards - ${(board._id && board.name) || ""}`}>
+            {isLoadingBoard && (
+                <div>
+                    <FaSpinner className="animate-spin" />
+                </div>
+            )}
             <ScrollContainer
                 ignoreElements=".board-item"
                 className="
@@ -62,6 +68,7 @@ const ProjectBoards = () => {
                             <Droppable droppableId={idx.toString()}>
                                 {(provided, snapshot) => (
                                     <ProjectBoardColumn
+                                    boardId={boardId}
                                         board={board}
                                         {...provided.droppableProps}
                                         ref={provided.innerRef}

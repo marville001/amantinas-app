@@ -22,16 +22,16 @@ const boardsReducer = (state = initialState, action) => {
             return { ...state, loading: false };
 
         case GET_BOARD.REQUEST:
-            return { ...state, loading: true, board: {}, columns: [] };
+            return { ...state, isLoadingBoard: true };
         case GET_BOARD.SUCCESS:
             return {
                 ...state,
-                loading: false,
+                isLoadingBoard: false,
                 board: action.board,
                 columns: action.columns,
             };
         case GET_BOARD.FAIL:
-            return { ...state, loading: false, board: {}, columns: [] };
+            return { ...state, isLoadingBoard: false };
 
         case CREATE_BOARD.REQUEST:
             return { ...state, isCreatingBoard: true };
@@ -49,15 +49,7 @@ const boardsReducer = (state = initialState, action) => {
         case UPDATE_COLUMN_NAME.SUCCESS:
             return {
                 ...state,
-                isUpdatingColumnName: false,
-                columns: [
-                    ...state.columns.map((column) => {
-                        if (column.id === action.column._id) {
-                            return action.column;
-                        }
-                        return column;
-                    }),
-                ],
+                isUpdatingColumnName: false
             };
         case UPDATE_COLUMN_NAME.FAIL:
             return { ...state, isUpdatingColumnName: false };
