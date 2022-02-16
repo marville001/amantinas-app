@@ -58,7 +58,7 @@ const Login = () => {
                 </h1>
                 <div className="flex space-x-5 my-6 justify-center">
                     <GoogleLogin
-                        clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+                        clientId="202471176377-6j6tvqu6ulhuffe440snjbrg5e3bpilo.apps.googleusercontent.com"
                         buttonText="Login"
                         onSuccess={responseGoogle}
                         onFailure={responseGoogle}
@@ -82,7 +82,7 @@ const Login = () => {
                     />
 
                     <FacebookLogin
-                        appId="1088597931155576"
+                        appId="498471691691479"
                         callback={responseFacebook}
                         fields="name,email,picture"
                         cssClass="cursor-pointer p-3 px-4 rounded-lg bg-white font-bold text-primary-blue"
