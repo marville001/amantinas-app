@@ -1,19 +1,21 @@
 import React, { useRef, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { FaSpinner } from "react-icons/fa";
-import { HiPencil } from "react-icons/hi";
+import { HiPencil, HiPlusSm } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import {
     getBoardAction,
     updateColumnNameAction,
 } from "../../redux/actions/boardsActions";
 import BoardCard from "../BoardCard/BoardCard";
+import AddBoardItemModal from "../Modals/AddBoardItemModal";
 
 const ProjectBoardColumn = ({ boardId, board, ...props }) => {
     const { user } = useSelector((state) => state.userAuthState);
     const { isUpdatingColumnName } = useSelector((state) => state.boardsState);
 
     const [isEditingName, setIsEditingName] = useState(false);
+    const [addItemModalOpen, setAddItemModalOpen] = useState(false);
     const [name, setName] = useState(board.name);
 
     const dispatch = useDispatch();
@@ -62,7 +64,14 @@ const ProjectBoardColumn = ({ boardId, board, ...props }) => {
                     />
                 </div>
             )}
-            <hr className="border-0 h-[2px] my-2 mb-8 opacity-50 border-dark-color bg-dark-color" />
+            <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-color bg-dark-color" />
+            <div
+                onClick={() => setAddItemModalOpen(true)}
+                className="flex items-center px-5 py-2 w-full cursor-pointer"
+            >
+                <HiPlusSm />
+                <p className="px-2 rounded-md">Add Item</p>
+            </div>
             {board.items.length > 0 &&
                 board.items.map((item, idx) => (
                     <Draggable
@@ -83,6 +92,11 @@ const ProjectBoardColumn = ({ boardId, board, ...props }) => {
                         )}
                     </Draggable>
                 ))}
+
+            <AddBoardItemModal
+                isOpen={addItemModalOpen}
+                closeModal={() => setAddItemModalOpen(false)}
+            />
         </div>
     );
 };
