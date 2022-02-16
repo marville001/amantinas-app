@@ -17,12 +17,11 @@ const ProjectsBoardListing = () => {
         dispatch(getBoardsAction({ investorId: user?._id }));
     }, [dispatch, user?._id]);
 
-    console.log({boards});
 
     return (
         <DashboardWrapper title="My Boards">
             <div className="flex my-10 flex-wrap gap-4">
-                {[boards].map((board) => (
+                {boards?.map((board) => (
                     <Link
                         to={`/project-boards/${board._id}`}
                         key={board._id}
