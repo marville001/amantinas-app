@@ -19,6 +19,7 @@ import SuggestionsBoard from "./pages/SuggestionsBoard/SuggestionsBoard";
 import AdminHome from "./admin/pages/AdminHome";
 import AdminSuggestionsBoard from "./admin/pages/AdminSuggestionsBoard";
 import AdminLogin from "./admin/pages/AdminLogin";
+import ProjectsBoardListing from "./pages/ProjectBoards/ProjectsBoardListing";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -60,7 +61,8 @@ const App = () => {
         />
         <Route exact path="/archived-data" element={<ArchivedData />} />
         <Route exact path="/users" element={<Users />} />
-        <Route exact path="/project-boards" element={<ProjectBoards />} />
+        <Route exact path="/project-boards" element={<ProjectsBoardListing />} />
+        <Route exact path="/project-boards/:boardId" element={<ProjectBoards />} />
         <Route exact path="/suggestions-boards" element={<SuggestionsBoard />} />
         <Route exact path="/admin" element={<AdminHome />} />
         <Route exact path="/admin/login" element={<AdminLogin />} />
