@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Modal from "./Modal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaSpinner } from "react-icons/fa";
 import { BiBath, BiBed } from "react-icons/bi";
 import priceFormatter from "../../utils/priceFormatter";
 import { HiOutlineLocationMarker } from "react-icons/hi";
+import { createTransactionAction } from "../../redux/actions/transactionsActions";
 
 const AddTransactionModal = ({
     isOpen,
@@ -13,6 +14,10 @@ const AddTransactionModal = ({
     closeModal = () => {},
 }) => {
     const { homes } = useSelector((state) => state.homesState);
+    const { user } = useSelector((state) => state.userAuthState);
+    const { isCreatingTransaction } = useSelector(
+        (state) => state.transactionsState
+    );
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -26,7 +31,7 @@ const AddTransactionModal = ({
     const [connectedHome, setConnectedHome] = useState("");
     const [homeDets, setHomeDets] = useState({});
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const handleCloseModal = () => {
         setHomeDets({});
@@ -45,12 +50,28 @@ const AddTransactionModal = ({
     const handleSubmit = async () => {
         setError("");
 
-        // const res = await dispatch();
-        // if (!res.success) {
-        //     setError(res.message);
-        // } else {
-        //     handleCloseModal();
-        // }
+        const obj = {
+            title,
+            investorId: user?._id,
+            homeId: connectedHome,
+            description,
+            amount,
+            date,
+            recurring,
+            type,
+        };
+
+        if (recurring) {
+            obj.startDate = startDate;
+            obj.endDate = endDate;
+        }
+
+        const res = await dispatch(createTransactionAction(obj));
+        if (!res.success) {
+            setError(res.message);
+        } else {
+            handleCloseModal();
+        }
     };
 
     useEffect(() => {
@@ -67,6 +88,12 @@ const AddTransactionModal = ({
             <div className="text-center text-white text-2xl mb-4">
                 New Transaction
             </div>
+
+            {error && (
+                <div className="text-center bg-red-200 rounded-lg text-red-500 my-4 text-sm p-1">
+                    {error}
+                </div>
+            )}
 
             <div className="flex space-x-4">
                 <div className="flex-1">
@@ -136,11 +163,6 @@ const AddTransactionModal = ({
                     )}
                 </div>
                 <div className="flex-1">
-                    {error && (
-                        <div className="text-center bg-red-200 rounded-lg text-red-500 my-4 text-sm p-1">
-                            {error}
-                        </div>
-                    )}
                     <div className="flex flex-1 flex-col space-y-2">
                         <label className="text-white text-md">Title</label>
                         <input
@@ -267,11 +289,11 @@ const AddTransactionModal = ({
 
                     <div className="flex  space-y-2 my-4 justify-center">
                         <button
-                            disabled={false}
+                            disabled={isCreatingTransaction}
                             onClick={handleSubmit}
                             className="disabled:opacity-50 disabled:cursor-not-allowed uppercase px-16 tracking-wider py-2 bg-dark-color text-white text-lg rounded-md mt-8 flex items-center"
                         >
-                            {false ? (
+                            {isCreatingTransaction ? (
                                 <>
                                     <FaSpinner className="animate-spin mr-4" />{" "}
                                     <span className="capitalize">

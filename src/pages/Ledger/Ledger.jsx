@@ -5,6 +5,7 @@ import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper
 import DataTable from "../../components/DataTable/DataTable";
 import AddTransactionModal from "../../components/Modals/AddTransactionModal";
 import { getHomesAction } from "../../redux/actions/homesActions";
+import { getTransactionsAction } from "../../redux/actions/transactionsActions";
 
 const Ledger = () => {
     const { user } = useSelector((state) => state.userAuthState);
@@ -15,6 +16,7 @@ const Ledger = () => {
 
     useEffect(() => {
         dispatch(getHomesAction({ investorId: user?._id }));
+        dispatch(getTransactionsAction({ investorId: user?._id }));
     }, [dispatch, user?._id]);
 
     return (
