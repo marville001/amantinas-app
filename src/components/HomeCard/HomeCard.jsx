@@ -8,7 +8,7 @@ const HomeCard = ({ home }) => {
     return (
         <div className="shadow-lg p-2 rounded-lg pb-5">
             <img
-                className="w-full h-52 rounded-lg"
+                className="w-full h-52 object-cover rounded-lg"
                 src={`${process.env.REACT_APP_STATIC_URL + home?.images[0]}`}
                 alt=""
             />
