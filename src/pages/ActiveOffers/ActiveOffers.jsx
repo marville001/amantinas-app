@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaSpinner } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper";
 import HomeCard from "../../components/HomeCard/HomeCard";
 import ListCard from "../../components/ListCard/ListCard";
 import ViewTypeHeader from "../../components/ViewTypeHeader/ViewTypeHeader";
+import { getHomesAction } from "../../redux/actions/homesActions";
 
 const ActiveOffers = () => {
     const { viewType } = useSelector((state) => state.appState);
     const { homes, loading } = useSelector((state) => state.homesState);
+    const { user } = useSelector((state) => state.userAuthState);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getHomesAction({ investorId: user?._id }));
+    }, [dispatch, user?._id]);
+
+
     return (
         <DashboardWrapper title="Active Offers">
             <div className="my-6 bg-white rounded-xl p-4 max-w-6xl">
@@ -27,7 +37,7 @@ const ActiveOffers = () => {
                 {viewType === "cards" ? (
                     <div className="px-12 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-16">
                         {homes
-                            ?.filter((h) => h.category === "active")
+                            ?.filter((h) => h.isActive === true)
                             .map((home, idx) => (
                                 <HomeCard key={home._id} home={home} />
                             ))}
@@ -35,7 +45,7 @@ const ActiveOffers = () => {
                 ) : (
                     <div className="md:px-12 flex flex-col space-y-2">
                         {homes
-                            ?.filter((h) => h.category === "active")
+                            ?.filter((h) => h.isActive === true)
                             .map((home, idx) => (
                                 <ListCard key={home._id} home={home} />
                             ))}

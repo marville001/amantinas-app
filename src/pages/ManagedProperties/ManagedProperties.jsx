@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper";
 import HomeCard from "../../components/HomeCard/HomeCard";
 import CashFlowChart from "../../components/CashFlowChart/CashFlowChart";
 import CustomDatePicker from "../../components/CustomDatePicker/CustomDatePicker";
 import ListCard from "../../components/ListCard/ListCard";
 import ViewTypeHeader from "../../components/ViewTypeHeader/ViewTypeHeader";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaSpinner } from "react-icons/fa";
+import { getHomesAction } from "../../redux/actions/homesActions";
 
 const ManagedProperties = () => {
     const { viewType } = useSelector((state) => state.appState);
     const { homes, loading } = useSelector((state) => state.homesState);
+    const { user } = useSelector((state) => state.userAuthState);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getHomesAction({ investorId: user?._id }));
+    }, [dispatch, user?._id]);
     return (
         <DashboardWrapper title="Managed Properties">
             <div className="my-8 p-10 max-w-2xl bg-white rounded-xl mx-auto">
@@ -50,7 +58,7 @@ const ManagedProperties = () => {
                 {viewType === "cards" ? (
                     <div className="px-12 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-16">
                         {homes
-                            ?.filter((h) => h.category === "managed")
+                            ?.filter((h) => h.isManaged === true && h.isArchived === false)
                             .map((home, idx) => (
                                 <HomeCard key={home._id} home={home} />
                             ))}
@@ -58,7 +66,7 @@ const ManagedProperties = () => {
                 ) : (
                     <div className="md:px-12 flex flex-col space-y-2">
                         {homes
-                            ?.filter((h) => h.category === "managed")
+                            ?.filter((h) => h.isManaged === true && h.isArchived === false)
                             .map((home, idx) => (
                                 <ListCard key={home._id} home={home} />
                             ))}
