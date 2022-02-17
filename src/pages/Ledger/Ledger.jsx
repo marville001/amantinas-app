@@ -112,8 +112,8 @@ const Ledger = () => {
                     </div>
                 )}
                 </div>
-
                 {/* Table End*/}
+
             </div>
             <div className="my-6">
                 <DataTable
