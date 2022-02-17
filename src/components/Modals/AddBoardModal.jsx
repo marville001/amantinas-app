@@ -3,6 +3,7 @@ import { FaSpinner } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { createBoardAction } from "../../redux/actions/boardsActions";
 import Modal from "./Modal";
+import {useNavigate} from 'react-router-dom'
 
 const AddBoardModal = ({ isOpen, title, size, closeModal = () => {} }) => {
     const { user } = useSelector((state) => state.userAuthState);
@@ -13,6 +14,7 @@ const AddBoardModal = ({ isOpen, title, size, closeModal = () => {} }) => {
     const [error, setError] = useState("");
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleCloseModal = () => {
         setName("");
@@ -33,6 +35,7 @@ const AddBoardModal = ({ isOpen, title, size, closeModal = () => {} }) => {
             setError(res.message);
         } else {
             handleCloseModal();
+            navigate("/project-boards")
         }
     };
 
