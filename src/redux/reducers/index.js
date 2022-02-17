@@ -8,6 +8,7 @@ import scrapesReducer from "./scrapesReducer";
 import homesReducer from "./homesReducer";
 import suggestionsReducer from "./suggestionsReducer";
 import boardsReducer from "./boardsReducer";
+import transactionsReducer from "./transactionsReducer";
 
 const rootReducer = combineReducers({
     appState: appReducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
     homesState: homesReducer,
     suggestionsState: suggestionsReducer,
     boardsState: boardsReducer,
+    transactionsState: transactionsReducer,
 });
 
 export default rootReducer;
