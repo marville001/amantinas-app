@@ -37,7 +37,7 @@ const ActiveOffers = () => {
                 {viewType === "cards" ? (
                     <div className="px-12 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-16">
                         {homes
-                            ?.filter((h) => h.isActive === true)
+                            ?.filter((h) => h.isActive === true && h.isArchived === false)
                             .map((home, idx) => (
                                 <HomeCard key={home._id} home={home} />
                             ))}
@@ -45,7 +45,7 @@ const ActiveOffers = () => {
                 ) : (
                     <div className="md:px-12 flex flex-col space-y-2">
                         {homes
-                            ?.filter((h) => h.isActive === true)
+                            ?.filter((h) => h.isActive === true && h.isArchived === false)
                             .map((home, idx) => (
                                 <ListCard key={home._id} home={home} />
                             ))}

@@ -32,7 +32,7 @@ const DashboardWrapper = ({ children, title }) => {
     }
 
     return (
-        <div className="flex min-h-screen">
+        <div className="flex min-h-screen mb-12">
             <Sidebar />
             <div
                 className={`${
