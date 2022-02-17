@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper";
 
 import DataTable from "../../components/DataTable/DataTable";
+import AddTransactionModal from "../../components/Modals/AddTransactionModal";
 
-const Ledger = () => {
+const Ledger = () => {    
+  const [addTransModalOpen, setAddTransModalOpen] = useState(false);
+
   return (
     <DashboardWrapper title={"Ledger"}>
       <div className="my-6">
@@ -19,6 +22,7 @@ const Ledger = () => {
             "Property",
             "Notes",
           ]}
+          btnAction={() => setAddTransModalOpen(true)}
         />
       </div>
       <div className="my-6">
@@ -36,6 +40,10 @@ const Ledger = () => {
           ]}
         />
       </div>
+      <AddTransactionModal
+                isOpen={addTransModalOpen}
+                closeModal={() => setAddTransModalOpen(false)}
+            />
     </DashboardWrapper>
   );
 };
