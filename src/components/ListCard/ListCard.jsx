@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { HiDotsVertical, HiOutlineLocationMarker } from "react-icons/hi";
 import { BiBath, BiBed } from "react-icons/bi";
 import priceFormatter from "../../utils/priceFormatter";
@@ -11,16 +11,21 @@ import {
 import { FaSpinner } from "react-icons/fa";
 
 const ListCard = ({ home }) => {
-    const { isUpdatingProspect } = useSelector((state) => state.homesState);
     const { user } = useSelector((state) => state.userAuthState);
+
+    const [loading, setLoading] = useState(false);
 
     const dispatch = useDispatch();
 
     const handleUpdate = async (obj) => {
+        setLoading(true)
         const res = await dispatch(updateProspectAction(home._id, obj));
 
         if (res.success) {
             await dispatch(getHomesAction({ investorId: user?._id }));
+            setLoading(false)
+        }else{
+            setLoading(false)
         }
     };
     return (
@@ -40,7 +45,7 @@ const ListCard = ({ home }) => {
                 </div>
             </div>
 
-            {isUpdatingProspect && (
+            {loading && (
                     <FaSpinner className="absolute animate-spin mr-4 text-2xl right-6 text-primary-blue" />
                 )}
 

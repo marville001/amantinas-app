@@ -54,9 +54,7 @@ const AddProspectModal = ({ isOpen, title, size, closeModal = () => {} }) => {
         } else {
             setSuccess(res.message);
 
-            setTimeout(() => {
-                handleCloseModal()
-            }, 2000);
+            handleCloseModal();
         }
     };
 
