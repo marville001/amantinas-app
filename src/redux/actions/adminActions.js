@@ -1,4 +1,4 @@
-import { ADMIN_LOGIN, CREATE_ADMIN } from "../types/admin";
+import { ADMIN_LOGIN, CREATE_ADMIN, GET_ADMINS } from "../types/admin";
 import { get, post } from "../../utils/http";
 import parseError from "../../utils/parseError";
 
@@ -6,7 +6,6 @@ export const getLoggedInAdmin = () => async (dispatch) => {
     const token = localStorage.adminToken;
 
     if (token) {
-        console.log({ token });
         dispatch({ type: ADMIN_LOGIN.REQUEST });
         try {
             const data = await get("admin-auth/me", "admin");
@@ -57,6 +56,25 @@ export const createAdminAction = (details) => async (dispatch) => {
             type: CREATE_ADMIN.FAIL,
             error: parseError(error),
         });
+        return { success: false, message: parseError(error) };
+    }
+};
+
+export const getAdminsAction = () => async (dispatch) => {
+    dispatch({ type: GET_ADMINS.REQUEST });
+    try {
+        const data = await get("users/admins", "admin");
+        dispatch({
+            type: GET_ADMINS.SUCCESS,
+            admins: data.admins,
+        });
+        return { success: true };
+    } catch (error) {
+        dispatch({
+            type: GET_ADMINS.FAIL,
+            error: parseError(error),
+        });
+
         return { success: false, message: parseError(error) };
     }
 };
