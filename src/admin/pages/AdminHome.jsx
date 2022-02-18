@@ -24,7 +24,7 @@ const AdminHome = () => {
         <DashboardWrapper title="Archived Data">
             <div className="mb-10 mt-4 flex md:space-x-2 space-y-2 sm:space-x-2 sm:space-y-0 flex-col sm:flex-row">
                 <div className="flex-[1] bg-white p-4">
-                    <h4>Welcome "{"Admin Name"}"</h4>
+                    <h4>Welcome <span className="font-bold">{admin?.name}</span></h4>
                     <div className="flex items-center mt-6 justify-between">
                         <p className="text-dark-color">Total no of investors</p>
                         <div className="text-2xl text-dark-color font-bold">

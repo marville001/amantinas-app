@@ -14,6 +14,7 @@ const adminReducer = (state = initialState, action) => {
         case ADMIN_LOGIN.SUCCESS:
             return { ...state, loading: false, admin: action.admin };
         case ADMIN_LOGIN.FAIL:
+        case "ADMIN_LOGOUT":
             return { ...state, loading: false, admin: {} };
 
         case CREATE_ADMIN.REQUEST:

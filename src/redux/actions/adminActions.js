@@ -8,7 +8,7 @@ export const getLoggedInAdmin = () => async (dispatch) => {
     if (token) {
         dispatch({ type: ADMIN_LOGIN.REQUEST });
         try {
-            const data = await get("admin-auth/me",{}, "admin");
+            const data = await get("admin-auth/me", {}, "admin");
             dispatch({
                 type: ADMIN_LOGIN.SUCCESS,
                 admin: data.admin,
@@ -41,6 +41,12 @@ export const adminLoginAction = (details) => async (dispatch) => {
         return { success: false, message: parseError(error) };
     }
 };
+export const adminLogoutAction = () => async (dispatch) => {
+    localStorage.removeItem("adminToken");
+    dispatch({
+        type: "ADMIN_LOGOUT",
+    });
+};
 
 export const createAdminAction = (details) => async (dispatch) => {
     dispatch({ type: CREATE_ADMIN.REQUEST });
@@ -64,7 +70,7 @@ export const createAdminAction = (details) => async (dispatch) => {
 export const getAdminsAction = () => async (dispatch) => {
     dispatch({ type: GET_ADMINS.REQUEST });
     try {
-        const data = await get("users/admins",{}, "admin");
+        const data = await get("users/admins", {}, "admin");
         dispatch({
             type: GET_ADMINS.SUCCESS,
             admins: data.admins,

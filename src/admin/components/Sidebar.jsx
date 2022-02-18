@@ -8,7 +8,7 @@ import {
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { SIDEBAR } from "../../redux/types";
-import { userLogoutAction } from "../../redux/actions/userAuthActions";
+import { adminLogoutAction } from "../../redux/actions/adminActions";
 const SideLink = ({ to = "/home", icon: Icon, text }) => {
     const { pathname } = useLocation();
     const dispatch = useDispatch();
@@ -83,8 +83,8 @@ const Sidebar = () => {
                 />
                 <div
                     onClick={() => {
-                        dispatch(userLogoutAction());
-                        navigate("/")
+                        dispatch(adminLogoutAction());
+                        navigate("/admin/login")
                     }}
                     className="absolute bottom-10 inset-x-0 flex select-none justify-center items-center text-white space-x-2 cursor-pointer"
                 >
