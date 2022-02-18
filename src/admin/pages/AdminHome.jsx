@@ -1,11 +1,25 @@
 import React, { useState } from "react";
-import { FaAirbnb } from "react-icons/fa";
+import { useEffect } from "react";
+import { FaAirbnb, FaSpinner } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getAdminsAction } from "../../redux/actions/adminActions";
 import AddAdminModal from "../components/AddAdminModal";
 import DashboardWrapper from "../Wrapper";
 
 const AdminHome = () => {
+    const { admins, admin, isLoadingAdmins } = useSelector(
+        (state) => state.adminState
+    );
+
     const [addAdminModalOpen, setAddAdminModalOpen] = useState(false);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getAdminsAction());
+    }, [dispatch]);
+
     return (
         <DashboardWrapper title="Archived Data">
             <div className="mb-10 mt-4 flex md:space-x-2 space-y-2 sm:space-x-2 sm:space-y-0 flex-col sm:flex-row">
@@ -85,20 +99,30 @@ const AdminHome = () => {
                         Add Admin
                     </button>
                 </div>
+
                 <table className="w-full sm:w-1/2 mt-4">
                     <thead className="mb-2">
                         <tr>
-                            <th className="text-left">Email</th>
                             <th className="text-left">Name</th>
+                            <th className="text-left">Email</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>malcolmockyer@gmail.com</td>
-                            <td>Malcool Mockyer</td>
-                        </tr>
+                        {admins
+                            ?.filter((ad) => ad._id !== admin._id)
+                            .map((ad) => (
+                                <tr>
+                                    <td>{ad.name}</td>
+                                    <td>{ad.email}</td>
+                                </tr>
+                            ))}
                     </tbody>
                 </table>
+                {isLoadingAdmins && (
+                    <div className="py-3">
+                        <FaSpinner className="animate-spin" />
+                    </div>
+                )}
             </div>
             <AddAdminModal
                 isOpen={addAdminModalOpen}

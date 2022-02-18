@@ -37,7 +37,7 @@ export const loadSuggestionsAction =
     async (dispatch) => {
         dispatch({ type: GET_SUGGESTIONS.REQUEST });
         try {
-            const data = await get("suggestions", admin ? "admin" : "user");
+            const data = await get("suggestions", {}, admin ? "admin" : "user");
             dispatch({
                 type: GET_SUGGESTIONS.SUCCESS,
                 suggestions: data.suggestions,

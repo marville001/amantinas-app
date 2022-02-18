@@ -8,12 +8,13 @@ export const getLoggedInAdmin = () => async (dispatch) => {
     if (token) {
         dispatch({ type: ADMIN_LOGIN.REQUEST });
         try {
-            const data = await get("admin-auth/me", "admin");
+            const data = await get("admin-auth/me",{}, "admin");
             dispatch({
                 type: ADMIN_LOGIN.SUCCESS,
                 admin: data.admin,
             });
         } catch (error) {
+            console.log(error);
             localStorage.removeItem("adminToken");
             window.location.href = "/admin/login";
         }
@@ -63,7 +64,7 @@ export const createAdminAction = (details) => async (dispatch) => {
 export const getAdminsAction = () => async (dispatch) => {
     dispatch({ type: GET_ADMINS.REQUEST });
     try {
-        const data = await get("users/admins", "admin");
+        const data = await get("users/admins",{}, "admin");
         dispatch({
             type: GET_ADMINS.SUCCESS,
             admins: data.admins,
