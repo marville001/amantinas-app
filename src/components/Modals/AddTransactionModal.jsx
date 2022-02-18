@@ -110,9 +110,13 @@ const AddTransactionModal = ({
                             className="p-1 px-2"
                         >
                             <option value=""></option>
-                            {homes?.map((home) => (
-                                <option value={home._id}>{home.name}</option>
-                            ))}
+                            {homes
+                                ?.filter((home) => home.isManaged === true)
+                                .map((home) => (
+                                    <option value={home._id}>
+                                        {home.name}
+                                    </option>
+                                ))}
                         </select>
                     </div>
                     {connectedHome && (

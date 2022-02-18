@@ -15,7 +15,7 @@ export const getLoggedInUser = () => async (dispatch) => {
             });
         } catch (error) {
             localStorage.removeItem("token");
-            window.location.href = "/admin/login";
+            window.location.href = "/login";
         }
     }
 };
