@@ -8,7 +8,6 @@ const AddAdminModal = ({ isOpen, closeModal = () => {} }) => {
     const { isCreatingAdmin } = useSelector(
         (state) => state.adminState
     );
-    const { admin } = useSelector((state) => state.adminState);
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
