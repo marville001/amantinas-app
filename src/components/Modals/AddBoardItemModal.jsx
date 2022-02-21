@@ -5,15 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { addColumnItemAction } from "../../redux/actions/boardsActions";
 import { FaSpinner } from "react-icons/fa";
 
-const initialValue =
-    "<p>Your initial <b>html value</b> or an empty string to init editor without value</p>";
 
 const AddBoardItemModal = ({ isOpen, column, closeModal = () => {} }) => {
     const { isAddingColumnItem } = useSelector((state) => state.boardsState);
 
     const [title, setTitle] = useState("");
     const [picture, setPicture] = useState("");
-    const [description, setDescription] = useState(initialValue);
+    const [description, setDescription] = useState("");
 
     const [error, setError] = useState("");
 
