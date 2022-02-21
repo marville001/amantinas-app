@@ -1,4 +1,4 @@
-import React, {  useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { FaSpinner } from "react-icons/fa";
 import { HiPencil, HiPlusSm } from "react-icons/hi";
@@ -80,29 +80,30 @@ const ProjectBoardColumn = ({ boardId, board }) => {
                 <HiPlusSm />
                 <p className="px-2 rounded-md">Add Item</p>
             </div>
-            {board.items.length > 0 &&
-                board.items.map((item, idx) => (
-                    <Draggable
-                        index={idx}
-                        draggableId={item._id.toString()}
-                        key={item._id}
-                        className="w-[90%] mx-auto"
-                    >
-                        {(provided) => {
-                            // console.log({ provided });
-                            return (
-                                <div
-                                    className="board-item"
-                                    ref={provided.innerRef}
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps}
-                                >
-                                    <BoardCard item={item} />
-                                </div>
-                            );
-                        }}
-                    </Draggable>
-                ))}
+            <div className="flex flex-col space-y-5 my-3">
+                {board.items.length > 0 &&
+                    board.items.map((item, idx) => (
+                        <Draggable
+                            index={idx}
+                            draggableId={item._id.toString()}
+                            key={item._id}
+                            className="w-[90%] mx-auto"
+                        >
+                            {(provided) => {
+                                return (
+                                    <div
+                                        className="board-item"
+                                        ref={provided.innerRef}
+                                        {...provided.draggableProps}
+                                        {...provided.dragHandleProps}
+                                    >
+                                        <BoardCard item={item} />
+                                    </div>
+                                );
+                            }}
+                        </Draggable>
+                    ))}
+            </div>
 
             <AddBoardItemModal
                 isOpen={addItemModalOpen}

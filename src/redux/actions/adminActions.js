@@ -14,7 +14,6 @@ export const getLoggedInAdmin = () => async (dispatch) => {
                 admin: data.admin,
             });
         } catch (error) {
-            console.log(error);
             localStorage.removeItem("adminToken");
             window.location.href = "/admin/login";
         }

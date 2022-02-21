@@ -41,7 +41,6 @@ export const updateProspectAction = (id, details) => async (dispatch) => {
 export const getHomesAction =
     ({ investorId }) =>
     async (dispatch) => {
-        console.log({ investorId });
         dispatch({ type: GET_HOMES.REQUEST });
         try {
             const data = await get(`homes/${investorId}`);

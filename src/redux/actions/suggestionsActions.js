@@ -101,7 +101,6 @@ export const suggestionDragAction =
     };
 
 export const deleteSuggestionAction = (details) => async (dispatch) => {
-    console.log(details);
     dispatch({ type: DELETE_SUGGESTION.REQUEST });
     try {
         const data = await delete_("suggestions", details);

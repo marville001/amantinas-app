@@ -23,7 +23,6 @@ export const createTransactionAction = (details) => async (dispatch) => {
 export const getTransactionsAction =
     ({ investorId }) =>
     async (dispatch) => {
-        console.log({ investorId });
         dispatch({ type: GET_TRANSACTIONS.REQUEST });
         try {
             const data = await get(`transactions/${investorId}`);

@@ -47,8 +47,6 @@ const AdminSuggestionsBoard = () => {
                 "admin"
             )
         );
-
-        console.log(column);
     };
 
     useEffect(() => {

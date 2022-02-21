@@ -26,7 +26,6 @@ const AddBoardItemModal = ({ isOpen, column, closeModal = () => {} }) => {
     };
 
     const handleSubmit = async () => {
-        console.log(title, picture, description);
         setError("");
 
         const formData = new FormData();
