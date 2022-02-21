@@ -49,7 +49,7 @@ const AddBoardItemModal = ({ isOpen, column, closeModal = () => {} }) => {
             closeModal={handleCloseModal}
             classes={"!bg-light-blue !shadow-2xl !min-h-[60vh] !relative"}
         >
-            <h2 className="text-lg mb-3">New</h2>
+            <h2 className="text-lg mb-3">{column.name}</h2>
 
             {error && (
                 <div className="text-center max-w-4xl mx-auto bg-red-200 rounded-lg text-red-500 my-4 text-sm p-1">
