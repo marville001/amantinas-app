@@ -4,6 +4,7 @@ import {
     CREATE_BOARD,
     UPDATE_COLUMN_NAME,
     CLEAR_BOARD_COLUMN,
+    ADD_COLUMN_ITEM,
 } from "../types/users";
 
 const initialState = {
@@ -54,6 +55,26 @@ const boardsReducer = (state = initialState, action) => {
             };
         case UPDATE_COLUMN_NAME.FAIL:
             return { ...state, isUpdatingColumnName: false };
+
+        case ADD_COLUMN_ITEM.REQUEST:
+            return {
+                ...state,
+                isAddingColumnItem: true,
+            };
+        case ADD_COLUMN_ITEM.SUCCESS:
+            return {
+                ...state,
+                isAddingColumnItem: false,
+                columns: state.columns.map((col) => {
+                    if (col._id === action.column._id) {
+                        return action.column;
+                    } else {
+                        return col;
+                    }
+                }),
+            };
+        case ADD_COLUMN_ITEM.FAIL:
+            return { ...state, isAddingColumnItem: false };
 
         case CLEAR_BOARD_COLUMN:
             return {

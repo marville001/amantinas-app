@@ -10,11 +10,15 @@ import {
 import BoardCard from "../BoardCard/BoardCard";
 import AddBoardItemModal from "../Modals/AddBoardItemModal";
 
-const ProjectBoardColumn = ({ boardId, board,  }) => {
+const ProjectBoardColumn = ({ boardId, board }) => {
     const { user } = useSelector((state) => state.userAuthState);
     const { isUpdatingColumnName } = useSelector((state) => state.boardsState);
 
     const [isEditingName, setIsEditingName] = useState(false);
+
+    // To control the column we are adding item to
+    const [activeCol, setActiveCol] = useState({});
+
     const [addItemModalOpen, setAddItemModalOpen] = useState(false);
     const [name, setName] = useState(board.name);
 
@@ -67,7 +71,10 @@ const ProjectBoardColumn = ({ boardId, board,  }) => {
             )}
             <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-color bg-dark-color" />
             <div
-                onClick={() => setAddItemModalOpen(true)}
+                onClick={() => {
+                    setAddItemModalOpen(true);
+                    setActiveCol(board);
+                }}
                 className="flex items-center px-5 py-2 w-full cursor-pointer"
             >
                 <HiPlusSm />
@@ -90,7 +97,7 @@ const ProjectBoardColumn = ({ boardId, board,  }) => {
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                 >
-                                    <BoardCard />
+                                    <BoardCard item={item} />
                                 </div>
                             );
                         }}
@@ -99,7 +106,11 @@ const ProjectBoardColumn = ({ boardId, board,  }) => {
 
             <AddBoardItemModal
                 isOpen={addItemModalOpen}
-                closeModal={() => setAddItemModalOpen(false)}
+                closeModal={() => {
+                    setAddItemModalOpen(false);
+                    setActiveCol({});
+                }}
+                column={activeCol}
             />
         </div>
     );

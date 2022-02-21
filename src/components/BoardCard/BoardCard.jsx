@@ -2,7 +2,7 @@ import React from "react";
 import { HiDotsVertical, HiOutlineLocationMarker } from "react-icons/hi";
 import { FaBabyCarriage, FaCar } from "react-icons/fa";
 
-const BoardCard = () => {
+const BoardCard = ({item}) => {
   return (
     <div className="shadow-md p-2 rounded-lg pb-5">
       <img
@@ -11,7 +11,7 @@ const BoardCard = () => {
         alt=""
       />
       <div className="mt-3 mb-2 flex justify-between">
-        <h2 className="text-dark-color font-bold">Real Estate</h2>
+        <h2 className="text-dark-color font-bold">{item.title}</h2>
         <HiDotsVertical className="text-2xl text-primary-blue cursor-pointer" />
       </div>
 

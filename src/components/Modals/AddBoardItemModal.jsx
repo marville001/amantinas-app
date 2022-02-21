@@ -1,17 +1,48 @@
 import React, { useState } from "react";
 import Modal from "./Modal";
 import { RichTextEditor } from "@mantine/rte";
+import { useDispatch, useSelector } from "react-redux";
+import { addColumnItemAction } from "../../redux/actions/boardsActions";
+import { FaSpinner } from "react-icons/fa";
 
 const initialValue =
     "<p>Your initial <b>html value</b> or an empty string to init editor without value</p>";
 
-const AddBoardItemModal = ({ isOpen, closeModal = () => {} }) => {
+const AddBoardItemModal = ({ isOpen, column, closeModal = () => {} }) => {
+    const { isAddingColumnItem } = useSelector((state) => state.boardsState);
+
     const [title, setTitle] = useState("");
     const [picture, setPicture] = useState("");
     const [description, setDescription] = useState(initialValue);
 
+    const [error, setError] = useState("");
+
+    const dispatch = useDispatch();
+
     const handleCloseModal = () => {
         closeModal();
+        setTitle("");
+        setError("");
+        setPicture("");
+        setDescription("");
+    };
+
+    const handleSubmit = async () => {
+        console.log(title, picture, description);
+        setError("");
+
+        const formData = new FormData();
+        if (picture[0]) formData.append("image", picture[0]);
+        formData.append("columnId", column._id);
+        formData.append("title", title);
+        formData.append("description", description);
+
+        const res = await dispatch(addColumnItemAction(formData));
+        if (!res.success) {
+            setError(res.message);
+        } else {
+            handleCloseModal();
+        }
     };
 
     return (
@@ -22,6 +53,13 @@ const AddBoardItemModal = ({ isOpen, closeModal = () => {} }) => {
             classes={"!bg-light-blue !shadow-2xl !min-h-[60vh] !relative"}
         >
             <h2 className="text-lg mb-3">New</h2>
+
+            {error && (
+                <div className="text-center max-w-4xl mx-auto bg-red-200 rounded-lg text-red-500 my-4 text-sm p-1">
+                    {error}
+                </div>
+            )}
+
             <div>
                 <label className="mb-2" htmlFor="title">
                     Title
@@ -91,12 +129,25 @@ const AddBoardItemModal = ({ isOpen, closeModal = () => {} }) => {
             <div className="flex justify-between absolute bottom-2 inset-x-0 mx-6">
                 <button
                     onClick={handleCloseModal}
-                    className="bg-dark-color px-6 rounded text-white py-1 text-xs uppercase"
+                    className="bg-primary-blue px-6 rounded text-white py-1 text-xs uppercase"
                 >
                     Cancel
                 </button>
-                <button className="bg-primary-blue px-6 rounded text-white py-1 text-xs uppercase">
-                    Save
+                <button
+                    disabled={isAddingColumnItem}
+                    onClick={handleSubmit}
+                    className="disabled:opacity-50 disabled:cursor-not-allowed 
+                    bg-dark-color flex justify-center items-center p-1 px-10 
+                    text-white rounded-md uppercase text-md"
+                >
+                    {isAddingColumnItem ? (
+                        <>
+                            <FaSpinner className="animate-spin mr-4" />{" "}
+                            <span className="capitalize">Loading...</span>
+                        </>
+                    ) : (
+                        <span>Save</span>
+                    )}
                 </button>
             </div>
         </Modal>

@@ -1,6 +1,7 @@
 import { get, post, put } from "../../utils/http";
 import parseError from "../../utils/parseError";
 import {
+    ADD_COLUMN_ITEM,
     CLEAR_BOARD_COLUMN,
     CREATE_BOARD,
     GET_BOARD,
@@ -84,4 +85,22 @@ export const updateColumnNameAction = (id, details) => async (dispatch) => {
 
 export const clearBoardColumn = () => async (dispatch) => {
     dispatch({ type: CLEAR_BOARD_COLUMN });
+};
+
+export const addColumnItemAction = (details) => async (dispatch) => {
+    dispatch({ type: ADD_COLUMN_ITEM.REQUEST });
+    try {
+        const data = await post("boards/column/item", details);
+        dispatch({
+            type: ADD_COLUMN_ITEM.SUCCESS,
+            column: data.column,
+        });
+        return { success: true, message: "Item Created Sucecssfully" };
+    } catch (error) {
+        dispatch({
+            type: ADD_COLUMN_ITEM.FAIL,
+            error: parseError(error),
+        });
+        return { success: false, message: parseError(error) };
+    }
 };
