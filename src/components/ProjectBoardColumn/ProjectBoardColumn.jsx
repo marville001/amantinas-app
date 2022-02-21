@@ -85,8 +85,8 @@ const ProjectBoardColumn = ({ boardId, board }) => {
                     board.items.map((item, idx) => (
                         <Draggable
                             index={idx}
-                            draggableId={item._id.toString()}
-                            key={item._id}
+                            draggableId={item?._id.toString()}
+                            key={item?._id}
                             className="w-[90%] mx-auto"
                         >
                             {(provided) => {

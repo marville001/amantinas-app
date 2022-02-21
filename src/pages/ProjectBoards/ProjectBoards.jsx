@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
     clearBoardColumn,
     getBoardAction,
+    updateColumnItemPositionAction,
 } from "../../redux/actions/boardsActions";
 import { useParams } from "react-router-dom";
 
@@ -24,7 +25,7 @@ const ProjectBoards = () => {
     const dispatch = useDispatch();
     const { boardId } = useParams();
 
-    const onDragEnd = (re) => {
+    const onDragEnd = async (re) => {
         if (!re.destination) return;
         let newBoardData = boardData;
         var dragItem =
@@ -41,6 +42,29 @@ const ProjectBoards = () => {
             dragItem
         );
         setBoardData(newBoardData);
+
+        const { source, destination, draggableId } = re;
+
+        const from = boardData[parseInt(source.droppableId)]._id;
+        const to = boardData[parseInt(destination.droppableId)]._id;
+        const index = destination.index;
+        const itemId = draggableId;
+
+        if (
+            source.droppableId !== destination.droppableId ||
+            (source.droppableId === destination.droppableId &&
+                source.index !== destination.index)
+        ) {
+            console.log({ from, to, index, itemId });
+            await dispatch(
+                updateColumnItemPositionAction({
+                    from,
+                    to,
+                    index,
+                    itemId,
+                })
+            );
+        }
     };
 
     useEffect(() => {

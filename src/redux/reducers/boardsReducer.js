@@ -5,6 +5,7 @@ import {
     UPDATE_COLUMN_NAME,
     CLEAR_BOARD_COLUMN,
     ADD_COLUMN_ITEM,
+    UPDATE_COLUMN_ITEM_POSITION,
 } from "../types/users";
 
 const initialState = {
@@ -56,6 +57,15 @@ const boardsReducer = (state = initialState, action) => {
         case UPDATE_COLUMN_NAME.FAIL:
             return { ...state, isUpdatingColumnName: false };
 
+        case UPDATE_COLUMN_ITEM_POSITION.REQUEST:
+            return { ...state, isUpdatingColumnPos: true };
+        case UPDATE_COLUMN_ITEM_POSITION.SUCCESS:
+            return {
+                ...state,
+                isUpdatingColumnPos: false,
+            };
+        case UPDATE_COLUMN_ITEM_POSITION.FAIL:
+            return { ...state, isUpdatingColumnPos: false };
         case ADD_COLUMN_ITEM.REQUEST:
             return {
                 ...state,

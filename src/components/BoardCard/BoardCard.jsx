@@ -14,7 +14,7 @@ const BoardCard = ({ item }) => {
                 />
             )}
             <div className="mt-3 mb-2 flex justify-between">
-                <h2 className="text-dark-color font-bold">{item.title}</h2>
+                <h2 className="text-dark-color font-bold">{item?.title}</h2>
                 <HiDotsVertical className="text-2xl text-primary-blue cursor-pointer" />
             </div>
             <div
@@ -26,7 +26,7 @@ const BoardCard = ({ item }) => {
                 prose-p:m-0
                 "
             >
-                {parse(parse(item.description))}
+                {parse(parse(item?.description || "none"))}
             </div>
         </div>
     );

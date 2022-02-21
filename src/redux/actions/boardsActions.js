@@ -6,6 +6,7 @@ import {
     CREATE_BOARD,
     GET_BOARD,
     GET_BOARDS,
+    UPDATE_COLUMN_ITEM_POSITION,
     UPDATE_COLUMN_NAME,
 } from "../types/users";
 
@@ -99,6 +100,23 @@ export const addColumnItemAction = (details) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: ADD_COLUMN_ITEM.FAIL,
+            error: parseError(error),
+        });
+        return { success: false, message: parseError(error) };
+    }
+};
+
+export const updateColumnItemPositionAction = (details) => async (dispatch) => {
+    dispatch({ type: UPDATE_COLUMN_ITEM_POSITION.REQUEST });
+    try {
+        await put(`boards/column/item/position`, details);
+        dispatch({
+            type: UPDATE_COLUMN_ITEM_POSITION.SUCCESS,
+        });
+        return { success: true };
+    } catch (error) {
+        dispatch({
+            type: UPDATE_COLUMN_ITEM_POSITION.FAIL,
             error: parseError(error),
         });
         return { success: false, message: parseError(error) };
