@@ -74,16 +74,21 @@ const ProjectBoards = () => {
                     {boardData.map((board, idx) => (
                         <div
                             key={board.name}
-                            className="board min-w-[200px] sm:min-w-[300px] bg-white p-2 flex flex-col pb-16 max-h-[900px] overflow-y-auto rounded-3xl"
+                            className="board min-w-[200px] sm:min-w-[300px] bg-white p-2 flex flex-colmax-h-[900px] overflow-y-auto rounded-3xl"
                         >
                             <Droppable droppableId={idx.toString()}>
                                 {(provided, snapshot) => (
-                                    <ProjectBoardColumn
-                                        boardId={boardId}
-                                        board={board}
-                                        {...provided.droppableProps}
+                                    <div
+                                        className="board-item pb-16 "
                                         ref={provided.innerRef}
-                                    />
+                                        {...provided.draggableProps}
+                                        {...provided.dragHandleProps}
+                                    >
+                                        <ProjectBoardColumn
+                                            boardId={boardId}
+                                            board={board}
+                                        />
+                                    </div>
                                 )}
                             </Droppable>
                         </div>

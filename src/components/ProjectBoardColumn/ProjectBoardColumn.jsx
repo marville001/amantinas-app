@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { FaSpinner } from "react-icons/fa";
 import { HiPencil, HiPlusSm } from "react-icons/hi";
@@ -10,7 +10,7 @@ import {
 import BoardCard from "../BoardCard/BoardCard";
 import AddBoardItemModal from "../Modals/AddBoardItemModal";
 
-const ProjectBoardColumn = ({ boardId, board, ...props }) => {
+const ProjectBoardColumn = ({ boardId, board,  }) => {
     const { user } = useSelector((state) => state.userAuthState);
     const { isUpdatingColumnName } = useSelector((state) => state.boardsState);
 
@@ -26,8 +26,9 @@ const ProjectBoardColumn = ({ boardId, board, ...props }) => {
         await dispatch(updateColumnNameAction(board._id, { name }));
         await dispatch(getBoardAction(boardId, { investorId: user?._id }));
     };
+
     return (
-        <div {...props}>
+        <div>
             {isEditingName ? (
                 <div className="flex px-2">
                     <input
@@ -76,20 +77,23 @@ const ProjectBoardColumn = ({ boardId, board, ...props }) => {
                 board.items.map((item, idx) => (
                     <Draggable
                         index={idx}
-                        draggableId={item.id.toString()}
-                        key={item.id}
+                        draggableId={item._id.toString()}
+                        key={item._id}
                         className="w-[90%] mx-auto"
                     >
-                        {(provided) => (
-                            <div
-                                className="board-item"
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                            >
-                                <BoardCard />
-                            </div>
-                        )}
+                        {(provided) => {
+                            // console.log({ provided });
+                            return (
+                                <div
+                                    className="board-item"
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                >
+                                    <BoardCard />
+                                </div>
+                            );
+                        }}
                     </Draggable>
                 ))}
 
