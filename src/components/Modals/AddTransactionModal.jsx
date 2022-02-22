@@ -78,7 +78,9 @@ const AddTransactionModal = ({
         if (connectedHome === "") {
             setHomeDets({});
         } else {
-            const dets = homes.find((home) => home._id === connectedHome);
+            const dets = homes.find(
+                (home) => home._id === connectedHome && home.isManaged === true
+            );
             setHomeDets(dets);
         }
     }, [connectedHome, homes]);
@@ -101,23 +103,31 @@ const AddTransactionModal = ({
 
                     <div className="mr-8 mb-2">
                         <label htmlFor="home_" className="text-white ">
-                            Select Home
+                            Select Managed Home
                         </label>
-                        <select
-                            value={connectedHome}
-                            onChange={(e) => setConnectedHome(e.target.value)}
-                            name="home_"
-                            className="p-1 px-2"
-                        >
-                            <option value=""></option>
-                            {homes
-                                ?.filter((home) => home.isManaged === true)
-                                .map((home) => (
-                                    <option value={home._id}>
-                                        {home.name}
-                                    </option>
-                                ))}
-                        </select>
+                        {(homes?.filter((home) => home.isManaged === true).length === 0) ? (
+                            <div className="my-4 px-3">
+                                <p className="text-md text-white">No Managed Home Yet</p>
+                            </div>
+                        ) : (
+                            <select
+                                value={connectedHome}
+                                onChange={(e) =>
+                                    setConnectedHome(e.target.value)
+                                }
+                                name="home_"
+                                className="p-1 px-2"
+                            >
+                                <option value=""></option>
+                                {homes
+                                    ?.filter((home) => home.isManaged === true)
+                                    .map((home) => (
+                                        <option value={home._id}>
+                                            {home.name}
+                                        </option>
+                                    ))}
+                            </select>
+                        )}
                     </div>
                     {connectedHome && (
                         <div className="mr-8 p-2 bg-white rounded-lg pb-5">
