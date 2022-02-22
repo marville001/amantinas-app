@@ -31,10 +31,10 @@ const HomeCard = ({ home }) => {
     };
 
     return (
-        <div className="shadow-lg p-2 rounded-lg pb-5">
+        <div className="shadow-lg p-2 rounded-lg">
             <div className="w-full relative">
                 <img
-                    className="w-full h-52 object-cover rounded-lg"
+                    className="w-full h-36 object-cover rounded-lg"
                     src={`${
                         process.env.REACT_APP_STATIC_URL + home?.images[0]
                     }`}
