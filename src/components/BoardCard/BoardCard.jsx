@@ -23,7 +23,7 @@ const BoardCard = ({ item }) => {
                 prose-ol:list-decimal prose-ol:my-0
                 prose-ul:list-disc prose-ul:my-0
                 prose-li:p-0 prose-li:m-0
-                prose-p:m-0
+                prose-p:m-0 text-sm mt-2
                 "
             >
                 {parse(parse(item?.description || "none"))}

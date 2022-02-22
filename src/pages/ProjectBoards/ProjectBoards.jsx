@@ -9,10 +9,10 @@ import {
     getBoardAction,
     updateColumnItemPositionAction,
 } from "../../redux/actions/boardsActions";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import ProjectBoardColumn from "../../components/ProjectBoardColumn/ProjectBoardColumn";
-import { FaSpinner } from "react-icons/fa";
+import { FaChevronLeft, FaSpinner } from "react-icons/fa";
 
 const ProjectBoards = () => {
     const { user } = useSelector((state) => state.userAuthState);
@@ -87,10 +87,15 @@ const ProjectBoards = () => {
                     <FaSpinner className="animate-spin" />
                 </div>
             )}
+            <div className="mt-4">
+                <Link to="/project-boards" className="flex items-center space-x-1 text-brown-color text-sm">
+                    <FaChevronLeft className="text-xs " /> <span>All Boards</span>
+                </Link>
+            </div>
             <ScrollContainer
                 ignoreElements=".board-item"
                 className="
-      my-10 flex space-x-8 overflow-x-auto board-container select-none  
+      my-4 flex space-x-8 overflow-x-auto board-container select-none  
       "
             >
                 <DragDropContext onDragEnd={onDragEnd}>
