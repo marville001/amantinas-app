@@ -45,7 +45,7 @@ const Prospects = () => {
                 )}
 
                 {viewType === "cards" ? (
-                    <div className="px-12 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-16">
+                    <div className={`px-12 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-16`}>
                         {homes
                             ?.filter((h) => h.category === "prospect" && h.isArchived === false)
                             .map((home, idx) => (
