@@ -32,7 +32,7 @@ const ProjectBoardColumn = ({ boardId, board }) => {
     };
 
     return (
-        <div>
+        <div className="!max-w-[260px] mx-auto">
             {isEditingName ? (
                 <div className="flex px-2">
                     <input
@@ -56,7 +56,7 @@ const ProjectBoardColumn = ({ boardId, board }) => {
                     </button>
                 </div>
             ) : (
-                <div className="flex justify-between items-center group">
+                <div className="flex w-full justify-between items-center group">
                     <h2 className="text-md font-light ml-3 fo text-dark-color">
                         {board.name}
                     </h2>

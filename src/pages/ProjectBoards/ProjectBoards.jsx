@@ -55,7 +55,6 @@ const ProjectBoards = () => {
             (source.droppableId === destination.droppableId &&
                 source.index !== destination.index)
         ) {
-            console.log({ from, to, index, itemId });
             await dispatch(
                 updateColumnItemPositionAction({
                     from,
@@ -98,12 +97,12 @@ const ProjectBoards = () => {
                     {boardData.map((board, idx) => (
                         <div
                             key={board.name}
-                            className="board min-w-[200px] sm:min-w-[300px] bg-white p-2 flex flex-colmax-h-[900px] overflow-y-auto rounded-3xl"
+                            className="board min-w-[200px] sm:min-w-[280px] max-w-[280px] bg-white p-2 flex flex-col max-h-[900px] overflow-y-auto rounded-3xl"
                         >
                             <Droppable droppableId={idx.toString()}>
                                 {(provided, snapshot) => (
                                     <div
-                                        className="board-item pb-16 "
+                                        className="board-item pb-16 w-full"
                                         ref={provided.innerRef}
                                         {...provided.draggableProps}
                                         {...provided.dragHandleProps}
