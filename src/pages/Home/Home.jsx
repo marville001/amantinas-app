@@ -10,20 +10,48 @@ import { useDispatch, useSelector } from "react-redux";
 import { getHomesAction } from "../../redux/actions/homesActions";
 import { getTransactionsAction } from "../../redux/actions/transactionsActions";
 import priceFormatter from "../../utils/priceFormatter";
+import axios from "axios";
+import { get, post } from "../../utils/http";
 
 const Home = () => {
     const { user } = useSelector((state) => state.userAuthState);
     const { transactions } = useSelector((state) => state.transactionsState);
     const { homes } = useSelector((state) => state.homesState);
     const [newBoardModalOpen, setNewBoardModalOpen] = useState(false);
+    const [loadingTime, setLoadingTime] = useState(false);
+    const [timelog, setTimelog] = useState(false);
 
     const dispatch = useDispatch();
+
+    const handleTimeIn = async () => {
+        const { timelog } = await post(`time-log/in`, {
+            timeIn: new Date(),
+            userId: user?._id,
+        });
+
+        setTimelog(timelog);
+    };
+
+    const handleTimeOut = async () => {};
 
     useEffect(() => {
         dispatch(getHomesAction({ investorId: user?._id }));
         dispatch(getTransactionsAction({ investorId: user?._id }));
         dispatch(getHomesAction({ investorId: user?._id }));
     }, [dispatch, user?._id]);
+
+    useEffect(() => {
+        const loadTime = async () => {
+            setLoadingTime(true);
+            const { timelog } = await get(`time-log/${user?._id}`);
+            setLoadingTime(false);
+            setTimelog(timelog);
+        };
+
+        if (user?._id) {
+            loadTime();
+        }
+    }, [user?._id]);
 
     return (
         <DashboardWrapper>
@@ -203,12 +231,56 @@ const Home = () => {
                         <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-color bg-dark-color" />
 
                         <div className="flex flex-col items-center my-4 mx-6">
-                            <button className="bg-primary-blue p-2 px-10 w-full text-white rounded-xl uppercase text-xs">
-                                Time In
-                            </button>
-                            <h4 className="text-3xl my-2 text-brown-color ">
-                                15:37:00
-                            </h4>
+                            {timelog?._id ? (
+                                timelog.timeOut ? (
+                                    <button className="bg-primary-blue p-2 px-10 w-full text-white rounded-xl uppercase text-xs">
+                                        Log Out
+                                    </button>
+                                ) : (
+                                    <button
+                                        onClick={handleTimeOut}
+                                        className="bg-primary-blue p-2 px-10 w-full text-white rounded-xl uppercase text-xs"
+                                    >
+                                        Time Out
+                                    </button>
+                                )
+                            ) : (
+                                <button
+                                    onClick={handleTimeIn}
+                                    className="bg-primary-blue p-2 px-10 w-full text-white rounded-xl uppercase text-xs"
+                                >
+                                    Time In
+                                </button>
+                            )}
+                            <div className="py-4">
+                                {timelog?.timeOut ? (
+                                    <h4 className="text-3xl my-2 text-brown-color ">
+                                        {new Date(timelog.timeOut).getHours() +
+                                            " : " +
+                                            new Date(
+                                                timelog?.timeIn
+                                            ).getMinutes() +
+                                            " : " +
+                                            new Date(
+                                                timelog?.timeIn
+                                            ).getSeconds()}
+                                    </h4>
+                                ) : timelog?.timeIn ? (
+                                    <h4 className="text-3xl my-2 text-brown-color ">
+                                        {new Date(timelog?.timeIn).getHours() +
+                                            " : " +
+                                            new Date(
+                                                timelog?.timeIn
+                                            ).getMinutes() +
+                                            " : " +
+                                            new Date(
+                                                timelog?.timeIn
+                                            ).getSeconds()}
+                                    </h4>
+                                ) : (
+                                    <div className="my-8"></div>
+                                )}
+                            </div>
                             <Link
                                 to="/my-activities"
                                 className="text-center bg-primary-blue p-2 px-10 w-full text-white rounded-xl uppercase text-xs"
