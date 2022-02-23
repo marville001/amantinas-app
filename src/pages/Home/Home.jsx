@@ -10,14 +10,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { getHomesAction } from "../../redux/actions/homesActions";
 import { getTransactionsAction } from "../../redux/actions/transactionsActions";
 import priceFormatter from "../../utils/priceFormatter";
-import axios from "axios";
 import { get, post } from "../../utils/http";
+import { FaSpinner } from "react-icons/fa";
+import TimeOutModal from "../../components/Modals/TimeOutModal";
 
 const Home = () => {
     const { user } = useSelector((state) => state.userAuthState);
     const { transactions } = useSelector((state) => state.transactionsState);
     const { homes } = useSelector((state) => state.homesState);
     const [newBoardModalOpen, setNewBoardModalOpen] = useState(false);
+    const [timeOutModalOpen, setTimeOutModalOpen] = useState(false);
     const [loadingTime, setLoadingTime] = useState(false);
     const [timelog, setTimelog] = useState(false);
 
@@ -31,8 +33,6 @@ const Home = () => {
 
         setTimelog(timelog);
     };
-
-    const handleTimeOut = async () => {};
 
     useEffect(() => {
         dispatch(getHomesAction({ investorId: user?._id }));
@@ -230,73 +230,94 @@ const Home = () => {
                         </h2>
                         <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-color bg-dark-color" />
 
-                        <div className="flex flex-col items-center my-4 mx-6">
-                            {timelog?._id ? (
-                                timelog.timeOut ? (
-                                    <button className="bg-primary-blue p-2 px-10 w-full text-white rounded-xl uppercase text-xs">
-                                        Log Out
-                                    </button>
+                        {loadingTime ? (
+                            <div className="flex justify-center my-4">
+                                <FaSpinner className="animate-spin text-2xl" />
+                            </div>
+                        ) : (
+                            <div className="flex flex-col items-center my-4 mx-6">
+                                {timelog?._id ? (
+                                    timelog.timeOut ? (
+                                        <button className="bg-primary-blue p-2 px-10 w-full text-white rounded-xl uppercase text-xs">
+                                            Log Out
+                                        </button>
+                                    ) : (
+                                        <button
+                                            onClick={() =>
+                                                setTimeOutModalOpen(true)
+                                            }
+                                            className="bg-primary-blue p-2 px-10 w-full text-white rounded-xl uppercase text-xs"
+                                        >
+                                            Time Out
+                                        </button>
+                                    )
                                 ) : (
                                     <button
-                                        onClick={handleTimeOut}
+                                        onClick={handleTimeIn}
                                         className="bg-primary-blue p-2 px-10 w-full text-white rounded-xl uppercase text-xs"
                                     >
-                                        Time Out
+                                        Time In
                                     </button>
-                                )
-                            ) : (
-                                <button
-                                    onClick={handleTimeIn}
-                                    className="bg-primary-blue p-2 px-10 w-full text-white rounded-xl uppercase text-xs"
-                                >
-                                    Time In
-                                </button>
-                            )}
-                            <div className="py-4">
-                                {timelog?.timeOut ? (
-                                    <h4 className="text-3xl my-2 text-brown-color ">
-                                        {new Date(timelog.timeOut).getHours() +
-                                            " : " +
-                                            new Date(
-                                                timelog?.timeIn
-                                            ).getMinutes() +
-                                            " : " +
-                                            new Date(
-                                                timelog?.timeIn
-                                            ).getSeconds()}
-                                    </h4>
-                                ) : timelog?.timeIn ? (
-                                    <h4 className="text-3xl my-2 text-brown-color ">
-                                        {new Date(timelog?.timeIn).getHours() +
-                                            " : " +
-                                            new Date(
-                                                timelog?.timeIn
-                                            ).getMinutes() +
-                                            " : " +
-                                            new Date(
-                                                timelog?.timeIn
-                                            ).getSeconds()}
-                                    </h4>
-                                ) : (
-                                    <div className="my-8"></div>
                                 )}
+                                <div className="py-4">
+                                    {timelog?.timeOut ? (
+                                        <h4 className="text-3xl my-2 text-brown-color ">
+                                            {new Date(
+                                                timelog.timeOut
+                                            ).getHours() +
+                                                " : " +
+                                                new Date(
+                                                    timelog?.timeOut
+                                                ).getMinutes() +
+                                                " : " +
+                                                new Date(
+                                                    timelog?.timeOut
+                                                ).getSeconds()}
+                                        </h4>
+                                    ) : timelog?.timeIn ? (
+                                        <h4 className="text-3xl my-2 text-brown-color ">
+                                            {new Date(
+                                                timelog?.timeIn
+                                            ).getHours() +
+                                                " : " +
+                                                new Date(
+                                                    timelog?.timeIn
+                                                ).getMinutes() +
+                                                " : " +
+                                                new Date(
+                                                    timelog?.timeIn
+                                                ).getSeconds()}
+                                        </h4>
+                                    ) : (
+                                        <div className="my-8"></div>
+                                    )}
+                                </div>
+                                <Link
+                                    to="/my-activities"
+                                    className="text-center bg-primary-blue p-2 px-10 w-full text-white rounded-xl uppercase text-xs"
+                                >
+                                    View Activities
+                                </Link>
                             </div>
-                            <Link
-                                to="/my-activities"
-                                className="text-center bg-primary-blue p-2 px-10 w-full text-white rounded-xl uppercase text-xs"
-                            >
-                                View Activities
-                            </Link>
-                        </div>
+                        )}
                     </div>
                 </div>
             </div>
 
             <AddBoardModal
-                title={"New Board"}
                 size="lg"
                 isOpen={newBoardModalOpen}
                 closeModal={() => setNewBoardModalOpen(false)}
+            />
+
+            <TimeOutModal
+                size="lg"
+                isOpen={timeOutModalOpen}
+                setLoadingTime={setLoadingTime}
+                setTimelog={setTimelog}
+                timelog={timelog}
+                loadingTime={loadingTime}
+                closeModal={() => setTimeOutModalOpen(false)}
             />
         </DashboardWrapper>
     );

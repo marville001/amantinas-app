@@ -5,7 +5,7 @@ import { createBoardAction } from "../../redux/actions/boardsActions";
 import Modal from "./Modal";
 import {useNavigate} from 'react-router-dom'
 
-const AddBoardModal = ({ isOpen, title, size, closeModal = () => {} }) => {
+const AddBoardModal = ({ isOpen, size, closeModal = () => {} }) => {
     const { user } = useSelector((state) => state.userAuthState);
     const { isCreatingBoard } = useSelector((state) => state.boardsState);
 
@@ -41,7 +41,7 @@ const AddBoardModal = ({ isOpen, title, size, closeModal = () => {} }) => {
 
     return (
         <Modal
-            title={title}
+            title={"New Board"}
             size={size}
             isOpen={isOpen}
             closeModal={closeModal}
