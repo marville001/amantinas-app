@@ -293,7 +293,7 @@ const Home = () => {
                                     )}
                                 </div>
                                 <Link
-                                    to="/my-activities"
+                                    to="/users-activities"
                                     className="text-center bg-primary-blue p-2 px-10 w-full text-white rounded-xl uppercase text-xs"
                                 >
                                     View Activities

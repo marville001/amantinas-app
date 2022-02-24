@@ -20,6 +20,7 @@ import AdminHome from "./admin/pages/AdminHome";
 import AdminSuggestionsBoard from "./admin/pages/AdminSuggestionsBoard";
 import AdminLogin from "./admin/pages/AdminLogin";
 import ProjectsBoardListing from "./pages/ProjectBoards/ProjectsBoardListing";
+import UsersActivity from "./pages/UsersActivity/UsersActivity";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -60,6 +61,7 @@ const App = () => {
           element={<ManagedProperties />}
         />
         <Route exact path="/archived-data" element={<ArchivedData />} />
+        <Route exact path="/users-activities" element={<UsersActivity />} />
         <Route exact path="/users" element={<Users />} />
         <Route exact path="/project-boards" element={<ProjectsBoardListing />} />
         <Route exact path="/project-boards/:boardId" element={<ProjectBoards />} />
