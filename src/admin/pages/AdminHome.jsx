@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { FaAirbnb, FaSpinner } from "react-icons/fa";
+import { HiPencilAlt, HiTrash } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAdminsAction } from "../../redux/actions/adminActions";
@@ -105,6 +106,7 @@ const AdminHome = () => {
                         <tr>
                             <th className="text-left">Name</th>
                             <th className="text-left">Email</th>
+                            <th className="text-left"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -114,6 +116,12 @@ const AdminHome = () => {
                                 <tr>
                                     <td>{ad.name}</td>
                                     <td>{ad.email}</td>
+                                    <td>
+                                        <div className="flex space-x-4">
+                                            <HiPencilAlt className="text-xl text-dark-color hover:text-primary-blue cursor-pointer" />
+                                            <HiTrash className="text-xl text-dark-color hover:text-primary-blue cursor-pointer" />
+                                        </div>
+                                    </td>
                                 </tr>
                             ))}
                     </tbody>
