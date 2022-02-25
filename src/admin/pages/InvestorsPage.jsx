@@ -113,7 +113,7 @@ const InvestorsPage = () => {
                                                 {investor?.plan}
                                             </td>
                                             <td class="py-4 px-6 text-sm font-medium whitespace-nowrap">
-                                                {investor?.createdAt}
+                                                {new Date( Date(investor?.createdAt)).toLocaleDateString()}
                                             </td>
 
                                             <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap flex items-center space-x-5">
