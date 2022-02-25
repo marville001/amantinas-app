@@ -19,6 +19,7 @@ const AdminHome = () => {
     const [addAdminModalOpen, setAddAdminModalOpen] = useState(false);
     const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
     const [active, setActive] = useState("");
+    const [success, setSuccess] = useState("");
 
     const dispatch = useDispatch();
 
@@ -30,6 +31,10 @@ const AdminHome = () => {
         try {
             setConfirmDeleteOpen(false);
             await delete_(`users/admins/${active}`);
+            setSuccess("Admin Deleted Successfully");
+            setTimeout(() => {
+                setSuccess("");
+            }, 2000);
             await dispatch(getAdminsAction());
         } catch (error) {
             console.log(error);
@@ -117,6 +122,11 @@ const AdminHome = () => {
                         Add Admin
                     </button>
                 </div>
+                {success && (
+                <div className="my-4 p-2 rounded-md w-full sm:w-1/2 bg-green-200 text-center text-green-800 text-lg">
+                    {success}
+                </div>
+            )}
 
                 <table className="w-full sm:w-1/2 mt-4">
                     <thead className="mb-2">

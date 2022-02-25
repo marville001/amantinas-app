@@ -15,6 +15,7 @@ const InvestorsPage = () => {
 
     const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
     const [active, setActive] = useState("");
+    const [success, setSuccess] = useState("");
 
     const dispatch = useDispatch();
 
@@ -22,6 +23,12 @@ const InvestorsPage = () => {
         try {
             setConfirmDeleteOpen(false);
             await delete_(`users/investors/${active}`);
+            setSuccess("Investor Deleted Successfully");
+
+            setTimeout(() => {
+                setSuccess("");
+            }, 2000);
+
             await dispatch(getInvestorsAction());
         } catch (error) {
             console.log(error);
@@ -39,6 +46,12 @@ const InvestorsPage = () => {
                     <FaSpinner className="animate-spin" />
                 </div>
             )}
+            {success && (
+                <div className="my-4 p-2 rounded-md bg-green-200 text-center text-green-800 text-lg">
+                    {success}
+                </div>
+            )}
+
             <div class="flex flex-col">
                 <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
