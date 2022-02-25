@@ -1,4 +1,9 @@
-import { ADMIN_LOGIN, CREATE_ADMIN, GET_ADMINS } from "../types/admin";
+import {
+    ADMIN_LOGIN,
+    CREATE_ADMIN,
+    GET_ADMINS,
+    GET_INVESTORS,
+} from "../types/admin";
 
 const initialState = {
     admin: {},
@@ -38,6 +43,17 @@ const adminReducer = (state = initialState, action) => {
             };
         case GET_ADMINS.FAIL:
             return { ...state, isLoadingAdmins: false };
+
+        case GET_INVESTORS.REQUEST:
+            return { ...state, investors: [], isLoadingInvestors: true };
+        case GET_INVESTORS.SUCCESS:
+            return {
+                ...state,
+                isLoadingInvestors: false,
+                investors: action.investors,
+            };
+        case GET_INVESTORS.FAIL:
+            return { ...state, isLoadingInvestors: false };
 
         default:
             return { ...state };

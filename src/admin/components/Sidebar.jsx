@@ -1,5 +1,5 @@
 import React from "react";
-import { Link,  useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
     HiOutlineViewGrid,
     HiOutlineXCircle,
@@ -75,7 +75,11 @@ const Sidebar = () => {
             {/* List links */}
             <div className="my-12 flex flex-col space-y-8 h-full">
                 <SideLink to="/admin" icon={HiOutlineViewGrid} text="Home" />
-                <SideLink to="/admin/users" icon={HiOutlineViewGrid} text="Users" />
+                <SideLink
+                    to="/admin/investors"
+                    icon={HiOutlineViewGrid}
+                    text="Investors"
+                />
                 <SideLink
                     to="/admin/suggestions-boards"
                     icon={HiOutlineViewGrid}
@@ -84,7 +88,7 @@ const Sidebar = () => {
                 <div
                     onClick={() => {
                         dispatch(adminLogoutAction());
-                        navigate("/admin/login")
+                        navigate("/admin/login");
                     }}
                     className="absolute bottom-10 inset-x-0 flex select-none justify-center items-center text-white space-x-2 cursor-pointer"
                 >

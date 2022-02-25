@@ -5,15 +5,20 @@ import { HiPencilAlt, HiTrash } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAdminsAction } from "../../redux/actions/adminActions";
+import { delete_ } from "../../utils/http";
 import AddAdminModal from "../components/AddAdminModal";
+import ConfirmModal from "../components/ConfirmModal";
 import DashboardWrapper from "../Wrapper";
 
 const AdminHome = () => {
     const { admins, admin, isLoadingAdmins } = useSelector(
         (state) => state.adminState
     );
+    const { investors } = useSelector((state) => state.adminState);
 
     const [addAdminModalOpen, setAddAdminModalOpen] = useState(false);
+    const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
+    const [active, setActive] = useState("");
 
     const dispatch = useDispatch();
 
@@ -21,19 +26,31 @@ const AdminHome = () => {
         dispatch(getAdminsAction());
     }, [dispatch]);
 
+    const deleteAdmin = async () => {
+        try {
+            setConfirmDeleteOpen(false);
+            await delete_(`users/admins/${active}`);
+            await dispatch(getAdminsAction());
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <DashboardWrapper title="Archived Data">
             <div className="mb-10 mt-4 flex md:space-x-2 space-y-2 sm:space-x-2 sm:space-y-0 flex-col sm:flex-row">
                 <div className="flex-[1] bg-white p-4">
-                    <h4>Welcome <span className="font-bold">{admin?.name}</span></h4>
+                    <h4>
+                        Welcome <span className="font-bold">{admin?.name}</span>
+                    </h4>
                     <div className="flex items-center mt-6 justify-between">
                         <p className="text-dark-color">Total no of investors</p>
                         <div className="text-2xl text-dark-color font-bold">
-                            450
+                            {investors?.length}
                         </div>
                     </div>
                     <Link
-                        to="/admin"
+                        to="/admin/investors"
                         className="mt-3 rounded uppercase tracking-wider text-xs inline-block 
                         bg-primary-blue text-white py-2 px-6"
                     >
@@ -113,13 +130,19 @@ const AdminHome = () => {
                         {admins
                             ?.filter((ad) => ad._id !== admin._id)
                             .map((ad) => (
-                                <tr>
+                                <tr key={ad._id}>
                                     <td>{ad.name}</td>
                                     <td>{ad.email}</td>
                                     <td>
                                         <div className="flex space-x-4">
                                             <HiPencilAlt className="text-xl text-dark-color hover:text-primary-blue cursor-pointer" />
-                                            <HiTrash className="text-xl text-dark-color hover:text-primary-blue cursor-pointer" />
+                                            <HiTrash
+                                                onClick={() => {
+                                                    setActive(ad._id);
+                                                    setConfirmDeleteOpen(true);
+                                                }}
+                                                className="text-xl text-dark-color hover:text-primary-blue cursor-pointer"
+                                            />
                                         </div>
                                     </td>
                                 </tr>
@@ -135,6 +158,15 @@ const AdminHome = () => {
             <AddAdminModal
                 isOpen={addAdminModalOpen}
                 closeModal={() => setAddAdminModalOpen(false)}
+            />
+            <ConfirmModal
+                isOpen={confirmDeleteOpen}
+                action={deleteAdmin}
+                message="Please confirm deleting admin"
+                closeModal={() => {
+                    setConfirmDeleteOpen(false);
+                    setActive("");
+                }}
             />
         </DashboardWrapper>
     );

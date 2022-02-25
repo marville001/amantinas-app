@@ -8,6 +8,7 @@ export default function Modal({
     size,
     children,
     title,
+    center = true,
 }) {
     return (
         <Transition appear show={isOpen} as={Fragment}>
@@ -30,12 +31,15 @@ export default function Modal({
                     </Transition.Child>
 
                     {/* This element is to trick the browser into centering the modal contents. */}
-                    <span
-                        className="inline-block h-screen align-middle"
-                        aria-hidden="true"
-                    >
-                        &#8203;
-                    </span>
+
+                    {center && (
+                        <span
+                            className="inline-block h-screen align-middle"
+                            aria-hidden="true"
+                        >
+                            &#8203;
+                        </span>
+                    )}
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"

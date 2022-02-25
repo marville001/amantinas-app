@@ -1,4 +1,4 @@
-import { ADMIN_LOGIN, CREATE_ADMIN, GET_ADMINS } from "../types/admin";
+import { ADMIN_LOGIN, CREATE_ADMIN, GET_ADMINS, GET_INVESTORS } from "../types/admin";
 import { get, post } from "../../utils/http";
 import parseError from "../../utils/parseError";
 
@@ -78,6 +78,25 @@ export const getAdminsAction = () => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: GET_ADMINS.FAIL,
+            error: parseError(error),
+        });
+
+        return { success: false, message: parseError(error) };
+    }
+};
+
+export const getInvestorsAction = () => async (dispatch) => {
+    dispatch({ type: GET_INVESTORS.REQUEST });
+    try {
+        const data = await get("users/investors", {}, "admin");
+        dispatch({
+            type: GET_INVESTORS.SUCCESS,
+            investors: data.investors,
+        });
+        return { success: true };
+    } catch (error) {
+        dispatch({
+            type: GET_INVESTORS.FAIL,
             error: parseError(error),
         });
 
