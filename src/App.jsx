@@ -23,6 +23,7 @@ import ProjectsBoardListing from "./pages/ProjectBoards/ProjectsBoardListing";
 import UsersActivity from "./pages/UsersActivity/UsersActivity";
 import InvestorsPage from "./admin/pages/InvestorsPage";
 import InvestorDetailsPage from "./admin/pages/InvestorDetailsPage";
+import SetPassPage from "./pages/SetPassPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -49,6 +50,7 @@ const App = () => {
     <div className="bg-[#effafb] min-h-screen max-w-[1560px] mx-auto">
       <Routes>
         <Route exact path="/" element={<Login />} />
+        <Route exact path="/set-pass/:token" element={<SetPassPage />} />
         <Route exact path="/login" element={<Navigate to="/" />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/home" element={<Home />} />

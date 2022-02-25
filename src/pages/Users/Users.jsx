@@ -7,7 +7,6 @@ import { loadUsersAction } from "../../redux/actions/usersActions";
 
 const Users = () => {
     const { users, loading } = useSelector((state) => state.usersState);
-    const { user } = useSelector((state) => state.userAuthState);
     const [addUserModalOpen, setAddUserModalOpen] = useState(false);
 
     const dispatch = useDispatch();
