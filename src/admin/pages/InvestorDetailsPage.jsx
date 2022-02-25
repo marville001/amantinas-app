@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { FaSpinner } from "react-icons/fa";
-import { HiTrash } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { getInvestorsAction } from "../../redux/actions/adminActions";
 import DashboardWrapper from "../Wrapper";
 
@@ -27,6 +26,8 @@ const InvestorDetailsPage = () => {
             setInvestor(invs);
         }
     }, [investors, id]);
+
+    console.log(investor);
     return (
         <DashboardWrapper title={`Investors Details`}>
             {isLoadingInvestors && (

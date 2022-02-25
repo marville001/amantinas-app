@@ -21,9 +21,9 @@ const Users = () => {
             <div className="my-6 bg-white rounded-xl p-2 max-w-6xl">
                 <div className="flex flex-col-reverse md:flex-row justify-between my-6 mt-10">
                     <div className="flex space-x-4 ml-auto">
-                        {user.plan}
+                        
                         <button
-                            disabled={user.plan === "free" && users.length >= 2}
+                            // disabled={user.plan === "free" && users.length >= 2}
                             onClick={() => setAddUserModalOpen(true)}
                             className="disabled:opacity-50 disabled:cursor-not-allowed bg-primary-blue p-2 px-10 w-full text-white rounded-md uppercase text-xs"
                         >
