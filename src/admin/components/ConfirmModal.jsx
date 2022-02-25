@@ -3,8 +3,8 @@ import Modal from "../../components/Modals/Modal";
 
 const ConfirmModal = ({ isOpen, message, closeModal = () => {}, action }) => {
     return (
-        <Modal center={false} size="sm" isOpen={isOpen} closeModal={closeModal}>
-            <div className="text-white text-2xl text-center mb-6">
+        <Modal center={false} size="md" isOpen={isOpen} closeModal={closeModal}>
+            <div className="text-white text-xl mb-6">
                 {message}
             </div>
             <div className=" mt-6 flex justify-between">

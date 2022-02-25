@@ -22,6 +22,7 @@ import AdminLogin from "./admin/pages/AdminLogin";
 import ProjectsBoardListing from "./pages/ProjectBoards/ProjectsBoardListing";
 import UsersActivity from "./pages/UsersActivity/UsersActivity";
 import InvestorsPage from "./admin/pages/InvestorsPage";
+import InvestorDetailsPage from "./admin/pages/InvestorDetailsPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -70,6 +71,7 @@ const App = () => {
         <Route exact path="/admin" element={<AdminHome />} />
         <Route exact path="/admin/login" element={<AdminLogin />} />
         <Route exact path="/admin/investors" element={<InvestorsPage />} />
+        <Route exact path="/admin/investors/:id" element={<InvestorDetailsPage />} />
         <Route exact path="/admin/suggestions-boards" element={<AdminSuggestionsBoard />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

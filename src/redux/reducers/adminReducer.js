@@ -45,7 +45,7 @@ const adminReducer = (state = initialState, action) => {
             return { ...state, isLoadingAdmins: false };
 
         case GET_INVESTORS.REQUEST:
-            return { ...state, investors: [], isLoadingInvestors: true };
+            return { ...state, isLoadingInvestors: true };
         case GET_INVESTORS.SUCCESS:
             return {
                 ...state,

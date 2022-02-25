@@ -1,39 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { FaSpinner } from "react-icons/fa";
 import { HiTrash } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getInvestorsAction } from "../../redux/actions/adminActions";
-import { delete_ } from "../../utils/http";
-import ConfirmModal from "../components/ConfirmModal";
 import DashboardWrapper from "../Wrapper";
 
-const InvestorsPage = () => {
+const InvestorDetailsPage = () => {
     const { investors, isLoadingInvestors } = useSelector(
         (state) => state.adminState
     );
-
-    const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
-    const [active, setActive] = useState("");
-
     const dispatch = useDispatch();
-
-    const deleteInvestor = async () => {
-        try {
-            setConfirmDeleteOpen(false);
-            await delete_(`users/investors/${active}`);
-            await dispatch(getInvestorsAction());
-        } catch (error) {
-            console.log(error);
-        }
-    };
 
     useEffect(() => {
         dispatch(getInvestorsAction());
     }, [dispatch]);
 
     return (
-        <DashboardWrapper title={`Investors`}>
+        <DashboardWrapper title={`Investors Details`}>
             {isLoadingInvestors && (
                 <div className="my-4 p-4 bg-white">
                     <FaSpinner className="animate-spin" />
@@ -105,20 +89,12 @@ const InvestorsPage = () => {
 
                                             <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap flex items-center space-x-5">
                                                 <Link
-                                                    to={`/admin/investors/${investor._id}`}
+                                                    to="/admin/investors"
                                                     class="text-blue-600 dark:text-blue-500 hover:underline"
                                                 >
                                                     Edit
                                                 </Link>
-                                                <HiTrash
-                                                    onClick={() => {
-                                                        setActive(investor._id);
-                                                        setConfirmDeleteOpen(
-                                                            true
-                                                        );
-                                                    }}
-                                                    className="text-xl text-brown-color hover:text-red-400 cursor-pointer"
-                                                />
+                                                <HiTrash className="text-xl text-brown-color hover:text-red-400 cursor-pointer" />
                                             </td>
                                         </tr>
                                     ))}
@@ -128,17 +104,8 @@ const InvestorsPage = () => {
                     </div>
                 </div>
             </div>
-            <ConfirmModal
-                isOpen={confirmDeleteOpen}
-                action={deleteInvestor}
-                message="Deleting investor will delete all their records. Confirm delete?"
-                closeModal={() => {
-                    setConfirmDeleteOpen(false);
-                    setActive("");
-                }}
-            />
         </DashboardWrapper>
     );
 };
 
-export default InvestorsPage;
+export default InvestorDetailsPage;
