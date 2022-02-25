@@ -99,7 +99,7 @@ const InvestorsPage = () => {
                                 </thead>
                                 <tbody>
                                     {investors?.map((investor, i) => (
-                                        <tr class="bg-white border-b">
+                                        <tr key={investor._id} class="bg-white border-b">
                                             <td class="py-4 px-6 text-sm font-medium whitespace-nowrap">
                                                 {i + 1}
                                             </td>

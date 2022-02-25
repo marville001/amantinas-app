@@ -63,7 +63,7 @@ const DataTable = ({
                 <div className="flex flex-col">
                     {data.length > 0 &&
                         data.map((item, idx) => (
-                            <div className="flex py-3 hover:bg-light-blue cursor-pointer">
+                            <div key={idx} className="flex py-3 hover:bg-light-blue cursor-pointer">
                                 <div className="px-1 lg:px-3">
                                     <input
                                         type="checkbox"

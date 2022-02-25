@@ -121,8 +121,8 @@ const AddTransactionModal = ({
                                 <option value=""></option>
                                 {homes
                                     ?.filter((home) => home.isManaged === true)
-                                    .map((home) => (
-                                        <option value={home._id}>
+                                    .map((home, i) => (
+                                        <option key={i} value={home._id}>
                                             {home.name}
                                         </option>
                                     ))}
