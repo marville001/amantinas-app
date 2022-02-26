@@ -20,10 +20,10 @@ export const addUserAction = (details) => async (dispatch) => {
     }
 };
 
-export const loadUsersAction = () => async (dispatch) => {
+export const loadUsersAction = ({investorId}) => async (dispatch) => {
     dispatch({ type: LOAD_USERS.REQUEST });
     try {
-        const data = await get("sub-user/get");
+        const data = await get("sub-user/get/"+investorId);
         dispatch({
             type: LOAD_USERS.SUCCESS,
             users: data.users,

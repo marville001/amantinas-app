@@ -1,32 +1,52 @@
 import React, { useEffect, useState } from "react";
 
 import { FaSpinner } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
     userLoginAction,
     userLogoutAction,
 } from "../../redux/actions/userAuthActions";
+import { post } from "../../utils/http";
+import { USER_LOGIN } from "../../redux/types/users";
 
 const SetPassPage = () => {
-    const { user, loading } = useSelector((state) => state.userAuthState);
+    const { user } = useSelector((state) => state.userAuthState);
 
     const [password, setPassword] = useState("");
     const [cPassword, setCPassword] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const [error, setError] = useState("");
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { token } = useParams();
 
     const handleSubmit = async () => {
         setError("");
         const obj = { cPassword, password };
 
-        const res = await dispatch(userLoginAction(obj));
-        if (!res.success) {
-            setError(res.message);
-            return;
+        if(cPassword !== password){
+            setError("Passwords do not match")
+            return
+        }
+
+        try {
+            setLoading(true)
+            const data = await post(`sub-user/activate/${token}`, {password});
+            localStorage.setItem("token", data.token)
+            dispatch({
+                type: USER_LOGIN.SUCCESS,
+                user: data.user,
+            });
+            setLoading(false)
+        } catch (error) {
+            setLoading(false)
+            setError(error.response.data.message);
+            setTimeout(() => {
+                setError("")
+            }, 6000);
         }
     };
 
