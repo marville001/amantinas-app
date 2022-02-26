@@ -37,7 +37,7 @@ const ScrapingTool = () => {
     const handleSubmit = async () => {
         setError("");
         const obj = {
-            investorId: user._id,
+            investorId: user.type && user.type === "subuser"? user.investorId : user?._id,
             country,
             state,
             city,

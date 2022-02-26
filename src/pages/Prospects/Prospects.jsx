@@ -17,8 +17,8 @@ const Prospects = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getHomesAction({ investorId: user?._id }));
-    }, [dispatch, user?._id]);
+        dispatch(getHomesAction({ investorId: user.type && user.type === "subuser"? user.investorId : user?._id }));
+    }, [dispatch, user?._id, user.type, user.investorId]);
 
     return (
         <DashboardWrapper title="Prospects">

@@ -13,8 +13,8 @@ const Users = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(loadUsersAction({investorId: user?._id}));
-    }, [dispatch, user?._id]);
+        dispatch(loadUsersAction({investorId: user.type && user.type === "subuser"? user.investorId : user?._id}));
+    }, [dispatch, user?._id, user.type, user.investorId]);
 
     return (
         <DashboardWrapper title="Users">

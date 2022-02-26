@@ -35,10 +35,15 @@ const Home = () => {
     };
 
     useEffect(() => {
-        dispatch(getHomesAction({ investorId: user?._id }));
-        dispatch(getTransactionsAction({ investorId: user?._id }));
-        dispatch(getHomesAction({ investorId: user?._id }));
-    }, [dispatch, user?._id]);
+        dispatch(
+            getHomesAction({
+                investorId: user.type && user.type === "subuser"? user.investorId : user?._id,
+            })
+        );
+        dispatch(getTransactionsAction({ investorId: user.type && user.type === "subuser"
+        ? user.investorId
+        : user?._id }));
+    }, [dispatch, user?._id, user.investorId, user.type]);
 
     useEffect(() => {
         const loadTime = async () => {

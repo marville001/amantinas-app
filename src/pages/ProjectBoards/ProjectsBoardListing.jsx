@@ -9,16 +9,21 @@ import { getBoardsAction } from "../../redux/actions/boardsActions";
 
 const ProjectsBoardListing = () => {
     const { user } = useSelector((state) => state.userAuthState);
-    const { boards, loading } = useSelector(
-        (state) => state.boardsState
-    );
+    const { boards, loading } = useSelector((state) => state.boardsState);
 
     const [newBoardModalOpen, setNewBoardModalOpen] = useState(false);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getBoardsAction({ investorId: user?._id }));
-    }, [dispatch, user?._id]);
+        dispatch(
+            getBoardsAction({
+                investorId:
+                    user.type && user.type === "subuser"
+                        ? user.investorId
+                        : user?._id,
+            })
+        );
+    }, [dispatch, user?._id, user.type, user.investorId]);
 
     return (
         <DashboardWrapper title="My Boards">

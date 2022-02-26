@@ -14,7 +14,7 @@ export const getLoggedInUser = () => async (dispatch) => {
                 user: data.user,
             });
         } catch (error) {
-            localStorage.removeItem("token");
+            // localStorage.removeItem("token");
             window.location.href = "/login";
         }
     }

@@ -17,8 +17,8 @@ const ManagedProperties = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getHomesAction({ investorId: user?._id }));
-    }, [dispatch, user?._id]);
+        dispatch(getHomesAction({ investorId: user.type && user.type === "subuser"? user.investorId : user?._id }));
+    }, [dispatch, user?._id, user.type, user.investorId]);
     return (
         <DashboardWrapper title="Managed Properties">
             <div className="my-8 p-10 max-w-2xl bg-white rounded-xl mx-auto">

@@ -67,8 +67,8 @@ const ProjectBoards = () => {
     };
 
     useEffect(() => {
-        dispatch(getBoardAction(boardId, { investorId: user?._id }));
-    }, [dispatch, user?._id, boardId]);
+        dispatch(getBoardAction(boardId, { investorId: user.type && user.type === "subuser"? user.investorId : user?._id }));
+    }, [dispatch, user?._id, boardId, user.type, user.investorId]);
 
     useEffect(() => {
         setBoardData(columns);

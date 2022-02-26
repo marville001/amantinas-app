@@ -20,9 +20,23 @@ const Ledger = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getHomesAction({ investorId: user?._id }));
-        dispatch(getTransactionsAction({ investorId: user?._id }));
-    }, [dispatch, user?._id]);
+        dispatch(
+            getHomesAction({
+                investorId:
+                    user.type && user.type === "subuser"
+                        ? user.investorId
+                        : user?._id,
+            })
+        );
+        dispatch(
+            getTransactionsAction({
+                investorId:
+                    user.type && user.type === "subuser"
+                        ? user.investorId
+                        : user?._id,
+            })
+        );
+    }, [dispatch, user?._id, user.type, user.investorId]);
 
     return (
         <DashboardWrapper title={"Ledger"}>
@@ -80,7 +94,10 @@ const Ledger = () => {
                     <div className="flex flex-col">
                         {transactions.length > 0 &&
                             transactions.map((trans, idx) => (
-                                <div key={idx} className="flex py-3 hover:bg-light-blue cursor-pointer">
+                                <div
+                                    key={idx}
+                                    className="flex py-3 hover:bg-light-blue cursor-pointer"
+                                >
                                     <div className="px-1 lg:px-3">
                                         <input
                                             type="checkbox"
@@ -107,13 +124,12 @@ const Ledger = () => {
                     </div>
 
                     {loading && (
-                    <div className="flex justify-center my-4">
-                        <FaSpinner className="animate-spin mr-4 text-2xl" />
-                    </div>
-                )}
+                        <div className="flex justify-center my-4">
+                            <FaSpinner className="animate-spin mr-4 text-2xl" />
+                        </div>
+                    )}
                 </div>
                 {/* Table End*/}
-
             </div>
             <div className="my-6">
                 <DataTable
