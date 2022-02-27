@@ -5,10 +5,11 @@ import {
     HiOutlineXCircle,
     HiOutlineLogout,
 } from "react-icons/hi";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { SIDEBAR } from "../../redux/types";
 import { userLogoutAction } from "../../redux/actions/userAuthActions";
+
+
 const SideLink = ({ to = "/home", icon: Icon, text }) => {
     const { pathname } = useLocation();
     const dispatch = useDispatch();
@@ -47,6 +48,7 @@ const SideLink = ({ to = "/home", icon: Icon, text }) => {
 
 const Sidebar = () => {
     const { sidebarOpen } = useSelector((state) => state.appState);
+    const { user } = useSelector((state) => state.userAuthState);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -75,7 +77,9 @@ const Sidebar = () => {
             {/* List links */}
             <div className="my-12 flex flex-col space-y-8">
                 <SideLink to="/home" icon={HiOutlineViewGrid} text="Home" />
-                <SideLink to="/ledger" icon={HiOutlineViewGrid} text="Ledger" />
+                {(!user.type || !user.type === "subuser") &&
+                    <SideLink to="/ledger" icon={HiOutlineViewGrid} text="Ledger" />
+                }
                 <SideLink
                     to="/scraping-tool"
                     icon={HiOutlineViewGrid}
@@ -106,7 +110,9 @@ const Sidebar = () => {
                     icon={HiOutlineViewGrid}
                     text="Archived data"
                 />
-                <SideLink to="/users" icon={HiOutlineViewGrid} text="Users" />
+                {(!user.type || !user.type === "subuser") &&
+                    <SideLink to="/users" icon={HiOutlineViewGrid} text="Users" />
+                }
                 <SideLink
                     to="/project-boards"
                     icon={HiOutlineViewGrid}
