@@ -44,6 +44,7 @@ const EditBoardItemModal = ({
             };
 
             await put(`boards/column/item/details/${columnId}`, obj, "user");
+            handleCloseModal();
             await dispatch(
                 getBoardAction(boardId, {
                     investorId:
@@ -53,7 +54,6 @@ const EditBoardItemModal = ({
                 })
             );
 
-            handleCloseModal();
             setIsLoading(false);
         } catch (error) {
             setIsLoading(false);
