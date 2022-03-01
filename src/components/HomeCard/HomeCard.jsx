@@ -8,14 +8,37 @@ import {
     getHomesAction,
     updateProspectAction,
 } from "../../redux/actions/homesActions";
-import { FaSpinner } from "react-icons/fa";
+import { FaEdit, FaSpinner, FaTrash } from "react-icons/fa";
+import { delete_ } from "../../utils/http";
+import ConfirmModal from "../Modals/ConfirmModal";
 
 const HomeCard = ({ home }) => {
     const { user } = useSelector((state) => state.userAuthState);
 
     const [loading, setLoading] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
 
     const dispatch = useDispatch();
+
+    const handleDelete = async () => {
+        setIsDeleting(true);
+
+        try {
+            await delete_(`homes/${home._id}`, {}, "user");
+            await dispatch(
+                getHomesAction({
+                    investorId:
+                        user.type && user.type === "subuser"
+                            ? user.investorId
+                            : user?._id,
+                })
+            );
+            setIsDeleting(false);
+        } catch (error) {
+            setIsDeleting(false);
+        }
+    };
 
     const handleUpdate = async (obj) => {
         setLoading(true);
@@ -23,10 +46,17 @@ const HomeCard = ({ home }) => {
         const res = await dispatch(updateProspectAction(home._id, obj));
 
         if (res.success) {
-            await dispatch(getHomesAction({ investorId: user?._id }));
+            await dispatch(
+                getHomesAction({
+                    investorId:
+                        user.type && user.type === "subuser"
+                            ? user.investorId
+                            : user?._id,
+                })
+            );
             setLoading(false);
-        }else{
-            setLoading(false)
+        } else {
+            setLoading(false);
         }
     };
 
@@ -108,6 +138,22 @@ const HomeCard = ({ home }) => {
                                     Archived Data
                                 </Menu.Item>
                             </div>
+                            <div className="bg-gray-200 h-1 w-full"></div>
+                            <div
+                                onClick={() => setConfirmDeleteOpen(true)}
+                                className="flex items-center p-1 mt-2 hover:opacity-80 space-x-4 cursor-pointer"
+                            >
+                                {isDeleting ? (
+                                    <FaSpinner className="animate-spin m-auto" />
+                                ) : (
+                                    <>
+                                        <FaTrash /> <span>Delete</span>
+                                    </>
+                                )}
+                            </div>
+                            {/* <div className="flex items-center px-2 hover:opacity-80 space-x-4 cursor-pointer">
+                                <FaEdit /> <span>Edit</span>
+                            </div> */}
                         </Menu.Items>
                     </Menu>
                 )}
@@ -139,6 +185,15 @@ const HomeCard = ({ home }) => {
                     {priceFormatter(home?.price)}
                 </p>
             </div>
+
+            <ConfirmModal
+                isOpen={confirmDeleteOpen}
+                action={handleDelete}
+                message="Please confirm deleting prospect"
+                closeModal={() => {
+                    setConfirmDeleteOpen(false);
+                }}
+            />
         </div>
     );
 };
