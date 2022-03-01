@@ -28,7 +28,14 @@ const ProjectBoardColumn = ({ boardId, board }) => {
 
     const handleSaveName = async () => {
         await dispatch(updateColumnNameAction(board._id, { name }));
-        await dispatch(getBoardAction(boardId, { investorId: user?._id }));
+        await dispatch(
+            getBoardAction(boardId, {
+                investorId:
+                    user.type && user.type === "subuser"
+                        ? user.investorId
+                        : user?._id,
+            })
+        );
     };
 
     return (

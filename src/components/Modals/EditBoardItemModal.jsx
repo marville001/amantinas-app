@@ -2,19 +2,25 @@ import React, { useEffect, useState } from "react";
 import Modal from "./Modal";
 import { RichTextEditor } from "@mantine/rte";
 import { useDispatch, useSelector } from "react-redux";
-import { addColumnItemAction } from "../../redux/actions/boardsActions";
+import { getBoardAction } from "../../redux/actions/boardsActions";
 import { FaSpinner } from "react-icons/fa";
 import parse from "html-react-parser";
+import { put } from "../../utils/http";
 
-
-const EditBoardItemModal = ({ isOpen, columnId, editItem, closeModal = () => {} }) => {
-    const { isAddingColumnItem } = useSelector((state) => state.boardsState);
+const EditBoardItemModal = ({
+    isOpen,
+    columnId,
+    boardId,
+    editItem,
+    closeModal = () => {},
+}) => {
+    const { user } = useSelector((state) => state.userAuthState);
 
     const [title, setTitle] = useState("");
-    const [picture, setPicture] = useState("");
     const [description, setDescription] = useState("");
 
     const [error, setError] = useState("");
+    const [isLoading, setIsLoading] = useState("");
 
     const dispatch = useDispatch();
 
@@ -22,45 +28,55 @@ const EditBoardItemModal = ({ isOpen, columnId, editItem, closeModal = () => {} 
         closeModal();
         setTitle("");
         setError("");
-        setPicture("");
         setDescription("");
     };
 
-    const handleSubmit = async () => {
+    const handleUpdate = async () => {
         setError("");
+        setIsLoading(true);
+        if (title === "" || description === "") return;
 
-        const formData = new FormData();
-        if (picture[0]) formData.append("image", picture[0]);
-        formData.append("columnId", columnId);
-        formData.append("title", title);
-        formData.append("description", description);
+        try {
+            const obj = {
+                itemId: editItem?._id,
+                title,
+                description,
+            };
 
-        const res = await dispatch(addColumnItemAction(formData));
-        if (!res.success) {
-            setError(res.message);
-        } else {
+            await put(`boards/column/item/details/${columnId}`, obj, "user");
+            await dispatch(
+                getBoardAction(boardId, {
+                    investorId:
+                        user.type && user.type === "subuser"
+                            ? user.investorId
+                            : user?._id,
+                })
+            );
+
             handleCloseModal();
+            setIsLoading(false);
+        } catch (error) {
+            setIsLoading(false);
+            handleCloseModal();
+            console.log({ error });
         }
     };
 
     useEffect(() => {
-        if(editItem._id){
-            setTitle(editItem.title)
-            setDescription(parse(editItem.description))
+        if (editItem._id) {
+            setTitle(editItem?.title);
+            setDescription(parse(editItem?.description).toString());
         }
 
-      console.log({editItem});
-    }, [editItem])
-    
+    }, [editItem]);
 
     return (
         <Modal
             size="3xl"
             isOpen={isOpen}
-            closeModal={()=>{}}
+            closeModal={() => {}}
             classes={"!bg-light-blue !shadow-2xl !min-h-[60vh] !relative"}
         >
-
             {error && (
                 <div className="text-center max-w-4xl mx-auto bg-red-200 rounded-lg text-red-500 my-4 text-sm p-1">
                     {error}
@@ -90,7 +106,7 @@ const EditBoardItemModal = ({ isOpen, columnId, editItem, closeModal = () => {} 
                         ["unorderedList", "orderedList"],
                         ["h1", "h2", "h3"],
                     ]}
-                    value={description}
+                    value={description.toString()}
                     onChange={setDescription}
                 />
             </div>
@@ -103,13 +119,13 @@ const EditBoardItemModal = ({ isOpen, columnId, editItem, closeModal = () => {} 
                     Cancel
                 </button>
                 <button
-                    disabled={isAddingColumnItem}
-                    onClick={handleSubmit}
+                    disabled={isLoading}
+                    onClick={handleUpdate}
                     className="disabled:opacity-50 disabled:cursor-not-allowed 
                     bg-dark-color flex justify-center items-center p-1 px-10 
                     text-white rounded-md uppercase text-md"
                 >
-                    {isAddingColumnItem ? (
+                    {isLoading ? (
                         <>
                             <FaSpinner className="animate-spin mr-4" />{" "}
                             <span className="capitalize">Loading...</span>

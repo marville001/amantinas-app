@@ -125,7 +125,8 @@ const BoardCard = ({ item, columnid }) => {
                     setEditItem({});
                 }}
                 editItem={editItem}
-                columnid={columnid}
+                columnId={columnid}
+                boardId={boardId}
             />
         </div>
     );
