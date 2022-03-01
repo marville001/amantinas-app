@@ -52,7 +52,7 @@ const AddTransactionModal = ({
 
         const obj = {
             title,
-            investorId: user?._id,
+            investorId: user.type && user.type === "subuser"? user.investorId : user?._id,
             homeId: connectedHome,
             description,
             amount,

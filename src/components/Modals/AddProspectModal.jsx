@@ -39,7 +39,7 @@ const AddProspectModal = ({ isOpen, title, size, closeModal = () => {} }) => {
 
         const formData = new FormData();
         formData.append("image", picture[0]);
-        formData.append("investorId", user._id);
+        formData.append("investorId", user.type && user.type === "subuser"? user.investorId : user?._id);
         formData.append("name", name);
         formData.append("location", location);
         formData.append("bedrooms", bedrooms);

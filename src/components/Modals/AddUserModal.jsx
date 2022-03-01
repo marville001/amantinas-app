@@ -6,7 +6,8 @@ import { FaSpinner } from "react-icons/fa";
 
 const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
     const { isCreatingUser } = useSelector((state) => state.usersState);
-
+    const { user } = useSelector((state) => state.userAuthState);
+    
     const [sundayFree, setSundayFree] = useState(true);
     const [firstname, setFirstName] = useState("");
     const [lastname, setLastName] = useState("");
@@ -48,6 +49,7 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
             satFromTime,
             satToTime,
             sundayFree,
+            investorId: user.type && user.type === "subuser"? user.investorId : user?._id
         };
         if (!sundayFree) {
             obj.sunFromTime = sunFromTime;

@@ -27,7 +27,7 @@ const AddBoardModal = ({ isOpen, size, closeModal = () => {} }) => {
         const obj = {
             name,
             columns,
-            investorId: user?._id,
+            investorId: user.type && user.type === "subuser"? user.investorId : user?._id,
         };
 
         const res = await dispatch(createBoardAction(obj));
