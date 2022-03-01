@@ -1,9 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { HiDotsVertical } from "react-icons/hi";
 
 import parse from "html-react-parser";
+import { FaSpinner, FaTrash } from "react-icons/fa";
+import { Menu } from "@headlessui/react";
+import ConfirmModal from "../Modals/ConfirmModal";
+import { delete_ } from "../../utils/http";
+import { useDispatch, useSelector } from "react-redux";
+import { getBoardAction } from "../../redux/actions/boardsActions";
+import { useParams } from "react-router-dom";
 
-const BoardCard = ({ item }) => {
+const BoardCard = ({ item, columnid }) => {
+    const { user } = useSelector((state) => state.userAuthState);
+
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
+
+    const dispatch = useDispatch();
+    const { boardId } = useParams();
+
+    const handleDelete = async () => {
+        setIsDeleting(true);
+
+        try {
+            await delete_(`boards/column/${columnid}/${item._id}`, {}, "user");
+            await dispatch(getBoardAction(boardId, { investorId: user.type && user.type === "subuser"? user.investorId : user?._id }));
+
+            setIsDeleting(false);
+        } catch (error) {
+            setIsDeleting(false);
+            setConfirmDeleteOpen(false);
+        }
+    };
+
     return (
         <div className="shadow-md p-2 rounded-lg pb-5">
             {item?.image && (
@@ -15,7 +44,33 @@ const BoardCard = ({ item }) => {
             )}
             <div className="mt-3 mb-2 flex justify-between">
                 <h2 className="text-dark-color font-bold">{item?.title}</h2>
-                <HiDotsVertical className="text-2xl text-primary-blue cursor-pointer" />
+                <Menu as="div" className="relative">
+                    <Menu.Button>
+                        <HiDotsVertical className="text-2xl text-primary-blue cursor-pointer" />
+                        {/* <HiDotsVertical /> */}
+                    </Menu.Button>
+                    <Menu.Items
+                        className="absolute top-0 right-6 min-w-[140px] text-white
+                         bg-primary-blue p-2 shadow-md rounded-md z-50 ring-0 outline-none border-0"
+                    >
+                        <hr className="mt-2" />
+                        <div
+                            onClick={() => setConfirmDeleteOpen(true)}
+                            className="flex items-center p-1 mt-2 hover:opacity-80 space-x-4 cursor-pointer"
+                        >
+                            {isDeleting ? (
+                                <FaSpinner className="animate-spin m-auto" />
+                            ) : (
+                                <>
+                                    <FaTrash /> <span>Delete</span>
+                                </>
+                            )}
+                        </div>
+                        {/* <div className="flex items-center px-2 hover:opacity-80 space-x-4 cursor-pointer">
+                                <FaEdit /> <span>Edit</span>
+                            </div> */}
+                    </Menu.Items>
+                </Menu>
             </div>
             <div
                 className="
@@ -28,6 +83,15 @@ const BoardCard = ({ item }) => {
             >
                 {parse(parse(item?.description || "none"))}
             </div>
+            <ConfirmModal
+                isOpen={confirmDeleteOpen}
+                action={handleDelete}
+                message="Please confirm deleting the item"
+                loading={isDeleting}
+                closeModal={() => {
+                    setConfirmDeleteOpen(false);
+                }}
+            />
         </div>
     );
 };

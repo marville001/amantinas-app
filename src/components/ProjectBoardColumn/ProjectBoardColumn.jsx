@@ -97,7 +97,10 @@ const ProjectBoardColumn = ({ boardId, board }) => {
                                         {...provided.draggableProps}
                                         {...provided.dragHandleProps}
                                     >
-                                        <BoardCard item={item} />
+                                        <BoardCard
+                                            columnid={board._id}
+                                            item={item}
+                                        />
                                     </div>
                                 );
                             }}

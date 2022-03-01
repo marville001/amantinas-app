@@ -190,6 +190,7 @@ const HomeCard = ({ home }) => {
                 isOpen={confirmDeleteOpen}
                 action={handleDelete}
                 message="Please confirm deleting prospect"
+                loading={isDeleting}
                 closeModal={() => {
                     setConfirmDeleteOpen(false);
                 }}
