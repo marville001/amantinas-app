@@ -25,9 +25,13 @@ const DashboardWrapper = ({ children, title }) => {
             navigate("/");
         }
     }, [navigate]);
-    
 
-    if (userAuthState?.loading || adminState?.loading) {
+    if (
+        userAuthState?.loading ||
+        adminState?.loading 
+        ||
+        !userAuthState?.user?._id
+    ) {
         return <LoadingContainer />;
     }
 
