@@ -86,7 +86,7 @@ const AddTransactionModal = ({
     }, [connectedHome, homes]);
 
     return (
-        <Modal size="7xl" isOpen={isOpen} closeModal={handleCloseModal}>
+        <Modal size="3xl" isOpen={isOpen} closeModal={handleCloseModal}>
             <div className="text-center text-white text-2xl mb-4">
                 New Transaction
             </div>

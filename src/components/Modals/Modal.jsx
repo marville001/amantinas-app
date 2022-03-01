@@ -61,6 +61,12 @@ export default function Modal({
                         ? "max-w-lg"
                         : size === "xl"
                         ? "max-w-xl"
+                        : size === "2xl"
+                        ? "max-w-2xl"
+                        : size === "3xl"
+                        ? "max-w-3xl"
+                        : size === "4xl"
+                        ? "max-w-4xl"
                         : "max-w-2xl"
                 }
                 p-6 my-8 overflow-hidden 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { HiDotsVertical } from "react-icons/hi";
+import { HiDotsVertical, HiPencilAlt } from "react-icons/hi";
 
 import parse from "html-react-parser";
 import { FaSpinner, FaTrash } from "react-icons/fa";
@@ -9,12 +9,16 @@ import { delete_ } from "../../utils/http";
 import { useDispatch, useSelector } from "react-redux";
 import { getBoardAction } from "../../redux/actions/boardsActions";
 import { useParams } from "react-router-dom";
+import EditBoardItemModal from "../Modals/EditBoardItemModal";
+import { MenuItem } from "@mantine/core";
 
 const BoardCard = ({ item, columnid }) => {
     const { user } = useSelector((state) => state.userAuthState);
 
     const [isDeleting, setIsDeleting] = useState(false);
     const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
+    const [editItem, setEditItem] = useState({});
+    const [editItemModalOpen, setEditItemModalOpen] = useState(false);
 
     const dispatch = useDispatch();
     const { boardId } = useParams();
@@ -24,7 +28,14 @@ const BoardCard = ({ item, columnid }) => {
 
         try {
             await delete_(`boards/column/${columnid}/${item._id}`, {}, "user");
-            await dispatch(getBoardAction(boardId, { investorId: user.type && user.type === "subuser"? user.investorId : user?._id }));
+            await dispatch(
+                getBoardAction(boardId, {
+                    investorId:
+                        user.type && user.type === "subuser"
+                            ? user.investorId
+                            : user?._id,
+                })
+            );
 
             setIsDeleting(false);
         } catch (error) {
@@ -34,7 +45,9 @@ const BoardCard = ({ item, columnid }) => {
     };
 
     return (
-        <div className="shadow-md p-2 rounded-lg pb-5">
+        <div
+            className="shadow-md p-2 rounded-lg pb-5"
+        >
             {item?.image && (
                 <img
                     className="w-full h-32 sm:h-40 rounded-lg"
@@ -50,10 +63,9 @@ const BoardCard = ({ item, columnid }) => {
                         {/* <HiDotsVertical /> */}
                     </Menu.Button>
                     <Menu.Items
-                        className="absolute top-0 right-6 min-w-[140px] text-white
-                         bg-primary-blue p-2 shadow-md rounded-md z-50 ring-0 outline-none border-0"
+                        className="absolute top-0 right-6 text-white
+                         bg-primary-blue p-2 pr-4 shadow-md rounded-md z-50 ring-0 outline-none border-0"
                     >
-                        <hr className="mt-2" />
                         <div
                             onClick={() => setConfirmDeleteOpen(true)}
                             className="flex items-center p-1 mt-2 hover:opacity-80 space-x-4 cursor-pointer"
@@ -66,9 +78,22 @@ const BoardCard = ({ item, columnid }) => {
                                 </>
                             )}
                         </div>
-                        {/* <div className="flex items-center px-2 hover:opacity-80 space-x-4 cursor-pointer">
-                                <FaEdit /> <span>Edit</span>
-                            </div> */}
+                        <Menu.Item as="div"
+                            onClick={() => {
+                                setEditItemModalOpen(true)
+                                setEditItem(item)
+                            }
+                            }
+                            className="flex items-center p-1 mt-2 hover:opacity-80 space-x-4 cursor-pointer"
+                        >
+                            {isDeleting ? (
+                                <FaSpinner className="animate-spin m-auto" />
+                            ) : (
+                                <>
+                                    <HiPencilAlt /> <span>Edit</span>
+                                </>
+                            )}
+                        </Menu.Item>
                     </Menu.Items>
                 </Menu>
             </div>
@@ -91,6 +116,16 @@ const BoardCard = ({ item, columnid }) => {
                 closeModal={() => {
                     setConfirmDeleteOpen(false);
                 }}
+            />
+
+            <EditBoardItemModal
+                isOpen={editItemModalOpen}
+                closeModal={() => {
+                    setEditItemModalOpen(false);
+                    setEditItem({});
+                }}
+                editItem={editItem}
+                columnid={columnid}
             />
         </div>
     );
