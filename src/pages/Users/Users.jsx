@@ -1,19 +1,55 @@
 import React, { useEffect, useState } from "react";
 import { FaSpinner } from "react-icons/fa";
+import { HiPencilAlt, HiTrash } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper";
 import AddUserModal from "../../components/Modals/AddUserModal";
+import ConfirmModal from "../../components/Modals/ConfirmModal";
 import { loadUsersAction } from "../../redux/actions/usersActions";
+import { delete_ } from "../../utils/http";
 
 const Users = () => {
     const { users, loading } = useSelector((state) => state.usersState);
     const { user } = useSelector((state) => state.userAuthState);
     const [addUserModalOpen, setAddUserModalOpen] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
+    const [active, setActive] = useState("");
 
     const dispatch = useDispatch();
 
+    const handleDelete = async () => {
+        setIsDeleting(true);
+        try {
+            await delete_(`sub-user/${active}`, {}, "user");
+
+            dispatch(
+                loadUsersAction({
+                    investorId:
+                        user.type && user.type === "subuser"
+                            ? user.investorId
+                            : user?._id,
+                })
+            );
+            setIsDeleting(false);
+            setActive("")
+            setConfirmDeleteOpen(false);
+
+        } catch (error) {
+            setActive("")
+            setConfirmDeleteOpen(false);
+        }
+    };
+
     useEffect(() => {
-        dispatch(loadUsersAction({investorId: user.type && user.type === "subuser"? user.investorId : user?._id}));
+        dispatch(
+            loadUsersAction({
+                investorId:
+                    user.type && user.type === "subuser"
+                        ? user.investorId
+                        : user?._id,
+            })
+        );
     }, [dispatch, user?._id, user.type, user.investorId]);
 
     return (
@@ -21,7 +57,6 @@ const Users = () => {
             <div className="my-6 bg-white rounded-xl p-2 max-w-6xl">
                 <div className="flex flex-col-reverse md:flex-row justify-between my-6 mt-10">
                     <div className="flex space-x-4 ml-auto">
-                        
                         <button
                             // disabled={user.plan === "free" && users.length >= 2}
                             onClick={() => setAddUserModalOpen(true)}
@@ -43,26 +78,25 @@ const Users = () => {
                                 className="w-3 h-3 lg:w-3 lg:h-3 mt-1"
                             />
                         </div>
-                        {[
-                            "Firstname",
-                            "Lastname",
-                            "Role",
-                            "Email",
-                            "Notes",
-                        ]?.map((col, idx) => (
-                            <div key={idx} className="flex-1 px-2 lg:px-4">
-                                <h3 className="text-sm lg:text-lg capitalize">
-                                    {col}
-                                </h3>
-                            </div>
-                        ))}
+                        {["Firstname", "Lastname", "Role", "Email", ""]?.map(
+                            (col, idx) => (
+                                <div key={idx} className="flex-1 px-2 lg:px-4">
+                                    <h3 className="text-sm lg:text-lg capitalize">
+                                        {col}
+                                    </h3>
+                                </div>
+                            )
+                        )}
                     </div>
 
                     {/* Data */}
                     <div className="flex flex-col">
                         {users.length > 0 &&
                             users.map((user, idx) => (
-                                <div key={idx} className="flex py-3 hover:bg-light-blue cursor-pointer">
+                                <div
+                                    key={idx}
+                                    className="flex py-3 hover:bg-light-blue cursor-pointer"
+                                >
                                     <div className="px-1 lg:px-3">
                                         <input
                                             type="checkbox"
@@ -81,8 +115,15 @@ const Users = () => {
                                     <div className="flex-1 capitalize px-2 lg:px-4 first-line:text-sm font-light">
                                         {user.email}
                                     </div>
-                                    <div className="flex-1 capitalize px-2 lg:px-4 first-line:text-sm font-light">
-                                        {""}
+                                    <div className="flex-1 flex justify-end space-x-5 capitalize px-2 lg:px-4 first-line:text-sm font-light">
+                                        <HiPencilAlt className="text-xl text-dark-color hover:text-primary-blue" />
+                                        <HiTrash
+                                            onClick={() => {
+                                                setConfirmDeleteOpen(true);
+                                                setActive(user._id);
+                                            }}
+                                            className="text-xl text-dark-color hover:text-red-400"
+                                        />
                                     </div>
                                 </div>
                             ))}
@@ -99,6 +140,17 @@ const Users = () => {
             <AddUserModal
                 isOpen={addUserModalOpen}
                 closeModal={() => setAddUserModalOpen(false)}
+            />
+
+            <ConfirmModal
+                isOpen={confirmDeleteOpen}
+                action={handleDelete}
+                message="Please confirm deleting the user!"
+                loading={isDeleting}
+                closeModal={() => {
+                    setConfirmDeleteOpen(false);
+                    setActive("");
+                }}
             />
         </DashboardWrapper>
     );

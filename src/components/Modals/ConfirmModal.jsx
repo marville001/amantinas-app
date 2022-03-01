@@ -10,7 +10,7 @@ const ConfirmModal = ({
     loading,
 }) => {
     return (
-        <Modal center={false} size="md" isOpen={isOpen} closeModal={closeModal}>
+        <Modal center={false} size="md" isOpen={isOpen} closeModal={() => {}}>
             <div className="text-white text-xl mb-6">{message}</div>
             <div className=" mt-6 flex justify-between">
                 <button
