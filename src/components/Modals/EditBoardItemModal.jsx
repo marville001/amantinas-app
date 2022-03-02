@@ -58,7 +58,6 @@ const EditBoardItemModal = ({
         } catch (error) {
             setIsLoading(false);
             handleCloseModal();
-            console.log({ error });
         }
     };
 

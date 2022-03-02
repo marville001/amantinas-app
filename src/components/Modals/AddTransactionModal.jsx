@@ -25,6 +25,8 @@ const AddTransactionModal = ({
     const [date, setDate] = useState("");
     const [type, setType] = useState("");
     const [recurring, setRecurring] = useState(false);
+    const [customInterval, setCustomInterval] = useState("");
+    const [isCustom, setIsCustom] = useState(false);
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("false");
     const [error, setError] = useState("");
@@ -52,7 +54,10 @@ const AddTransactionModal = ({
 
         const obj = {
             title,
-            investorId: user.type && user.type === "subuser"? user.investorId : user?._id,
+            investorId:
+                user.type && user.type === "subuser"
+                    ? user.investorId
+                    : user?._id,
             homeId: connectedHome,
             description,
             amount,
@@ -64,6 +69,8 @@ const AddTransactionModal = ({
         if (recurring) {
             obj.startDate = startDate;
             obj.endDate = endDate;
+            obj.isCustom = isCustom;
+            obj.interval = customInterval;
         }
 
         const res = await dispatch(createTransactionAction(obj));
@@ -105,9 +112,12 @@ const AddTransactionModal = ({
                         <label htmlFor="home_" className="text-white ">
                             Select Managed Home
                         </label>
-                        {(homes?.filter((home) => home.isManaged === true).length === 0) ? (
+                        {homes?.filter((home) => home.isManaged === true)
+                            .length === 0 ? (
                             <div className="my-4 px-3">
-                                <p className="text-md text-white">No Managed Home Yet</p>
+                                <p className="text-md text-white">
+                                    No Managed Home Yet
+                                </p>
                             </div>
                         ) : (
                             <select
@@ -265,40 +275,105 @@ const AddTransactionModal = ({
                         </label>
                     </div>
                     {recurring && (
-                        <div className="flex space-x-2">
-                            <div className="flex flex-1 flex-col space-y-2 my-2">
-                                <label className="text-white text-md">
-                                    Start Date
-                                </label>
-                                <input
-                                    type="date"
-                                    value={startDate}
-                                    onChange={(e) =>
-                                        setStartDate(e.target.value)
-                                    }
-                                    className="
+                        <>
+                            <div className="flex space-x-2">
+                                <div className="flex flex-1 flex-col space-y-2 my-2">
+                                    <label className="text-white text-md">
+                                        Start Date
+                                    </label>
+                                    <input
+                                        type="date"
+                                        value={startDate}
+                                        onChange={(e) =>
+                                            setStartDate(e.target.value)
+                                        }
+                                        className="
         outline-none p-1 text-sm !rounded px-2 bg-light-blue ring-1 
         ring-dark-color text-dark-color
         "
-                                />
+                                    />
+                                </div>
+
+                                <div className="flex flex-1 flex-col space-y-2 my-2">
+                                    <label className="text-white text-md">
+                                        End Date{" "}
+                                        <span className="text-xs">
+                                            {" "}
+                                            (optional)
+                                        </span>
+                                    </label>
+                                    <input
+                                        type="date"
+                                        value={endDate}
+                                        onChange={(e) =>
+                                            setEndDate(e.target.value)
+                                        }
+                                        className="
+        outline-none p-1 text-sm !rounded px-2 bg-light-blue ring-1 
+        ring-dark-color text-dark-color
+        "
+                                    />
+                                </div>
                             </div>
 
                             <div className="flex flex-1 flex-col space-y-2 my-2">
-                                <label className="text-white text-md">
-                                    End Date{" "}
-                                    <span className="text-xs"> (optional)</span>
-                                </label>
-                                <input
-                                    type="date"
-                                    value={endDate}
-                                    onChange={(e) => setEndDate(e.target.value)}
-                                    className="
-        outline-none p-1 text-sm !rounded px-2 bg-light-blue ring-1 
-        ring-dark-color text-dark-color
-        "
-                                />
+                                <div className="text-white text-md flex justify-between">
+                                    <p>Date Interval</p>
+                                    <label
+                                        htmlFor="custom"
+                                        className="flex space-x-2 items-center"
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            name="custom"
+                                            checked={isCustom}
+                                            onChange={(e) =>
+                                                setIsCustom(e.target.checked)
+                                            }
+                                        />
+                                        <span>Custom</span>
+                                    </label>
+                                </div>
+                                {isCustom ? (
+                                    <div className="flex justify-between space-x-5 pr-6 items-center">
+                                        <h4 className="text-md text-white">
+                                            Every
+                                        </h4>
+                                        <input
+                                            value={customInterval}
+                                            onChange={(e) =>
+                                                setCustomInterval(
+                                                    e.target.value
+                                                )
+                                            }
+                                            type="number"
+                                            className="w-auto"
+                                        />
+                                        <h4 className="text-md text-white">
+                                            Days
+                                        </h4>
+                                    </div>
+                                ) : (
+                                    <select
+                                        value={customInterval}
+                                        onChange={(e) =>
+                                            setCustomInterval(e.target.value)
+                                        }
+                                        className="
+outline-none p-1 text-sm rounded px-2 bg-light-blue ring-1 
+ring-dark-color text-dark-color
+"
+                                    >
+                                        <option value="">Select Type</option>
+                                        <option value="monthly">Month</option>
+                                        <option value="weekly">Week</option>
+                                        <option value="bi-weekly">
+                                            Bi- Weekly
+                                        </option>
+                                    </select>
+                                )}
                             </div>
-                        </div>
+                        </>
                     )}
 
                     <div className="flex  space-y-2 my-4 justify-center">

@@ -43,7 +43,7 @@ const DataTable = ({
 
             <div className="overflow-x-auto">
                 {/* Title */}
-                <div className="flex lg:border-2 lg:border-opacity-70  lg:border-brown-color py-3 bg-fixed bg-light-blue items-center">
+                <div className="flex lg:border-2 lg:border-opacity-70  lg:border-brown-color py-1 bg-fixed bg-light-blue items-center">
                     <div className="px-1 lg:px-3 flex items-center">
                         <input
                             type="checkbox"
@@ -63,7 +63,7 @@ const DataTable = ({
                 <div className="flex flex-col">
                     {data.length > 0 &&
                         data.map((item, idx) => (
-                            <div key={idx} className="flex py-3 hover:bg-light-blue cursor-pointer">
+                            <div key={idx} className="flex py-1 hover:bg-light-blue cursor-pointer">
                                 <div className="px-1 lg:px-3">
                                     <input
                                         type="checkbox"

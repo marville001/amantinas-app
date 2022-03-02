@@ -21,14 +21,15 @@ export const createTransactionAction = (details) => async (dispatch) => {
 };
 
 export const getTransactionsAction =
-    ({ investorId }) =>
+    ({ investorId, activePage=1, pageSize=10 }) =>
     async (dispatch) => {
         dispatch({ type: GET_TRANSACTIONS.REQUEST });
         try {
-            const data = await get(`transactions/${investorId}`);
+            const data = await get(`transactions/${investorId}?activePage=${activePage}&pageSize=${pageSize}`);
             dispatch({
                 type: GET_TRANSACTIONS.SUCCESS,
                 transactions: data.transactions,
+                total: data.total,
             });
             return { success: true };
         } catch (error) {

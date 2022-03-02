@@ -26,6 +26,10 @@
     display: none !important;
 }
 
+.mantine-Pagination-active{
+    background-color: #0e5359;
+}
+
 @layer base {
     input[type="text"],
     input[type="password"],

@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { FaSpinner } from "react-icons/fa";
 import { HiOutlineDownload } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
-import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper";
+import { Pagination } from "@mantine/core";
 
+import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper";
 import DataTable from "../../components/DataTable/DataTable";
 import AddTransactionModal from "../../components/Modals/AddTransactionModal";
 import { getHomesAction } from "../../redux/actions/homesActions";
@@ -12,24 +13,32 @@ import priceFormatter from "../../utils/priceFormatter";
 
 const Ledger = () => {
     const { user } = useSelector((state) => state.userAuthState);
-    const { transactions, loading } = useSelector(
+    const { transactions, loading, total } = useSelector(
         (state) => state.transactionsState
     );
     const [addTransModalOpen, setAddTransModalOpen] = useState(false);
+
+    const [activePage, setActivePage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(
-            getHomesAction({
+            getTransactionsAction({
                 investorId:
                     user.type && user.type === "subuser"
                         ? user.investorId
                         : user?._id,
+                activePage,
+                pageSize,
             })
         );
+    }, [dispatch, user?._id, user.type, user.investorId, activePage, pageSize]);
+
+    useEffect(() => {
         dispatch(
-            getTransactionsAction({
+            getHomesAction({
                 investorId:
                     user.type && user.type === "subuser"
                         ? user.investorId
@@ -64,11 +73,27 @@ const Ledger = () => {
                     </div>
                 </div>
 
+                <div className="mb-5 flex items-center space-x-4">
+                    <select
+                        value={pageSize}
+                        onChange={(e) => setPageSize(e.target.value)}
+                        name="perPage"
+                        className="w-24"
+                        id=""
+                    >
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <h4>Total Rows</h4>
+                </div>
                 {/* Table Start*/}
 
                 <div className="overflow-x-auto">
                     {/* Title */}
-                    <div className="flex lg:border-2 lg:border-opacity-70  lg:border-brown-color py-3 bg-fixed bg-light-blue items-center">
+                    <div className="flex lg:border-2 lg:border-opacity-70  lg:border-brown-color py-1 bg-fixed bg-light-blue items-center">
                         <div className="px-1 lg:px-3 flex items-center">
                             <input
                                 type="checkbox"
@@ -90,46 +115,56 @@ const Ledger = () => {
                         ))}
                     </div>
 
-                    {/* Data */}
-                    <div className="flex flex-col">
-                        {transactions.length > 0 &&
-                            transactions.map((trans, idx) => (
-                                <div
-                                    key={idx}
-                                    className="flex py-3 hover:bg-light-blue cursor-pointer"
-                                >
-                                    <div className="px-1 lg:px-3">
-                                        <input
-                                            type="checkbox"
-                                            className="w-3 h-3 lg:w-3 lg:h-3 mt-1"
-                                        />
-                                    </div>
-                                    <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light">
-                                        {trans.title}
-                                    </div>
-                                    <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light">
-                                        {new Date(trans.date).toDateString()}
-                                    </div>
-                                    <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light">
-                                        {priceFormatter(trans.amount)}
-                                    </div>
-                                    <div className="flex-1 capitalize px-2 lg:px-4 first-line:text-sm font-light">
-                                        {trans.type}
-                                    </div>
-                                    <div className="flex-1 capitalize px-2 lg:px-4 first-line:text-sm font-light">
-                                        {trans.recurring ? "True" : "False"}
-                                    </div>
-                                </div>
-                            ))}
-                    </div>
-
-                    {loading && (
+                    {loading ? (
                         <div className="flex justify-center my-4">
                             <FaSpinner className="animate-spin mr-4 text-2xl" />
+                        </div>
+                    ) : (
+                        <div className="flex flex-col">
+                            {transactions.length > 0 &&
+                                transactions.map((trans, idx) => (
+                                    <div
+                                        key={idx}
+                                        className="flex py-2 hover:bg-light-blue cursor-pointer"
+                                    >
+                                        <div className="px-1 lg:px-3">
+                                            <input
+                                                type="checkbox"
+                                                className="w-3 h-3 lg:w-3 lg:h-3 mt-1"
+                                            />
+                                        </div>
+                                        <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light">
+                                            {trans.title}
+                                        </div>
+                                        <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light">
+                                            {new Date(
+                                                trans.date
+                                            ).toDateString()}
+                                        </div>
+                                        <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light">
+                                            {priceFormatter(trans.amount)}
+                                        </div>
+                                        <div className="flex-1 capitalize px-2 lg:px-4 first-line:text-sm font-light">
+                                            {trans.type}
+                                        </div>
+                                        <div className="flex-1 capitalize px-2 lg:px-4 first-line:text-sm font-light">
+                                            {trans.recurring ? "True" : "False"}
+                                        </div>
+                                    </div>
+                                ))}
                         </div>
                     )}
                 </div>
                 {/* Table End*/}
+
+                <div className="m-6 flex justify-end items-center space-x-2">
+                    <h4>Showing {pageSize <= total? pageSize : total} of {total}</h4>
+                    <Pagination
+                        total={Math.ceil(total / pageSize)}
+                        page={activePage}
+                        onChange={setActivePage}
+                    />
+                </div>
             </div>
             <div className="my-6">
                 <DataTable

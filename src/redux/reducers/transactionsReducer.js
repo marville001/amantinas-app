@@ -14,6 +14,7 @@ const transactionsReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
                 transactions: action.transactions,
+                total: action.total,
             };
         case GET_TRANSACTIONS.FAIL:
             return { ...state, loading: false };
