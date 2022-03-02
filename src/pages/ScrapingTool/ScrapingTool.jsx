@@ -1,14 +1,16 @@
 import React from "react";
+import { useCallback } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { FaSpinner } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper";
 import { createScrapeAction } from "../../redux/actions/scrapesActions";
+import { get } from "../../utils/http";
+import priceFormatter from "../../utils/priceFormatter";
 
 const ScrapingTool = () => {
-    const { isCreatingScrape } = useSelector(
-        (state) => state.scrapeState
-    );
+    const { isCreatingScrape } = useSelector((state) => state.scrapeState);
     const { user } = useSelector((state) => state.userAuthState);
 
     const [country, setCountry] = useState("");
@@ -31,13 +33,18 @@ const ScrapingTool = () => {
     });
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [scrapes, setScrapes] = useState("");
 
     const dispatch = useDispatch();
 
     const handleSubmit = async () => {
         setError("");
         const obj = {
-            investorId: user.type && user.type === "subuser"? user.investorId : user?._id,
+            investorId:
+                user.type && user.type === "subuser"
+                    ? user.investorId
+                    : user?._id,
             country,
             state,
             city,
@@ -55,6 +62,7 @@ const ScrapingTool = () => {
         const res = await dispatch(createScrapeAction(obj));
         if (!res.success) {
             setError(res.message);
+            loadScrapes();
         } else {
             setSuccess(res.message);
 
@@ -64,9 +72,28 @@ const ScrapingTool = () => {
         }
     };
 
+    const loadScrapes = useCallback(async () => {
+        setLoading(true);
+        try {
+            const investorId =
+                user.type && user.type === "subuser"
+                    ? user.investorId
+                    : user?._id;
+            const data = await get(`scrape/${investorId}`);
+            setScrapes(data.scrapes);
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+        }
+    }, [user?._id, user?.investorId, user?.type]);
+
+    useEffect(() => {
+        if (user?._id) loadScrapes();
+    }, [user?._id, loadScrapes]);
+
     return (
         <DashboardWrapper title="Scraping Tool">
-            <div className="my-6 bg-white rounded-xl p-4 max-w-6xl">
+            <div className="my-6 bg-white rounded-xl p-4 max-w-7xl">
                 <h2 className="text-md font-bold mb-2 ml-3 fo text-dark-color">
                     Scraping
                 </h2>
@@ -336,6 +363,103 @@ const ScrapingTool = () => {
                         </div>
                     </div>
                 </div>
+
+                <h2 className="text-lg my-4 text-dark-color">All Scrapes</h2>
+
+                <table className="w-full overflow-auto">
+                    {/* Title */}
+                    <thead className="lg:border-2 lg:border-opacity-70  lg:border-brown-color bg-light-blue">
+                        <tr>
+                            {[
+                                "Country",
+                                "Zip code",
+                                "State",
+                                "City",
+                                "Address",
+                                "Since",
+                                "Type",
+                                "Price",
+                                "Feets",
+                                "Beds",
+                                "Baths",
+                                "Execute",
+                                "",
+                            ]?.map((col, idx) => (
+                                <th key={idx} className="py-2">
+                                    <h3 className="text-sm capitalize">
+                                        {col}
+                                    </h3>
+                                </th>
+                            ))}
+                        </tr>
+                    </thead>
+                    {loading ? (
+                        <tr className="flex justify-center">
+                            <td
+                                colSpan={12}
+                                className="flex justify-center my-4"
+                            >
+                                <FaSpinner className="animate-spin mr-4 text-xl" />
+                            </td>
+                        </tr>
+                    ) : (
+                        <tbody className="my-6">
+                            {scrapes.length > 0 &&
+                                scrapes.map((scrape, idx) => (
+                                    <tr
+                                        key={idx}
+                                        className="py-3 hover:bg-light-blue cursor-pointer"
+                                    >
+                                        <td className="px-2 py-2 lg:px-4 first-line:text-sm font-light">
+                                            {scrape.country || "N/B"}
+                                        </td>
+                                        <td className="px-2 lg:px-4 first-line:text-sm font-light">
+                                            {scrape.zipcode || "N/B"}
+                                        </td>
+                                        <td className="px-2 lg:px-4 first-line:text-sm font-light">
+                                            {scrape.state || "N/B"}
+                                        </td>
+                                        <td className="px-2 lg:px-4 first-line:text-sm font-light">
+                                            {scrape.city || "N/B"}
+                                        </td>
+                                        <td className="px-2 lg:px-4 first-line:text-sm font-light">
+                                            {scrape.address || "N/B"}
+                                        </td>
+                                        <td className="px-2 lg:px-4 first-line:text-sm font-light">
+                                            {scrape.since || "N/B"}
+                                        </td>
+                                        <td className="px-2 lg:px-4 first-line:text-sm font-light">
+                                            {scrape.type || "N/B"}
+                                        </td>
+                                        <td className="px-2 lg:px-4 first-line:text-sm font-light">
+                                            {scrape.pricerange.length > 0
+                                                ? scrape.pricerange[0] +
+                                                  " - " +
+                                                  scrape.pricerange[1]
+                                                : "N/B"}
+                                        </td>
+                                        <td className="px-2 lg:px-4 first-line:text-sm font-light">
+                                            {scrape.squarefeets.length > 0
+                                                ? scrape.squarefeets[0] +
+                                                  " - " +
+                                                  scrape.squarefeets[1]
+                                                : "N/B"}
+                                        </td>
+                                        <td className="px-2 lg:px-4 first-line:text-sm font-light">
+                                            {scrape.bedrooms || "N/B"}
+                                        </td>
+                                        <td className="px-2 lg:px-4 first-line:text-sm font-light">
+                                            {scrape.bathrooms || "N/B"}
+                                        </td>
+                                        <td className="px-2 lg:px-4 first-line:text-sm font-light">
+                                            {scrape.execute || "N/B"}
+                                        </td>
+                                    </tr>
+                                ))}
+                        </tbody>
+                    )}
+                    {/* Table End*/}
+                </table>
             </div>
         </DashboardWrapper>
     );
