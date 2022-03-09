@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBoardAction } from "../../redux/actions/boardsActions";
 import { useParams } from "react-router-dom";
 import EditBoardItemModal from "../Modals/EditBoardItemModal";
-import { MenuItem } from "@mantine/core";
 
 const BoardCard = ({ item, columnid }) => {
     const { user } = useSelector((state) => state.userAuthState);

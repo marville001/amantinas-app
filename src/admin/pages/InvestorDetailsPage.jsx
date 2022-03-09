@@ -27,6 +27,8 @@ const InvestorDetailsPage = () => {
         }
     }, [investors, id]);
 
+    console.log(investor);
+
     return (
         <DashboardWrapper title={`Investors Details`}>
             {isLoadingInvestors && (

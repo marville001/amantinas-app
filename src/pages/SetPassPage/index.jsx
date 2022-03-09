@@ -4,7 +4,6 @@ import { FaSpinner } from "react-icons/fa";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    userLoginAction,
     userLogoutAction,
 } from "../../redux/actions/userAuthActions";
 import { post } from "../../utils/http";
@@ -25,7 +24,6 @@ const SetPassPage = () => {
 
     const handleSubmit = async () => {
         setError("");
-        const obj = { cPassword, password };
 
         if(cPassword !== password){
             setError("Passwords do not match")

@@ -8,7 +8,7 @@ import {
     getHomesAction,
     updateProspectAction,
 } from "../../redux/actions/homesActions";
-import { FaEdit, FaSpinner, FaTrash } from "react-icons/fa";
+import {  FaSpinner, FaTrash } from "react-icons/fa";
 import { delete_ } from "../../utils/http";
 import ConfirmModal from "../Modals/ConfirmModal";
 

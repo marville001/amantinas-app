@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper";
 import { createScrapeAction } from "../../redux/actions/scrapesActions";
 import { get } from "../../utils/http";
-import priceFormatter from "../../utils/priceFormatter";
 
 const ScrapingTool = () => {
     const { isCreatingScrape } = useSelector((state) => state.scrapeState);
