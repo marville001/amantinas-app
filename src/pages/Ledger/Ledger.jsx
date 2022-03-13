@@ -59,7 +59,14 @@ const Ledger = () => {
                 pageSize: invPageSize,
             })
         );
-    }, [dispatch, user?._id, user.type, user.investorId, activeInvPage, invPageSize]);
+    }, [
+        dispatch,
+        user?._id,
+        user.type,
+        user.investorId,
+        activeInvPage,
+        invPageSize,
+    ]);
 
     useEffect(() => {
         dispatch(
@@ -80,11 +87,11 @@ const Ledger = () => {
                 </h2>
                 <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-color bg-dark-color" />
                 <div className="flex flex-col-reverse md:flex-row justify-between my-6 mt-10">
-                    {/* <input
+                    <input
                         type="search"
                         className="border mt-4 md:mt-0 px-2 py-2 md:max-w-[400px] text-sm rounded-md placeholder:text-sm outline-none"
                         placeholder={`Search Activities`}
-                    /> */}
+                    />
                     <div className="flex space-x-4 ml-auto">
                         <div className="cursor-pointer border-brown-color border-2 p-1 rounded-md grid place-items-center">
                             <HiOutlineDownload className="w-8 h-6 text-brown-color" />
@@ -101,7 +108,10 @@ const Ledger = () => {
                 <div className="mb-5 flex items-center space-x-4">
                     <select
                         value={pageSize}
-                        onChange={(e) => setPageSize(e.target.value)}
+                        onChange={(e) => {
+                            setPageSize(e.target.value);
+                            setActivePage(1);
+                        }}
                         name="perPage"
                         className="w-24"
                         id=""
@@ -146,7 +156,8 @@ const Ledger = () => {
                         </div>
                     ) : (
                         <div className="flex flex-col">
-                            {transactions && transactions.length > 0 &&
+                            {transactions &&
+                                transactions.length > 0 &&
                                 transactions.map((trans, idx) => (
                                     <div
                                         key={idx}
@@ -184,8 +195,13 @@ const Ledger = () => {
 
                 <div className="m-6 flex justify-end items-center space-x-2">
                     <h4>
-                        Showing {pageSize <= total ? pageSize : total} of{" "}
-                        {total}
+                        Showing{" "}
+                        {pageSize <= total
+                            ? pageSize <= transactions.length
+                                ? pageSize
+                                : transactions.length
+                            : total}{" "}
+                        of {total}
                     </h4>
                     <Pagination
                         total={Math.ceil(total / pageSize)}
@@ -202,11 +218,11 @@ const Ledger = () => {
                 </h2>
                 <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-color bg-dark-color" />
                 <div className="flex flex-col-reverse md:flex-row justify-between my-6 mt-10">
-                    {/* <input
+                    <input
                         type="search"
                         className="border mt-4 md:mt-0 px-2 py-2 md:max-w-[400px] text-sm rounded-md placeholder:text-sm outline-none"
-                        placeholder={`Search Activities`}
-                    /> */}
+                        placeholder={`Search Invoices`}
+                    />
                     <div className="flex space-x-4 ml-auto">
                         <div className="cursor-pointer border-brown-color border-2 p-1 rounded-md grid place-items-center">
                             <HiOutlineDownload className="w-8 h-6 text-brown-color" />
@@ -223,7 +239,10 @@ const Ledger = () => {
                 <div className="mb-5 flex items-center space-x-4">
                     <select
                         value={invPageSize}
-                        onChange={(e) => setInvPageSize(e.target.value)}
+                        onChange={(e) => {
+                            setInvPageSize(e.target.value);
+                            setActiveInvPage(1);
+                        }}
                         name="perPage"
                         className="w-24"
                         id=""
@@ -284,9 +303,7 @@ const Ledger = () => {
                                             {inv.title}
                                         </div>
                                         <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light">
-                                            {new Date(
-                                                inv.date
-                                            ).toDateString()}
+                                            {new Date(inv.date).toDateString()}
                                         </div>
                                         <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light">
                                             {priceFormatter(inv.amount)}
@@ -306,8 +323,13 @@ const Ledger = () => {
 
                 <div className="m-6 flex justify-end items-center space-x-2">
                     <h4>
-                        Showing {invPageSize <= invTotal ? invPageSize : invTotal} of{" "}
-                        {invTotal}
+                        Showing{" "}
+                        {invPageSize <= invTotal
+                            ? invPageSize <= invoices.length
+                                ? invPageSize
+                                : invoices.length
+                            : invTotal}{" "}
+                        of {invTotal}
                     </h4>
                     <Pagination
                         total={Math.ceil(invTotal / invPageSize)}
