@@ -7,12 +7,7 @@ import priceFormatter from "../../utils/priceFormatter";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { createTransactionAction } from "../../redux/actions/transactionsActions";
 
-const AddTransactionModal = ({
-    isOpen,
-    selectedHome = {},
-    size,
-    closeModal = () => {},
-}) => {
+const AddTransactionModal = ({ isOpen, closeModal = () => {} }) => {
     const { homes } = useSelector((state) => state.homesState);
     const { user } = useSelector((state) => state.userAuthState);
     const { isCreatingTransaction } = useSelector(
@@ -45,6 +40,7 @@ const AddTransactionModal = ({
         setAmount("");
         setStartDate("");
         setEndDate("");
+        setError("");
         setRecurring(false);
         closeModal();
     };

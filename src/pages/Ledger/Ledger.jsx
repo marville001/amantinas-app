@@ -146,7 +146,7 @@ const Ledger = () => {
                         </div>
                     ) : (
                         <div className="flex flex-col">
-                            {transactions.length > 0 &&
+                            {transactions && transactions.length > 0 &&
                                 transactions.map((trans, idx) => (
                                     <div
                                         key={idx}

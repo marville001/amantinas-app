@@ -5,18 +5,16 @@ import { FaSpinner } from "react-icons/fa";
 import { BiBath, BiBed } from "react-icons/bi";
 import priceFormatter from "../../utils/priceFormatter";
 import { HiOutlineLocationMarker } from "react-icons/hi";
-import { createTransactionAction } from "../../redux/actions/transactionsActions";
+import { createInvoiceAction } from "../../redux/actions/invoiceActions";
 
 const AddInvoiceModal = ({
     isOpen,
-    selectedHome = {},
-    size,
     closeModal = () => {},
 }) => {
     const { homes } = useSelector((state) => state.homesState);
     const { user } = useSelector((state) => state.userAuthState);
-    const { isCreatingTransaction } = useSelector(
-        (state) => state.transactionsState
+    const { isCreatingInvoice } = useSelector(
+        (state) => state.invoiceState
     );
 
     const [title, setTitle] = useState("");
@@ -45,6 +43,7 @@ const AddInvoiceModal = ({
         setAmount("");
         setStartDate("");
         setEndDate("");
+        setError("")
         setRecurring(false);
         closeModal();
     };
@@ -73,7 +72,7 @@ const AddInvoiceModal = ({
             obj.interval = customInterval;
         }
 
-        const res = await dispatch(createTransactionAction(obj));
+        const res = await dispatch(createInvoiceAction(obj));
         if (!res.success) {
             setError(res.message);
         } else {
@@ -378,11 +377,11 @@ ring-dark-color text-dark-color
 
                     <div className="flex  space-y-2 my-4 justify-center">
                         <button
-                            disabled={isCreatingTransaction}
+                            disabled={isCreatingInvoice}
                             onClick={handleSubmit}
                             className="disabled:opacity-50 disabled:cursor-not-allowed uppercase px-16 tracking-wider py-2 bg-dark-color text-white text-lg rounded-md mt-8 flex items-center"
                         >
-                            {isCreatingTransaction ? (
+                            {isCreatingInvoice ? (
                                 <>
                                     <FaSpinner className="animate-spin mr-4" />{" "}
                                     <span className="capitalize">
