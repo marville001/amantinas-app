@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Pagination } from "@mantine/core";
 
 import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper";
-import DataTable from "../../components/DataTable/DataTable";
 import AddTransactionModal from "../../components/Modals/AddTransactionModal";
 import { getHomesAction } from "../../redux/actions/homesActions";
 import { getTransactionsAction } from "../../redux/actions/transactionsActions";
+import { getInvoicesAction } from "../../redux/actions/invoiceActions";
 import priceFormatter from "../../utils/priceFormatter";
 import AddInvoiceModal from "../../components/Modals/AddInvoiceModal";
 
@@ -17,11 +17,21 @@ const Ledger = () => {
     const { transactions, loading, total } = useSelector(
         (state) => state.transactionsState
     );
+    const {
+        invoices,
+        loading: invLoading,
+        total: invTotal,
+    } = useSelector((state) => state.invoiceState);
+
     const [addTransModalOpen, setAddTransModalOpen] = useState(false);
     const [addInvoiceModalOpen, setAddInvoiceModalOpen] = useState(false);
 
     const [activePage, setActivePage] = useState(1);
-    const [pageSize, setPageSize] = useState(10);
+    const [pageSize, setPageSize] = useState(5);
+
+    // Invoices
+    const [activeInvPage, setActiveInvPage] = useState(1);
+    const [invPageSize, setInvPageSize] = useState(5);
 
     const dispatch = useDispatch();
 
@@ -37,6 +47,19 @@ const Ledger = () => {
             })
         );
     }, [dispatch, user?._id, user.type, user.investorId, activePage, pageSize]);
+
+    useEffect(() => {
+        dispatch(
+            getInvoicesAction({
+                investorId:
+                    user.type && user.type === "subuser"
+                        ? user.investorId
+                        : user?._id,
+                activePage: activeInvPage,
+                pageSize: invPageSize,
+            })
+        );
+    }, [dispatch, user?._id, user.type, user.investorId, activeInvPage, invPageSize]);
 
     useEffect(() => {
         dispatch(
@@ -160,7 +183,10 @@ const Ledger = () => {
                 {/* Table End*/}
 
                 <div className="m-6 flex justify-end items-center space-x-2">
-                    <h4>Showing {pageSize <= total? pageSize : total} of {total}</h4>
+                    <h4>
+                        Showing {pageSize <= total ? pageSize : total} of{" "}
+                        {total}
+                    </h4>
                     <Pagination
                         total={Math.ceil(total / pageSize)}
                         page={activePage}
@@ -168,9 +194,11 @@ const Ledger = () => {
                     />
                 </div>
             </div>
+
+            {/* Invoices */}
             <div className="bg-white my-6 rounded-xl p-4 max-w-6xl overflow-hidden">
-            <h2 className="text-md font-bold mb-2 ml-3 fo text-dark-color">
-                    activities
+                <h2 className="text-md font-bold mb-2 ml-3 fo text-dark-color capitalize">
+                    invoices
                 </h2>
                 <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-color bg-dark-color" />
                 <div className="flex flex-col-reverse md:flex-row justify-between my-6 mt-10">
@@ -194,8 +222,8 @@ const Ledger = () => {
 
                 <div className="mb-5 flex items-center space-x-4">
                     <select
-                        value={pageSize}
-                        onChange={(e) => setPageSize(e.target.value)}
+                        value={invPageSize}
+                        onChange={(e) => setInvPageSize(e.target.value)}
                         name="perPage"
                         className="w-24"
                         id=""
@@ -234,14 +262,14 @@ const Ledger = () => {
                         ))}
                     </div>
 
-                    {loading ? (
+                    {invLoading ? (
                         <div className="flex justify-center my-4">
                             <FaSpinner className="animate-spin mr-4 text-2xl" />
                         </div>
                     ) : (
                         <div className="flex flex-col">
-                            {transactions.length > 0 &&
-                                transactions.map((trans, idx) => (
+                            {invoices.length > 0 &&
+                                invoices.map((inv, idx) => (
                                     <div
                                         key={idx}
                                         className="flex py-2 hover:bg-light-blue cursor-pointer"
@@ -253,21 +281,21 @@ const Ledger = () => {
                                             />
                                         </div>
                                         <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light">
-                                            {trans.title}
+                                            {inv.title}
                                         </div>
                                         <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light">
                                             {new Date(
-                                                trans.date
+                                                inv.date
                                             ).toDateString()}
                                         </div>
                                         <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light">
-                                            {priceFormatter(trans.amount)}
+                                            {priceFormatter(inv.amount)}
                                         </div>
                                         <div className="flex-1 capitalize px-2 lg:px-4 first-line:text-sm font-light">
-                                            {trans.type}
+                                            {inv.type}
                                         </div>
                                         <div className="flex-1 capitalize px-2 lg:px-4 first-line:text-sm font-light">
-                                            {trans.recurring ? "True" : "False"}
+                                            {inv.recurring ? "True" : "False"}
                                         </div>
                                     </div>
                                 ))}
@@ -277,11 +305,14 @@ const Ledger = () => {
                 {/* Table End*/}
 
                 <div className="m-6 flex justify-end items-center space-x-2">
-                    <h4>Showing {pageSize <= total? pageSize : total} of {total}</h4>
+                    <h4>
+                        Showing {invPageSize <= invTotal ? invPageSize : invTotal} of{" "}
+                        {invTotal}
+                    </h4>
                     <Pagination
-                        total={Math.ceil(total / pageSize)}
-                        page={activePage}
-                        onChange={setActivePage}
+                        total={Math.ceil(invTotal / invPageSize)}
+                        page={activeInvPage}
+                        onChange={setActiveInvPage}
                     />
                 </div>
             </div>
