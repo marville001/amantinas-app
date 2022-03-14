@@ -9,6 +9,7 @@ import homesReducer from "./homesReducer";
 import suggestionsReducer from "./suggestionsReducer";
 import boardsReducer from "./boardsReducer";
 import transactionsReducer from "./transactionsReducer";
+import invoiceReducer from "./invoiceReducer";
 
 const rootReducer = combineReducers({
     appState: appReducer,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
     suggestionsState: suggestionsReducer,
     boardsState: boardsReducer,
     transactionsState: transactionsReducer,
+    invoiceState: invoiceReducer,
 });
 
 export default rootReducer;
