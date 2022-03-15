@@ -1,17 +1,30 @@
-import { CREATE_HOME, GET_HOMES, UPDATE_HOME } from "../types/users";
+import {
+    CREATE_HOME,
+    GET_HOMES,
+    GET_SCRAPED_HOMES,
+    UPDATE_HOME,
+} from "../types/users";
 
 const initialState = {
     homes: [],
+    scrapedHomes: [],
     loading: false,
 };
 
 const homesReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_HOMES.REQUEST:
-            return { ...state, loading: true };
+            return { ...state, loadingScrapedHomes: true };
         case GET_HOMES.SUCCESS:
-            return { ...state, loading: false, homes: action.homes };
+            return { ...state, loadingScrapedHomes: false, homes: action.homes };
         case GET_HOMES.FAIL:
+            return { ...state, loadingScrapedHomes: false };
+
+        case GET_SCRAPED_HOMES.REQUEST:
+            return { ...state, loading: true };
+        case GET_SCRAPED_HOMES.SUCCESS:
+            return { ...state, loading: false, scrapedHomes: action.homes };
+        case GET_SCRAPED_HOMES.FAIL:
             return { ...state, loading: false };
 
         case CREATE_HOME.REQUEST:

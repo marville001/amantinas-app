@@ -1,6 +1,11 @@
 import { get, post, put } from "../../utils/http";
 import parseError from "../../utils/parseError";
-import { CREATE_HOME, GET_HOMES, UPDATE_HOME } from "../types/users";
+import {
+    CREATE_HOME,
+    GET_HOMES,
+    GET_SCRAPED_HOMES,
+    UPDATE_HOME,
+} from "../types/users";
 
 export const createProspectAction = (details) => async (dispatch) => {
     dispatch({ type: CREATE_HOME.REQUEST });
@@ -39,21 +44,44 @@ export const updateProspectAction = (id, details) => async (dispatch) => {
 };
 
 export const getHomesAction =
-    ({ investorId }) =>
+    ({ investorId, scraped = false }) =>
     async (dispatch) => {
-        dispatch({ type: GET_HOMES.REQUEST });
+        if (scraped) {
+            dispatch({ type: GET_SCRAPED_HOMES.REQUEST });
+        } else {
+            dispatch({ type: GET_HOMES.REQUEST });
+        }
+
         try {
-            const data = await get(`homes/${investorId}`);
-            dispatch({
-                type: GET_HOMES.SUCCESS,
-                homes: data.homes,
-            });
+            const data = await get(
+                `homes${scraped ? "/scraped" : ""}/${investorId}`
+            );
+            if (scraped) {
+                dispatch({
+                    type: GET_SCRAPED_HOMES.SUCCESS,
+                    homes: data.homes,
+                });
+            } else {
+                dispatch({
+                    type: GET_HOMES.SUCCESS,
+                    homes: data.homes,
+                });
+            }
+
             return { success: true };
         } catch (error) {
-            dispatch({
-                type: GET_HOMES.FAIL,
-                error: parseError(error),
-            });
+            if (scraped) {
+                dispatch({
+                    type: GET_SCRAPED_HOMES.FAIL,
+                    error: parseError(error),
+                });
+            } else {
+                dispatch({
+                    type: GET_HOMES.FAIL,
+                    error: parseError(error),
+                });
+            }
+
             return { success: false, message: parseError(error) };
         }
     };

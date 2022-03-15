@@ -1,15 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper";
 import HomeCard from "../../components/HomeCard/HomeCard";
 
 import ListCard from "../../components/ListCard/ListCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ViewTypeHeader from "../../components/ViewTypeHeader/ViewTypeHeader";
 import { FaSpinner } from "react-icons/fa";
+import { getHomesAction } from "../../redux/actions/homesActions";
 
 const ScrapedHomes = () => {
+    const { user } = useSelector((state) => state.userAuthState);
     const { viewType } = useSelector((state) => state.appState);
-    const { homes, loading } = useSelector((state) => state.homesState);
+    const { scrapedHomes, loadingScrapedHomes } = useSelector(
+        (state) => state.homesState
+    );
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(
+            getHomesAction({
+                investorId:
+                    user.type && user.type === "subuser"
+                        ? user.investorId
+                        : user?._id,
+                scraped: true,
+            })
+        );
+    }, [dispatch, user?._id, user.investorId, user.type]);
 
     return (
         <DashboardWrapper title="Scraping Homes">
@@ -20,15 +38,19 @@ const ScrapedHomes = () => {
                 <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-color bg-dark-color" />
 
                 <ViewTypeHeader />
-                {loading && (
+                {loadingScrapedHomes && (
                     <div className="flex justify-center my-4">
                         <FaSpinner className="animate-spin mr-4 text-2xl" />
                     </div>
                 )}
 
-                {viewType === "cards" ? (
+                {scrapedHomes?.length <= 0 ? (
+                    <div className="text-center py-4 text-lg text-slate-900 font-medium rounded-md bg-yellow-300">
+                        <h3>No Scraped homes yet from your scrapes</h3>
+                    </div>
+                ) : viewType === "cards" ? (
                     <div className="px-12 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-16">
-                        {homes
+                        {scrapedHomes
                             ?.filter((h) => h.scraped === true)
                             .map((home, idx) => (
                                 <HomeCard key={home._id} home={home} />
@@ -36,7 +58,7 @@ const ScrapedHomes = () => {
                     </div>
                 ) : (
                     <div className="md:px-12 flex flex-col space-y-2">
-                        {homes
+                        {scrapedHomes
                             ?.filter((h) => h.scraped === true)
                             .map((home, idx) => (
                                 <ListCard key={home._id} home={home} />
