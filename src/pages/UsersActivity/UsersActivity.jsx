@@ -6,7 +6,7 @@ import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper
 import { get } from "../../utils/http";
 const UsersActivity = () => {
     const { user } = useSelector((state) => state.userAuthState);
-    const { users, loading } = useSelector((state) => state.usersState);
+    const {  loading } = useSelector((state) => state.usersState);
 
     const [loadingTime, setLoadingTime] = useState(false);
     const [timelog, setTimelog] = useState(false);
