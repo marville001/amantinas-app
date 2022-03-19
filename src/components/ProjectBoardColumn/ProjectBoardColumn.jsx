@@ -64,7 +64,7 @@ const ProjectBoardColumn = ({ boardId, board }) => {
                 </div>
             ) : (
                 <div className="flex w-full justify-between items-center group">
-                    <h2 className="text-md font-light ml-3 fo text-dark-blue-color">
+                    <h2 className="text-md font-light ml-3 fo text-dark-blue-color dark:text-white">
                         {board.name}
                     </h2>
                     <HiPencil
@@ -72,17 +72,17 @@ const ProjectBoardColumn = ({ boardId, board }) => {
                             setIsEditingName(true);
                             inputRef.current && inputRef.current.focus();
                         }}
-                        className="mr-4 hidden group-hover:block font-bold text-xl cursor-pointer"
+                        className="mr-4 hidden group-hover:block font-bold text-xl cursor-pointer dark:text-white"
                     />
                 </div>
             )}
-            <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-blue-color bg-dark-blue-color" />
+            <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-blue-color bg-dark-blue-color dark:border-white dark:bg-white" />
             <div
                 onClick={() => {
                     setAddItemModalOpen(true);
                     setActiveCol(board);
                 }}
-                className="flex items-center px-5 py-2 w-full cursor-pointer"
+                className="flex items-center px-5 py-2 w-full cursor-pointer dark:text-white"
             >
                 <HiPlusSm />
                 <p className="px-2 rounded-md">Add Item</p>

@@ -84,11 +84,11 @@ const ProjectBoards = () => {
         >
             {isLoadingBoard && (
                 <div>
-                    <FaSpinner className="animate-spin" />
+                    <FaSpinner className="animate-spin mt-4 dark:text-white" />
                 </div>
             )}
             <div className="mt-4">
-                <Link to="/project-boards" className="flex items-center space-x-1 text-brown-color text-sm">
+                <Link to="/project-boards" className="flex items-center space-x-1 text-brown-color dark:text-white text-sm">
                     <FaChevronLeft className="text-xs " /> <span>All Boards</span>
                 </Link>
             </div>
@@ -102,7 +102,7 @@ const ProjectBoards = () => {
                     {boardData.map((board, idx) => (
                         <div
                             key={board.name}
-                            className="board min-w-[200px] sm:min-w-[280px] max-w-[280px] bg-white p-2 flex flex-col max-h-[900px] overflow-y-auto rounded-3xl"
+                            className="board min-w-[200px] sm:min-w-[280px] max-w-[280px] bg-white dark:bg-gray-primary-color p-2 flex flex-col max-h-[900px] overflow-y-auto rounded-3xl"
                         >
                             <Droppable droppableId={idx.toString()}>
                                 {(provided, snapshot) => (

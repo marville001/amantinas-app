@@ -47,9 +47,9 @@ const AddBoardItemModal = ({ isOpen, column, closeModal = () => {} }) => {
             size="3xl"
             isOpen={isOpen}
             closeModal={handleCloseModal}
-            classes={"!bg-light-blue !shadow-2xl !min-h-[60vh] !relative"}
+            classes={"!bg-light-blue dark:!bg-gray-secondary-color !shadow-2xl !min-h-[60vh] !relative"}
         >
-            <h2 className="text-lg mb-3">{column.name}</h2>
+            <h2 className="text-lg mb-3 dark:text-white">{column.name}</h2>
 
             {error && (
                 <div className="text-center max-w-4xl mx-auto bg-red-200 rounded-lg text-red-500 my-4 text-sm p-1">
@@ -58,7 +58,7 @@ const AddBoardItemModal = ({ isOpen, column, closeModal = () => {} }) => {
             )}
 
             <div>
-                <label className="mb-2" htmlFor="title">
+                <label className="mb-2 dark:text-white" htmlFor="title">
                     Title
                 </label>
                 <input
@@ -66,12 +66,12 @@ const AddBoardItemModal = ({ isOpen, column, closeModal = () => {} }) => {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     id="title"
-                    className="!rounded text-sm p-1  !ring-dark-blue-color"
+                    className="!rounded text-sm p-1  !ring-dark-blue-color dark:bg-dark-primary-color dark:text-white"
                 />
             </div>
 
             <div className="mt-4">
-                <label className="mb-2" htmlFor="picture">
+                <label className="mb-2 dark:text-white" htmlFor="picture">
                     Image
                 </label>
                 <label htmlFor="picture">
@@ -79,11 +79,11 @@ const AddBoardItemModal = ({ isOpen, column, closeModal = () => {} }) => {
                         className="
           bg-white w-full p-6 rounded-md flex
           flex-col items-center mx-auto cursor-pointer
-          overflow-hidden 
+          overflow-hidden  dark:bg-dark-primary-color
           "
                     >
                         {picture[0] ? (
-                            <div className="text-dark-blue-color overflow-hidden font-bold">
+                            <div className="text-dark-blue-color dark:text-white overflow-hidden font-bold">
                                 {picture[0].name.length > 20 && "..."}
                                 {picture[0].name.substring(
                                     picture[0].name.length - 20,
@@ -92,7 +92,7 @@ const AddBoardItemModal = ({ isOpen, column, closeModal = () => {} }) => {
                             </div>
                         ) : (
                             <>
-                                <div className="text-dark-blue-color font-bold">
+                                <div className="text-dark-blue-color dark:text-white font-bold">
                                     Click here to select image
                                 </div>
                             </>
@@ -109,7 +109,7 @@ const AddBoardItemModal = ({ isOpen, column, closeModal = () => {} }) => {
             </div>
 
             <div className="mt-4 mb-6">
-                <label className="mb-2" htmlFor="title">
+                <label className="mb-2 dark:text-white" htmlFor="title">
                     Description
                 </label>
                 <RichTextEditor
@@ -120,13 +120,14 @@ const AddBoardItemModal = ({ isOpen, column, closeModal = () => {} }) => {
                     ]}
                     value={description}
                     onChange={setDescription}
+                    className="dark:bg-dark-primary-color dark:text-white"
                 />
             </div>
 
             <div className="flex justify-between absolute bottom-2 inset-x-0 mx-6">
                 <button
                     onClick={handleCloseModal}
-                    className="bg-primary-blue px-6 rounded text-white py-1 text-xs uppercase"
+                    className="bg-primary-blue px-6 rounded text-white py-1 text-xs uppercase dark:bg-gray-primary-color"
                 >
                     Cancel
                 </button>
@@ -135,7 +136,7 @@ const AddBoardItemModal = ({ isOpen, column, closeModal = () => {} }) => {
                     onClick={handleSubmit}
                     className="disabled:opacity-50 disabled:cursor-not-allowed 
                     bg-dark-blue-color flex justify-center items-center p-1 px-10 
-                    text-white rounded-md uppercase text-md"
+                    text-white rounded-md uppercase text-md dark:bg-dark-primary-color"
                 >
                     {isAddingColumnItem ? (
                         <>

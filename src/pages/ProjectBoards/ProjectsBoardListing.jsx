@@ -29,7 +29,7 @@ const ProjectsBoardListing = () => {
         <DashboardWrapper title="My Boards">
             {loading && (
                 <div>
-                    <FaSpinner className="animate-spin" />
+                    <FaSpinner className="animate-spin dark:text-white mt-4" />
                 </div>
             )}
             <div className="flex my-10 flex-wrap gap-4">
@@ -39,7 +39,7 @@ const ProjectsBoardListing = () => {
                         key={board._id}
                         className="
                         rounded w-full sm:w-auto text-white font-medium px-4 
-                        bg-dark-blue-color py-8 min-w-[200px]"
+                        bg-dark-blue-color py-8 min-w-[200px] dark:bg-gray-secondary-color"
                     >
                         {board.name}
                     </Link>
@@ -47,7 +47,7 @@ const ProjectsBoardListing = () => {
                 <div
                     onClick={() => setNewBoardModalOpen(true)}
                     className="cursor-pointer rounded px-8 bg-white font-light
-                     py-6 flex flex-col items-center text-primary-blue"
+                     py-6 flex flex-col items-center text-primary-blue dark:bg-gray-primary-color dark:text-white"
                 >
                     <HiOutlinePlusCircle className="w-6 h-6" />
                     <span className="text-sm font-medium">

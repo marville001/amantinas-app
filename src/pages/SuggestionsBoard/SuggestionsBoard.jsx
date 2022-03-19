@@ -78,7 +78,7 @@ const SuggestionsBoard = () => {
             <div className="flex justify-end my-4">
                 <button
                     onClick={() => setSuggModalOpen(true)}
-                    className="px-8 py-2 bg-primary-blue rounded-lg text-white uppercase"
+                    className="px-8 py-2 bg-primary-blue rounded-lg text-white uppercase dark:bg-gray-primary-color"
                 >
                     Submit Suggestion
                 </button>
@@ -86,7 +86,7 @@ const SuggestionsBoard = () => {
 
             {loading && (
                 <div className="flex justify-center my-4">
-                    <FaSpinner className="animate-spin mr-4 text-2xl" />
+                    <FaSpinner className="animate-spin mr-4 text-2xl dark:text-white" />
                 </div>
             )}
 
@@ -98,14 +98,14 @@ const SuggestionsBoard = () => {
                 {[...boardData].map((board, idx) => (
                     <div
                         key={board.name}
-                        className="board flex-1 min-w-[200px] sm:min-w-[300px] bg-white p-2 flex flex-col max-h-[900px] overflow-y-auto rounded-3xl"
+                        className="board flex-1 min-w-[200px] sm:min-w-[300px] bg-white dark:bg-gray-primary-color p-2 flex flex-col max-h-[900px] overflow-y-auto rounded-3xl"
                     >
                         <div>
                             <div className="h-full pb-16">
-                                <h2 className="text-md text-center py-3 font-light ml-3 fo text-dark-blue-color">
+                                <h2 className="text-md text-center py-3 font-light ml-3 fo text-dark-blue-color dark:text-white">
                                     {board.name}
                                 </h2>
-                                <hr className="border-0 h-[2px] my-2 mb-8 opacity-50 border-dark-blue-color bg-dark-blue-color" />
+                                <hr className="border-0 h-[2px] my-2 mb-8 opacity-50 border-dark-blue-color bg-dark-blue-color dark:border-white dark:bg-white"  />
                                 {board.items.length > 0 &&
                                     board.items.map((item, idx) => (
                                         <div key={idx} className="board-item">

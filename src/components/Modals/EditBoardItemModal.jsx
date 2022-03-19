@@ -74,7 +74,7 @@ const EditBoardItemModal = ({
             size="3xl"
             isOpen={isOpen}
             closeModal={() => {}}
-            classes={"!bg-light-blue !shadow-2xl !min-h-[60vh] !relative"}
+            classes={"!bg-light-blue dark:!bg-gray-secondary-color !shadow-2xl !min-h-[60vh] !relative"}
         >
             {error && (
                 <div className="text-center max-w-4xl mx-auto bg-red-200 rounded-lg text-red-500 my-4 text-sm p-1">
@@ -83,7 +83,7 @@ const EditBoardItemModal = ({
             )}
 
             <div>
-                <label className="mb-2" htmlFor="title">
+                <label className="mb-2 dark:text-white" htmlFor="title">
                     Title
                 </label>
                 <input
@@ -91,12 +91,12 @@ const EditBoardItemModal = ({
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     id="title"
-                    className="!rounded text-sm p-1  !ring-dark-blue-color"
+                    className="!rounded text-sm p-1  !ring-dark-blue-color dark:text-white dark:bg-dark-primary-color"
                 />
             </div>
 
             <div className="mt-4 mb-6">
-                <label className="mb-2" htmlFor="title">
+                <label className="mb-2 dark:text-white" htmlFor="title">
                     Description
                 </label>
                 <RichTextEditor
@@ -107,13 +107,14 @@ const EditBoardItemModal = ({
                     ]}
                     value={description.toString()}
                     onChange={setDescription}
+                     className="dark:bg-dark-primary-color dark:text-white"
                 />
             </div>
 
             <div className="flex justify-between absolute bottom-2 inset-x-0 mx-6">
                 <button
                     onClick={handleCloseModal}
-                    className="bg-primary-blue px-6 rounded text-white py-1 text-xs uppercase"
+                    className="bg-primary-blue px-6 rounded text-white py-1 text-xs uppercase dark:bg-gray-primary-color"
                 >
                     Cancel
                 </button>
@@ -122,7 +123,7 @@ const EditBoardItemModal = ({
                     onClick={handleUpdate}
                     className="disabled:opacity-50 disabled:cursor-not-allowed 
                     bg-dark-blue-color flex justify-center items-center p-1 px-10 
-                    text-white rounded-md uppercase text-md"
+                    text-white rounded-md uppercase text-md dark:bg-dark-primary-color"
                 >
                     {isLoading ? (
                         <>

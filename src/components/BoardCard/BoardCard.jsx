@@ -45,25 +45,25 @@ const BoardCard = ({ item, columnid }) => {
 
     return (
         <div
-            className="shadow-md p-2 rounded-lg pb-5"
+            className="shadow-md p-2 rounded-lg pb-5 dark:bg-gray-secondary-color"
         >
             {item?.image && (
                 <img
                     className="w-full h-32 sm:h-40 rounded-lg"
-                    src={`${process.env.REACT_APP_STATIC_URL + item?.image}`}
+                    src={`${item?.image}`}
                     alt=""
                 />
             )}
             <div className="mt-3 mb-2 flex justify-between">
-                <h2 className="text-dark-blue-color font-bold">{item?.title}</h2>
+                <h2 className="text-dark-blue-color font-bold dark:text-white">{item?.title}</h2>
                 <Menu as="div" className="relative">
                     <Menu.Button>
-                        <HiDotsVertical className="text-2xl text-primary-blue cursor-pointer" />
+                        <HiDotsVertical className="text-2xl text-primary-blue dark:text-white cursor-pointer" />
                         {/* <HiDotsVertical /> */}
                     </Menu.Button>
                     <Menu.Items
                         className="absolute top-0 right-6 text-white
-                         bg-primary-blue p-2 pr-4 shadow-md rounded-md z-50 ring-0 outline-none border-0"
+                         bg-primary-blue p-2 pr-4 shadow-md dark:bg-dark-secondary-color rounded-md z-50 ring-0 outline-none border-0"
                     >
                         <div
                             onClick={() => setConfirmDeleteOpen(true)}
@@ -103,6 +103,7 @@ const BoardCard = ({ item, columnid }) => {
                 prose-ul:list-disc prose-ul:my-0
                 prose-li:p-0 prose-li:m-0
                 prose-p:m-0 text-sm mt-2
+                dark:prose-invert
                 "
             >
                 {parse(parse(item?.description || "none"))}

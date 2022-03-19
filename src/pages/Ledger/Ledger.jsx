@@ -153,7 +153,7 @@ const Ledger = () => {
 
                     {loading ? (
                         <div className="flex justify-center my-4">
-                            <FaSpinner className="animate-spin mr-4 text-2xl" />
+                            <FaSpinner className="animate-spin mr-4 text-2xl  dark:text-white" />
                         </div>
                     ) : (
                         <div className="flex flex-col">
@@ -285,7 +285,7 @@ const Ledger = () => {
 
                     {invLoading ? (
                         <div className="flex justify-center my-4">
-                            <FaSpinner className="animate-spin mr-4 text-2xl" />
+                            <FaSpinner className="animate-spin mr-4 text-2xl  dark:text-white" />
                         </div>
                     ) : (
                         <div className="flex flex-col">

@@ -84,8 +84,8 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                         value={firstname}
                         onChange={(e) => setFirstName(e.target.value)}
                         className="
-        outline-none p-2 rounded-md bg-light-blue ring-1 
-        ring-dark-blue-color text-dark-blue-color
+        outline-none p-2 rounded-md bg-light-blue ring-1  
+        ring-dark-blue-color text-dark-blue-color dark:bg-dark-primary-color dark:text-white
         "
                     />
                 </div>
@@ -97,7 +97,7 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                         onChange={(e) => setLastName(e.target.value)}
                         className="
         outline-none p-2 rounded-md bg-light-blue ring-1 
-        ring-dark-blue-color text-dark-blue-color
+        ring-dark-blue-color text-dark-blue-color dark:bg-dark-primary-color dark:text-white
         "
                     />
                 </div>
@@ -111,7 +111,7 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                         onChange={(e) => setEmail(e.target.value)}
                         className="
         outline-none p-2 rounded-md bg-light-blue ring-1 
-        ring-dark-blue-color text-dark-blue-color
+        ring-dark-blue-color text-dark-blue-color dark:bg-dark-primary-color dark:text-white
         "
                     />
                 </div>
@@ -123,7 +123,7 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                         onChange={(e) => setRole(e.target.value)}
                         className="
         outline-none p-2 rounded-md bg-light-blue ring-1 
-        ring-dark-blue-color text-dark-blue-color
+        ring-dark-blue-color text-dark-blue-color dark:bg-dark-primary-color dark:text-white
         "
                     >
                         <option value="">Select Role</option>
@@ -149,7 +149,8 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                                     onChange={(e) =>
                                         setWeekDayFromTime(e.target.value)
                                     }
-                                    className="border w-full border-primary-blue outline-none bg-light-blue rounded-md p-2 text-primary-blue"
+                                    className="border w-full border-primary-blue outline-none bg-light-blue rounded-md p-2 
+                                    text-primary-blue dark:bg-dark-primary-color dark:text-white"
                                 />
                                 <p className="text-white text-xs mt-1">From</p>
                             </div>
@@ -160,7 +161,8 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                                     onChange={(e) =>
                                         setWeekDayToTime(e.target.value)
                                     }
-                                    className="border w-full border-primary-blue outline-none text-primary-blue bg-light-blue rounded-md p-2"
+                                    className="border w-full border-primary-blue outline-none text-primary-blue bg-light-blue rounded-md p-2 first-letter:
+                                    dark:bg-dark-primary-color dark:text-white"
                                 />
                                 <p className="text-white text-xs mt-1">To</p>
                             </div>
@@ -177,7 +179,8 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                                     onChange={(e) =>
                                         setSatFromTime(e.target.value)
                                     }
-                                    className="border w-full border-primary-blue outline-none bg-light-blue rounded-md p-2 text-primary-blue"
+                                    className="border w-full border-primary-blue outline-none bg-light-blue rounded-md p-2 text-primary-blue
+                                    dark:bg-dark-primary-color dark:text-white "
                                 />
                                 <p className="text-white text-xs mt-1">From</p>
                             </div>
@@ -188,7 +191,9 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                                     onChange={(e) =>
                                         setSatToTime(e.target.value)
                                     }
-                                    className="border w-full border-primary-blue outline-none text-primary-blue bg-light-blue rounded-md p-2"
+                                    className="border w-full border-primary-blue outline-none text-primary-blue bg-light-blue rounded-md p-2
+                                    dark:bg-dark-primary-color dark:text-white
+                                    "
                                 />
                                 <p className="text-white text-xs mt-1">To</p>
                             </div>
@@ -217,7 +222,8 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                                         setSunFromTime(e.target.value)
                                     }
                                     disabled={sundayFree}
-                                    className="border w-full disabled:bg-slate-300 border-primary-blue outline-none bg-light-blue rounded-md p-2 text-primary-blue"
+                                    className="border w-full disabled:bg-slate-300 border-primary-blue outline-none bg-light-blue rounded-md p-2
+                                     text-primary-blue dark:bg-dark-primary-color dark:text-white dark:disabled:bg-gray-primary-color"
                                 />
                                 <p className="text-white text-xs mt-1">From</p>
                             </div>
@@ -229,7 +235,8 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                                         setSunToTime(e.target.value)
                                     }
                                     disabled={sundayFree}
-                                    className="border w-full disabled:bg-slate-300 border-primary-blue outline-none text-primary-blue bg-light-blue rounded-md p-2"
+                                    className="border w-full disabled:bg-slate-300 border-primary-blue outline-none text-primary-blue bg-light-blue 
+                                    rounded-md p-2 dark:bg-dark-primary-color dark:text-white dark:disabled:bg-gray-primary-color"
                                 />
                                 <p className="text-white text-xs mt-1">To</p>
                             </div>

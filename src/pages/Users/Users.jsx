@@ -54,13 +54,13 @@ const Users = () => {
 
     return (
         <DashboardWrapper title="Users">
-            <div className="my-6 bg-white rounded-xl p-2 max-w-6xl">
+            <div className="my-6 bg-white rounded-xl p-2 max-w-6xl dark:bg-gray-primary-color">
                 <div className="flex flex-col-reverse md:flex-row justify-between my-6 mt-10">
                     <div className="flex space-x-4 ml-auto">
                         <button
                             // disabled={user.plan === "free" && users.length >= 2}
                             onClick={() => setAddUserModalOpen(true)}
-                            className="disabled:opacity-50 disabled:cursor-not-allowed bg-primary-blue p-2 px-10 w-full text-white rounded-md uppercase text-xs"
+                            className="disabled:opacity-50 disabled:cursor-not-allowed bg-primary-blue p-2 px-10 w-full text-white rounded-md dark:bg-dark-primary-color uppercase text-xs"
                         >
                             Add User
                         </button>
@@ -71,7 +71,7 @@ const Users = () => {
 
                 <div className="overflow-x-auto">
                     {/* Title */}
-                    <div className="flex lg:border-2 lg:border-opacity-70  lg:border-brown-color py-3 bg-fixed bg-light-blue items-center">
+                    <div className="flex lg:border-2 lg:border-opacity-70  lg:border-brown-color py-3 bg-fixed bg-light-blue items-center dark:bg-gray-secondary-color">
                         <div className="px-1 lg:px-3 flex items-center">
                             <input
                                 type="checkbox"
@@ -81,7 +81,7 @@ const Users = () => {
                         {["Firstname", "Lastname", "Role", "Email", ""]?.map(
                             (col, idx) => (
                                 <div key={idx} className="flex-1 px-2 lg:px-4">
-                                    <h3 className="text-sm lg:text-lg capitalize">
+                                    <h3 className="text-sm lg:text-lg capitalize dark:text-white">
                                         {col}
                                     </h3>
                                 </div>
@@ -95,7 +95,7 @@ const Users = () => {
                             users.map((user, idx) => (
                                 <div
                                     key={idx}
-                                    className="flex py-3 hover:bg-light-blue cursor-pointer"
+                                    className="flex py-3 hover:bg-light-blue cursor-pointer dark:hover:bg-gray-secondary-color"
                                 >
                                     <div className="px-1 lg:px-3">
                                         <input
@@ -103,19 +103,19 @@ const Users = () => {
                                             className="w-3 h-3 lg:w-3 lg:h-3 mt-1"
                                         />
                                     </div>
-                                    <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light">
+                                    <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light dark:text-white">
                                         {user.firstname}
                                     </div>
-                                    <div className="flex-1 capitalize px-2 lg:px-4 first-line:text-sm font-light">
+                                    <div className="flex-1 capitalize px-2 lg:px-4 first-line:text-sm font-light dark:text-white">
                                         {user.lastname}
                                     </div>
-                                    <div className="flex-1 capitalize px-2 lg:px-4 first-line:text-sm font-light">
+                                    <div className="flex-1 capitalize px-2 lg:px-4 first-line:text-sm font-light dark:text-white">
                                         {user.role}
                                     </div>
-                                    <div className="flex-1 capitalize px-2 lg:px-4 first-line:text-sm font-light">
+                                    <div className="flex-1 capitalize px-2 lg:px-4 first-line:text-sm font-light dark:text-white">
                                         {user.email}
                                     </div>
-                                    <div className="flex-1 flex justify-end space-x-5 capitalize px-2 lg:px-4 first-line:text-sm font-light">
+                                    <div className="flex-1 flex justify-end space-x-5 capitalize px-2 lg:px-4 first-line:text-sm font-light dark:text-white">
                                         <HiPencilAlt className="text-xl text-dark-blue-color hover:text-primary-blue" />
                                         <HiTrash
                                             onClick={() => {
@@ -131,7 +131,7 @@ const Users = () => {
 
                     {loading && (
                         <div className="flex justify-center my-4">
-                            <FaSpinner className="animate-spin mr-4 text-2xl" />
+                            <FaSpinner className="animate-spin mr-4 text-2xl dark:text-white" />
                         </div>
                     )}
                 </div>
