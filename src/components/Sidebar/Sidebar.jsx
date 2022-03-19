@@ -63,7 +63,7 @@ const Sidebar = () => {
                 {/* <div className="bg-sky-blue rounded-full w-8 h-8 grid place-items-center font-normal text-2xl text-white">
           A
         </div> */}
-                <span className="text-sky-blue text-xl">
+                <span className="text-sky-blue dark:text-white text-xl">
                     Project Real Estate
                 </span>
                 <HiOutlineXCircle

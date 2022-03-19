@@ -62,16 +62,16 @@ const Home = () => {
         <DashboardWrapper>
             <div className="my-6">
                 <div className="grid space-y-5 lg:space-y-0 grid-cols-1 lg:grid-cols-4 lg:gap-5">
-                    <div className="bg-white px-8 py-6 col-span-3 rounded-xl">
-                        <h2 className="text-lg mb-2">Cash Flow</h2>
-                        <hr className="border-0 h-[2px] my-5 opacity-50 border-dark-blue-color bg-dark-blue-color" />
-                        <h2 className="text-[#0E5359] my-6">Overview</h2>
+                    <div className="bg-white dark:bg-gray-primary-color px-8 py-6 col-span-3 rounded-xl">
+                        <h2 className="text-lg  dark:text-white mb-2">Cash Flow</h2>
+                        <hr className="border-0 h-[2px] my-5 opacity-50 border-dark-blue-color bg-dark-blue-color dark:border-white dark:bg-white" />
+                        <h2 className="text-[#0E5359] dark:text-white my-6">Overview</h2>
                         <div className="flex lg:divide-x-2 flex-col lg:flex-row">
                             <div className="flex-1 p-4">
-                                <p className="text-[#666666] text-[13px]">
+                                <p className="text-[#666666]  dark:text-white text-[13px]">
                                     Net Cashflow YTD
                                 </p>
-                                <div className="text-dark-blue-color mt-2 font-bold text-3xl">
+                                <div className="text-dark-blue-color dark:text-white mt-2 font-bold text-3xl">
                                     {priceFormatter(
                                         transactions.reduce(
                                             (prev, curr) => prev + curr.amount,
@@ -81,10 +81,10 @@ const Home = () => {
                                 </div>
                             </div>
                             <div className="flex-1 lg:pl-6 p-4">
-                                <p className="text-[#666666] text-[13px]">
+                                <p className="text-[#666666] dark:text-white text-[13px]">
                                     Revenue YTD
                                 </p>
-                                <div className="text-dark-blue-color mt-2 font-bold text-3xl">
+                                <div className="text-dark-blue-color dark:text-white mt-2 font-bold text-3xl">
                                     {priceFormatter(
                                         transactions
                                             .filter((t) => t.type === "income")
@@ -97,10 +97,10 @@ const Home = () => {
                                 </div>
                             </div>
                             <div className="flex-1  lg:pl-6 p-4">
-                                <p className="text-[#666666] text-[13px]">
+                                <p className="text-[#666666] dark:text-white text-[13px]">
                                     Expense YTD
                                 </p>
-                                <div className="text-dark-blue-color mt-2 font-bold text-3xl">
+                                <div className="text-dark-blue-color dark:text-white mt-2 font-bold text-3xl">
                                     {priceFormatter(
                                         transactions
                                             .filter((t) => t.type === "expense")
@@ -114,7 +114,7 @@ const Home = () => {
                             </div>
                         </div>
                         <div className="h-64 w-full pb-10 mt-8">
-                            <h2 className="text-[#0E5359]">
+                            <h2 className="text-[#0E5359] dark:text-white">
                                 Monthly Cash Flow
                             </h2>
                             <br />
@@ -122,15 +122,15 @@ const Home = () => {
                             <hr />
                         </div>
                     </div>
-                    <div className="bg-white px-8 py-6 rounded-xl">
-                        <h2 className="text-lg mb-2 font-bold text-dark-blue-color">
+                    <div className="bg-white dark:bg-gray-primary-color px-8 py-6 rounded-xl">
+                        <h2 className="text-lg mb-2 font-bold text-dark-blue-color dark:text-white">
                             Portfolio Metrics
                         </h2>
-                        <hr className="border-0 h-[2px] my-5 opacity-50 border-dark-blue-color bg-dark-blue-color" />
+                        <hr className="border-0 h-[2px] my-5 opacity-50 border-dark-blue-color dark:border-white bg-dark-blue-color dark:bg-white" />
                         <div className="my-16 flex flex-col space-y-4">
                             <div className="flex justify-between">
-                                <h3 className="text-brown-color">Income</h3>
-                                <div className="text-md font-bold text-dark-blue-color">
+                                <h3 className="text-brown-color dark:text-white">Income</h3>
+                                <div className="text-md font-bold text-dark-blue-color dark:text-white">
                                     {priceFormatter(
                                         transactions
                                             .filter((t) => t.type === "income")
@@ -143,8 +143,8 @@ const Home = () => {
                                 </div>
                             </div>
                             <div className="flex justify-between">
-                                <h3 className="text-brown-color">Expernse</h3>
-                                <div className="text-md font-bold text-dark-blue-color">
+                                <h3 className="text-brown-color dark:text-white">Expernse</h3>
+                                <div className="text-md font-bold text-dark-blue-color  dark:text-white">
                                     {priceFormatter(
                                         transactions
                                             .filter((t) => t.type === "expense")
@@ -158,16 +158,16 @@ const Home = () => {
                             </div>
                         </div>
 
-                        <h2 className="text-lg mb-2 font-bold text-dark-blue-color">
+                        <h2 className="text-lg mb-2 font-bold text-dark-blue-color dark:text-white">
                             Core Metrics
                         </h2>
-                        <hr className="border-0 h-[2px] my-5 opacity-50 border-dark-blue-color bg-dark-blue-color" />
+                        <hr className="border-0 h-[2px] my-5 opacity-50 border-dark-blue-color dark:border-white bg-dark-blue-color dark:bg-white" />
                         <div className="my-10 flex flex-col space-y-4">
                             <div className="flex justify-between">
-                                <h3 className="text-brown-color">
+                                <h3 className="text-brown-color dark:text-white dark:text-white">
                                     Scraped Homes
                                 </h3>
-                                <div className="text-md font-bold text-dark-blue-color">
+                                <div className="text-md font-bold text-dark-blue-color dark:text-white dark:text-white">
                                     {
                                         homes?.filter(
                                             (h) =>
@@ -178,10 +178,10 @@ const Home = () => {
                                 </div>
                             </div>
                             <div className="flex justify-between">
-                                <h3 className="text-brown-color">
+                                <h3 className="text-brown-color dark:text-white dark:text-white">
                                     Active Offers
                                 </h3>
-                                <div className="text-md font-bold text-dark-blue-color">
+                                <div className="text-md font-bold text-dark-blue-color dark:text-white dark:text-white">
                                     {
                                         homes?.filter(
                                             (h) =>
@@ -192,16 +192,16 @@ const Home = () => {
                                 </div>
                             </div>
                             <div className="flex justify-between">
-                                <h3 className="text-brown-color">Deals Lost</h3>
-                                <div className="text-md font-bold text-dark-blue-color">
+                                <h3 className="text-brown-color dark:text-white">Deals Lost</h3>
+                                <div className="text-md font-bold text-dark-blue-color dark:text-white">
                                     0
                                 </div>
                             </div>
                             <div className="flex justify-between">
-                                <h3 className="text-brown-color">
+                                <h3 className="text-brown-color dark:text-white">
                                     Managed Homes
                                 </h3>
-                                <div className="text-md font-bold text-dark-blue-color">
+                                <div className="text-md font-bold text-dark-blue-color dark:text-white">
                                     {
                                         homes?.filter(
                                             (h) =>
@@ -216,24 +216,24 @@ const Home = () => {
                 </div>
 
                 <div className="flex flex-col sm:flex-row my-6 gap-5 justify-end">
-                    <div className="bg-white p-4 flex-1 lg:flex-none lg:min-w-[280px] rounded-xl">
-                        <h2 className="text-md mb-2 text-center font-bold text-dark-blue-color">
+                    <div className="bg-white dark:bg-gray-primary-color p-4 flex-1 lg:flex-none lg:min-w-[280px] rounded-xl">
+                        <h2 className="text-md mb-2 text-center font-bold text-dark-blue-color dark:text-white">
                             Project Boards
                         </h2>
-                        <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-blue-color bg-dark-blue-color" />
+                        <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-blue-color bg-dark-blue-color dark:border-white dark:bg-white" />
 
                         <div
                             onClick={() => setNewBoardModalOpen(true)}
-                            className="flex cursor-pointer items-center justify-center w-full pt-6 text-primary-blue"
+                            className="flex cursor-pointer items-center justify-center w-full pt-6 text-primary-blue dark:text-white"
                         >
                             <HiOutlinePlusCircle className="w-24 h-24" />
                         </div>
                     </div>
-                    <div className="bg-white p-4 flex-1 lg:flex-none py-4 lg:min-w-[280px] rounded-xl">
-                        <h2 className="text-md mb-2 text-center font-bold text-dark-blue-color">
+                    <div className="bg-white dark:bg-gray-primary-color p-4 flex-1 lg:flex-none py-4 lg:min-w-[280px] rounded-xl">
+                        <h2 className="text-md mb-2 text-center font-bold text-dark-blue-color dark:text-white">
                             Time
                         </h2>
-                        <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-blue-color bg-dark-blue-color" />
+                        <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-blue-color bg-dark-blue-color dark:bg-white dark:border-white" />
 
                         {loadingTime ? (
                             <div className="flex justify-center my-4">
@@ -243,7 +243,7 @@ const Home = () => {
                             <div className="flex flex-col items-center my-4 mx-6">
                                 {timelog?._id ? (
                                     timelog.timeOut ? (
-                                        <button className="bg-primary-blue p-2 px-10 w-full text-white rounded-xl uppercase text-xs">
+                                        <button className="bg-primary-blue p-2 px-10 w-full text-white rounded-xl dark:bg-white dark:text-dark-primary-color uppercase text-xs">
                                             Log Out
                                         </button>
                                     ) : (
@@ -251,7 +251,7 @@ const Home = () => {
                                             onClick={() =>
                                                 setTimeOutModalOpen(true)
                                             }
-                                            className="bg-primary-blue p-2 px-10 w-full text-white rounded-xl uppercase text-xs"
+                                            className="bg-primary-blue p-2 px-10 w-full text-white rounded-xl dark:bg-white dark:text-dark-primary-color  uppercase text-xs"
                                         >
                                             Time Out
                                         </button>
@@ -259,14 +259,14 @@ const Home = () => {
                                 ) : (
                                     <button
                                         onClick={handleTimeIn}
-                                        className="bg-primary-blue p-2 px-10 w-full text-white rounded-xl uppercase text-xs"
+                                        className="bg-primary-blue p-2 px-10 w-full text-white rounded-xl dark:bg-white dark:text-dark-primary-color  uppercase text-xs"
                                     >
                                         Time In
                                     </button>
                                 )}
                                 <div className="py-4">
                                     {timelog?.timeOut ? (
-                                        <h4 className="text-3xl my-2 text-brown-color ">
+                                        <h4 className="text-3xl my-2 text-brown-color dark:text-white">
                                             {new Date(
                                                 timelog.timeOut
                                             ).getHours() +
@@ -280,7 +280,7 @@ const Home = () => {
                                                 ).getSeconds()}
                                         </h4>
                                     ) : timelog?.timeIn ? (
-                                        <h4 className="text-3xl my-2 text-brown-color ">
+                                        <h4 className="text-3xl my-2 text-brown-color dark:text-white">
                                             {new Date(
                                                 timelog?.timeIn
                                             ).getHours() +
@@ -299,7 +299,7 @@ const Home = () => {
                                 </div>
                                 <Link
                                     to="/users-activities"
-                                    className="text-center bg-primary-blue p-2 px-10 w-full text-white rounded-xl uppercase text-xs"
+                                    className="text-center bg-primary-blue p-2 px-10 w-full text-white rounded-xl dark:bg-white dark:text-dark-primary-color  uppercase text-xs"
                                 >
                                     View Activities
                                 </Link>
