@@ -22,16 +22,16 @@ const Prospects = () => {
 
     return (
         <DashboardWrapper title="Prospects">
-            <div className="my-6 bg-white rounded-xl p-4 max-w-6xl">
-                <h2 className="text-md font-bold mb-2 ml-3 fo text-dark-blue-color">
+            <div className="my-6 bg-white dark:bg-gray-primary-color rounded-xl p-4 max-w-6xl">
+                <h2 className="text-md font-bold mb-2 ml-3 fo text-dark-blue-color dark:text-white">
                     Prospects
                 </h2>
-                <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-blue-color bg-dark-blue-color" />
+                <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-blue-color bg-dark-blue-color dark:border-white dark:bg-white" />
 
                 <div className="flex justify-end my-4">
                     <button
                         onClick={() => setAddProspectModalOpen(true)}
-                        className="px-8 py-2 bg-primary-blue rounded-lg text-white uppercase"
+                        className="px-8 py-2 bg-primary-blue rounded-lg text-white uppercase dark:bg-dark-primary-color"
                     >
                         Add prospect
                     </button>

@@ -88,7 +88,7 @@ const AddProspectModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                     onChange={(e) => setName(e.target.value)}
                     className="
         outline-none p-2 rounded-md bg-light-blue ring-1 
-        ring-dark-blue-color text-dark-blue-color
+        ring-dark-blue-color text-dark-blue-color dark:bg-dark-primary-color dark:text-white
         "
                 />
             </div>
@@ -100,7 +100,7 @@ const AddProspectModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                     onChange={(e) => setLocation(e.target.value)}
                     className="
         outline-none p-2 rounded-md bg-light-blue ring-1 
-        ring-dark-blue-color text-dark-blue-color
+        ring-dark-blue-color text-dark-blue-color dark:bg-dark-primary-color dark:text-white
         "
                 />
             </div>
@@ -114,7 +114,7 @@ const AddProspectModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                         className="
             w-full
         outline-none p-2 rounded-md bg-light-blue ring-1 
-        ring-dark-blue-color text-dark-blue-color
+        ring-dark-blue-color text-dark-blue-color dark:bg-dark-primary-color dark:text-white
         "
                     />
                 </div>
@@ -127,7 +127,7 @@ const AddProspectModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                         className="
             w-full
         outline-none p-2 rounded-md bg-light-blue ring-1 
-        ring-dark-blue-color text-dark-blue-color
+        ring-dark-blue-color text-dark-blue-color dark:bg-dark-primary-color dark:text-white
         "
                     />
                 </div>
@@ -140,7 +140,7 @@ const AddProspectModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                     onChange={(e) => setPrice(e.target.value)}
                     className="
         outline-none p-2 rounded-md bg-light-blue ring-1 
-        ring-dark-blue-color text-dark-blue-color
+        ring-dark-blue-color text-dark-blue-color dark:bg-dark-primary-color dark:text-white
         "
                 />
             </div>
@@ -150,11 +150,11 @@ const AddProspectModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                         className="
           bg-white w-4/5 p-3 rounded-md flex
           flex-col items-center mx-auto cursor-pointer
-          overflow-hidden 
+          overflow-hidden  dark:bg-dark-primary-color
           "
                     >
                         {picture[0] ? (
-                            <div className="text-dark-blue-color overflow-hidden font-bold">
+                            <div className="text-dark-blue-color overflow-hidden font-bold dark:text-white">
                                 {picture.length > 1 ? (
                                     `${picture.length} images selected`
                                 ) : (
@@ -170,7 +170,7 @@ const AddProspectModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                         ) : (
                             <>
                                 <HiOutlinePlusCircle className="text-5xl text-brown-color" />
-                                <div className="text-dark-blue-color font-bold">
+                                <div className="text-dark-blue-color font-bold dark:text-white">
                                     Add Picture
                                 </div>
                             </>
@@ -192,7 +192,7 @@ const AddProspectModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                     onClick={handleSubmit}
                     className="disabled:opacity-50 disabled:cursor-not-allowed 
                     bg-dark-blue-color flex justify-center items-center p-2 px-10 
-                    text-white rounded-md uppercase text-md"
+                    text-white rounded-md uppercase text-md dark:bg-dark-primary-color"
                 >
                     {isCreatingProspect ? (
                         <>

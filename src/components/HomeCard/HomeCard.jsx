@@ -63,7 +63,7 @@ const HomeCard = ({ home }) => {
     };
 
     return (
-        <div className="shadow-lg p-2 rounded-lg">
+        <div className="shadow-lg p-2 rounded-lg dark:bg-gray-secondary-color">
             <div className="w-full relative">
                 <img
                     className="w-full h-36 object-cover rounded-lg cursor-pointer"
@@ -74,22 +74,22 @@ const HomeCard = ({ home }) => {
                     }}
                 />
                 {loading && (
-                    <FaSpinner className="absolute animate-spin mr-4 text-2xl right-4 bottom-2 text-primary-blue" />
+                    <FaSpinner className="absolute animate-spin mr-4 text-2xl right-4 bottom-2 text-primary-blue dark:text-white" />
                 )}
             </div>
             <div className="mt-3 mb-2 flex justify-between">
-                <h2 className="text-dark-blue-color font-bold">{home?.name}</h2>
+                <h2 className="text-dark-blue-color font-bold dark:text-white">{home?.name}</h2>
                 {!home.isArchived && (
                     <Menu as="div" className="relative">
                         <Menu.Button>
-                            <HiDotsVertical className="text-2xl text-primary-blue cursor-pointer" />
+                            <HiDotsVertical className="text-2xl text-primary-blue cursor-pointer dark:text-white" />
                             {/* <HiDotsVertical /> */}
                         </Menu.Button>
                         <Menu.Items
                             className="absolute top-0 right-6 min-w-[140px] text-white
-                         bg-primary-blue p-2 shadow-md rounded-md z-50 ring-0 outline-none border-0"
+                         bg-primary-blue dark:bg-dark-secondary-color p-2 shadow-md rounded-md z-50 ring-0 outline-none border-0"
                         >
-                            <h5 className="text-xs font-medium uppercase">
+                            <h5 className="text-xs font-medium uppercase dark:text-white">
                                 Add To
                             </h5>
                             <hr className="mt-2" />
@@ -103,7 +103,7 @@ const HomeCard = ({ home }) => {
                                         home.isActive
                                             ? "cursor-not-allowed opacity-70"
                                             : "cursor-pointer"
-                                    } text-xs py-2`}
+                                    } text-xs py-2 dark:text-white`}
                                     as="div"
                                 >
                                     Active Offers
@@ -163,8 +163,8 @@ const HomeCard = ({ home }) => {
             </div>
 
             <div className="flex items-center space-x-2 my-2">
-                <HiOutlineLocationMarker className="text-md text-primary-blue cursor-pointer" />
-                <p className="text-primary-blue text-sm font-light">
+                <HiOutlineLocationMarker className="text-md text-primary-blue cursor-pointer dark:text-white" />
+                <p className="text-primary-blue text-sm font-light dark:text-white">
                     {home?.location}
                 </p>
             </div>
@@ -172,19 +172,19 @@ const HomeCard = ({ home }) => {
             <div className="flex justify-between pr-5">
                 <div className="flex items-center space-x-4">
                     <div className="flex items-center space-x-2 my-2">
-                        <BiBed className="text-md text-primary-blue cursor-pointer" />
-                        <p className="text-dark-blue-color text-sm font-light">
+                        <BiBed className="text-md text-primary-blue cursor-pointer dark:text-white" />
+                        <p className="text-dark-blue-color text-sm font-light dark:text-white">
                             {home?.bedrooms}
                         </p>
                     </div>
                     <div className="flex items-center space-x-2 my-2">
-                        <BiBath className="text-md text-primary-blue cursor-pointer " />
-                        <p className="text-dark-blue-color text-sm font-light">
+                        <BiBath className="text-md text-primary-blue cursor-pointer  dark:text-white" />
+                        <p className="text-dark-blue-color text-sm font-light dark:text-white">
                             {home?.bathrooms}
                         </p>
                     </div>
                 </div>
-                <p className="text-dark-blue-color font-medium font-sm">
+                <p className="text-dark-blue-color font-medium font-sm dark:text-white">
                     {priceFormatter(home?.price)}
                 </p>
             </div>

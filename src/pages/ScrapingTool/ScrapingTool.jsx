@@ -261,7 +261,8 @@ const ScrapingTool = () => {
                                                 max: e.target.value,
                                             }))
                                         }
-                                        className="border w-full border-primary-blue outline-none text-primary-blue bg-light-blue rounded-md p-2 dark:bg-dark-primary-color dark:text-white"
+                                        className="border w-full border-primary-blue outline-none text-primary-blue 
+                                        bg-light-blue rounded-md p-2 dark:bg-dark-primary-color dark:text-white"
                                     />
                                     <p className="text-brown-color dark:text-white">Max</p>
                                 </div>

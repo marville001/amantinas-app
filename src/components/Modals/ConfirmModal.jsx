@@ -21,7 +21,7 @@ const ConfirmModal = ({
                 </button>
                 <button
                     onClick={action}
-                    className="uppercase px-4 tracking-wider py-2 bg-dark-blue-color text-white text-sm rounded-md"
+                    className="uppercase px-4 tracking-wider py-2 bg-dark-blue-color text-white text-sm rounded-md dark:bg-dark-primary-color"
                 >
                     {loading ? (
                         <FaSpinner className="animate-spin m-auto" />

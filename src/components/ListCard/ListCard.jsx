@@ -61,7 +61,7 @@ const ListCard = ({ home }) => {
         }
     };
     return (
-        <div className="shadow-md relative p-2 flex items-center justify-between rounded-lg">
+        <div className="shadow-md relative p-2 flex items-center justify-between rounded-lg dark:bg-gray-secondary-color">
             <div className="flex flex-col md:flex-row md:space-x-16 items-center justify-between">
                 <img
                     className="w-10 h-10 sm:w-15 sm:h-15 md:w-24 md:h-24 rounded-lg cursor-pointer"
@@ -72,41 +72,41 @@ const ListCard = ({ home }) => {
                     alt=""
                 />
                 <div className="mt-3 mb-2">
-                    <h2 className="text-dark-blue-color text-sm font-bold">
+                    <h2 className="text-dark-blue-color text-sm font-bold dark:text-white">
                         {home?.name}
                     </h2>
                 </div>
             </div>
 
             {loading && (
-                <FaSpinner className="absolute animate-spin mr-4 text-2xl right-6 text-primary-blue" />
+                <FaSpinner className="absolute animate-spin mr-4 text-2xl right-6 text-primary-blue dark:text-white" />
             )}
 
             <div className="flex items-center flex-col md:flex-row md:space-x-16  justify-between">
                 <div className="flex items-center space-x-2 my-2">
-                    <HiOutlineLocationMarker className="text-md text-primary-blue cursor-pointer" />
-                    <p className="text-primary-blue text-sm font-light">
+                    <HiOutlineLocationMarker className="text-md text-primary-blue cursor-pointer dark:text-white" />
+                    <p className="text-primary-blue text-sm font-light dark:text-white">
                         {home?.location}
                     </p>
                 </div>
 
                 <div className="flex items-center space-x-3">
                     <div className="flex items-center space-x-2 my-2">
-                        <BiBed className="text-md text-primary-blue cursor-pointer" />
-                        <p className="text-dark-blue-color text-sm font-light">
+                        <BiBed className="text-md text-primary-blue cursor-pointer dark:text-white" />
+                        <p className="text-dark-blue-color text-sm font-light dark:text-white">
                             {home?.bedrooms}
                         </p>
                     </div>
                     <div className="flex items-center space-x-2 my-2">
-                        <BiBath className="text-md text-primary-blue cursor-pointer" />
-                        <p className="text-dark-blue-color text-sm font-light">
+                        <BiBath className="text-md text-primary-blue cursor-pointer dark:text-white" />
+                        <p className="text-dark-blue-color text-sm font-light dark:text-white">
                             {home?.bathrooms}
                         </p>
                     </div>
                 </div>
             </div>
             <div className="">
-                <p className="text-dark-blue-color font-medium font-sm">
+                <p className="text-dark-blue-color font-medium font-sm dark:text-white">
                     {priceFormatter(home?.price)}
                 </p>
             </div>
@@ -114,12 +114,12 @@ const ListCard = ({ home }) => {
                 {!home.isArchived && (
                     <Menu as="div" className="relative">
                         <Menu.Button>
-                            <HiDotsVertical className="text-2xl text-primary-blue cursor-pointer" />
+                            <HiDotsVertical className="text-2xl text-primary-blue cursor-pointer dark:text-white" />
                             {/* <HiDotsVertical /> */}
                         </Menu.Button>
                         <Menu.Items
                             className="absolute top-0 right-6 min-w-[140px] text-white
-                         bg-primary-blue p-2 shadow-md rounded-md z-50 ring-0 outline-none border-0"
+                         bg-primary-blue p-2 shadow-md rounded-md z-50 ring-0 outline-none border-0 dark:bg-dark-secondary-color"
                         >
                             <h5 className="text-xs font-medium uppercase">
                                 Add To
