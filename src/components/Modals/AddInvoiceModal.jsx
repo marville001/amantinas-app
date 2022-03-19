@@ -20,6 +20,7 @@ const AddInvoiceModal = ({
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [amount, setAmount] = useState("");
+    const [business, setBusiness] = useState("");
     const [date, setDate] = useState("");
     const [type, setType] = useState("");
     const [recurring, setRecurring] = useState(false);
@@ -44,6 +45,7 @@ const AddInvoiceModal = ({
         setStartDate("");
         setEndDate("");
         setError("")
+        setBusiness("");
         setRecurring(false);
         closeModal();
     };
@@ -60,6 +62,7 @@ const AddInvoiceModal = ({
             homeId: connectedHome,
             description,
             amount,
+            business,
             date,
             recurring,
             type,
@@ -144,8 +147,7 @@ const AddInvoiceModal = ({
                                 className="w-full h-40 object-cover rounded-lg"
                                 src={`${
                                     homeDets?.images
-                                        ? process.env.REACT_APP_STATIC_URL +
-                                          homeDets?.images[0]
+                                        ? homeDets?.images[0]
                                         : ""
                                 }`}
                                 alt=""
@@ -219,6 +221,21 @@ const AddInvoiceModal = ({
                             type="number"
                             value={amount}
                             onChange={(e) => setAmount(e.target.value)}
+                            className="
+        outline-none p-1 text-sm !rounded px-2 bg-light-blue ring-1 
+        ring-dark-color text-dark-color
+        "
+                        />
+                    </div>
+                    <div className="flex flex-1 flex-col space-y-2 my-2">
+                        <label className="text-white text-md">
+                            Business Name{" "}
+                            <span className="text-xs">(optional)</span>
+                        </label>
+                        <input
+                            type="text"
+                            value={business}
+                            onChange={(e) => setBusiness(e.target.value)}
                             className="
         outline-none p-1 text-sm !rounded px-2 bg-light-blue ring-1 
         ring-dark-color text-dark-color

@@ -17,6 +17,7 @@ const AddTransactionModal = ({ isOpen, closeModal = () => {} }) => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [amount, setAmount] = useState("");
+    const [business, setBusiness] = useState("");
     const [date, setDate] = useState("");
     const [type, setType] = useState("");
     const [recurring, setRecurring] = useState(false);
@@ -41,6 +42,7 @@ const AddTransactionModal = ({ isOpen, closeModal = () => {} }) => {
         setStartDate("");
         setEndDate("");
         setError("");
+        setBusiness("");
         setRecurring(false);
         closeModal();
     };
@@ -57,6 +59,7 @@ const AddTransactionModal = ({ isOpen, closeModal = () => {} }) => {
             homeId: connectedHome,
             description,
             amount,
+            business,
             date,
             recurring,
             type,
@@ -139,12 +142,9 @@ const AddTransactionModal = ({ isOpen, closeModal = () => {} }) => {
                         <div className="mr-8 p-2 bg-white rounded-lg pb-5">
                             <img
                                 className="w-full h-40 object-cover rounded-lg"
-                                src={`${
-                                    homeDets?.images
-                                        ? process.env.REACT_APP_STATIC_URL +
-                                          homeDets?.images[0]
-                                        : ""
-                                }`}
+                                src={
+                                    homeDets?.images ? homeDets?.images[0] : ""
+                                }
                                 alt=""
                             />
                             <div className="mt-3 mb-2 flex justify-between">
@@ -216,6 +216,22 @@ const AddTransactionModal = ({ isOpen, closeModal = () => {} }) => {
                             type="number"
                             value={amount}
                             onChange={(e) => setAmount(e.target.value)}
+                            className="
+        outline-none p-1 text-sm !rounded px-2 bg-light-blue ring-1 
+        ring-dark-color text-dark-color
+        "
+                        />
+                    </div>
+
+                    <div className="flex flex-1 flex-col space-y-2 my-2">
+                        <label className="text-white text-md">
+                            Business Name{" "}
+                            <span className="text-xs">(optional)</span>
+                        </label>
+                        <input
+                            type="text"
+                            value={business}
+                            onChange={(e) => setBusiness(e.target.value)}
                             className="
         outline-none p-1 text-sm !rounded px-2 bg-light-blue ring-1 
         ring-dark-color text-dark-color
