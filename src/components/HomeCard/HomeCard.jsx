@@ -66,7 +66,7 @@ const HomeCard = ({ home }) => {
         <div className="shadow-lg p-2 rounded-lg">
             <div className="w-full relative">
                 <img
-                    className="w-full h-36 object-cover rounded-lg"
+                    className="w-full h-36 object-cover rounded-lg cursor-pointer"
                     src={home?.images[0]}
                     alt=""
                     onClick={() => {

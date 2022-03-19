@@ -11,6 +11,7 @@ import {
 import { FaSpinner, FaTrash } from "react-icons/fa";
 import { delete_ } from "../../utils/http";
 import ConfirmModal from "../Modals/ConfirmModal";
+import HouseDetailsModal from "../Modals/HouseDetailsModal";
 
 const ListCard = ({ home }) => {
     const { user } = useSelector((state) => state.userAuthState);
@@ -18,6 +19,7 @@ const ListCard = ({ home }) => {
     const [loading, setLoading] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
     const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
+    const [detailsModalOpen, setDetailsModalOpen] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -62,8 +64,11 @@ const ListCard = ({ home }) => {
         <div className="shadow-md relative p-2 flex items-center justify-between rounded-lg">
             <div className="flex flex-col md:flex-row md:space-x-16 items-center justify-between">
                 <img
-                    className="w-10 h-10 sm:w-15 sm:h-15 md:w-24 md:h-24 rounded-lg "
+                    className="w-10 h-10 sm:w-15 sm:h-15 md:w-24 md:h-24 rounded-lg cursor-pointer"
                     src={home?.images[0]}
+                    onClick={() => {
+                        setDetailsModalOpen(true);
+                    }}
                     alt=""
                 />
                 <div className="mt-3 mb-2">
@@ -193,6 +198,11 @@ const ListCard = ({ home }) => {
                 closeModal={() => {
                     setConfirmDeleteOpen(false);
                 }}
+            />
+            <HouseDetailsModal
+                isOpen={detailsModalOpen}
+                closeModal={() => setDetailsModalOpen(false)}
+                home={home}
             />
         </div>
     );
