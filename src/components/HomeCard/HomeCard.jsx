@@ -67,9 +67,7 @@ const HomeCard = ({ home }) => {
             <div className="w-full relative">
                 <img
                     className="w-full h-36 object-cover rounded-lg"
-                    src={`${
-                        process.env.REACT_APP_STATIC_URL + home?.images[0]
-                    }`}
+                    src={home?.images[0]}
                     alt=""
                     onClick={() => {
                         setDetailsModalOpen(true);

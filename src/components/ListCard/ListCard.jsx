@@ -63,9 +63,7 @@ const ListCard = ({ home }) => {
             <div className="flex flex-col md:flex-row md:space-x-16 items-center justify-between">
                 <img
                     className="w-10 h-10 sm:w-15 sm:h-15 md:w-24 md:h-24 rounded-lg "
-                    src={`${
-                        process.env.REACT_APP_STATIC_URL + home?.images[0]
-                    }`}
+                    src={home?.images[0]}
                     alt=""
                 />
                 <div className="mt-3 mb-2">

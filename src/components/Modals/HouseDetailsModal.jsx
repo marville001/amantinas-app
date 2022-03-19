@@ -16,9 +16,7 @@ const HouseDetailsModal = ({
             </div>
 
             <div className="w-full h-56">
-                <img src={`${
-                        process.env.REACT_APP_STATIC_URL + home?.images[0]
-                    }`} alt=""
+                <img src={home?.images[0]} alt=""
                 className="w-full h-full object-cover"
                 />
             </div>
