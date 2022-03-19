@@ -38,7 +38,9 @@ const AddProspectModal = ({ isOpen, title, size, closeModal = () => {} }) => {
         setError("");
 
         const formData = new FormData();
-        formData.append("image", picture);
+        for (let image of picture) {
+            formData.append("image", image);
+        }
         formData.append(
             "investorId",
             user.type && user.type === "subuser" ? user.investorId : user?._id
