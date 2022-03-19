@@ -26,6 +26,7 @@ const InvestorDetailsPage = () => {
             setInvestor(invs);
         }
     }, [investors, id]);
+    console.log(investor);
 
     return (
         <DashboardWrapper title={`Investors Details`}>
