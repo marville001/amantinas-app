@@ -7,7 +7,6 @@ const HouseDetailsModal = ({
     closeModal = () => { },
     home
 }) => {
-    console.log({home});
     return (
         <Modal center={false} size="7xl" isOpen={isOpen} closeModal={() => {}}>
             <div className="text-white text-xl mb-6 flex justify-between">

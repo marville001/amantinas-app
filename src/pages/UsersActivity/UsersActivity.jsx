@@ -24,8 +24,6 @@ const UsersActivity = () => {
         }
     }, [user?._id]);
 
-    console.log(timelog);
-
     return (
         <DashboardWrapper title="Users Activity">
             <div className="mt-4 mx-2">

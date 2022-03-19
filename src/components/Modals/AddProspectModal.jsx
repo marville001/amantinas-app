@@ -169,7 +169,7 @@ const AddProspectModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                 <input
                     className="hidden"
                     id="picture"
-                    onChange={(e) => setPicture(e.target.files)}
+                    // onChange={(e) => setPicture(e.target.files)}
                     type="file"
                     accept="image/*"
                 />
