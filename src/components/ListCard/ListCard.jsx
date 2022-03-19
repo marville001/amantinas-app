@@ -72,7 +72,7 @@ const ListCard = ({ home }) => {
                     alt=""
                 />
                 <div className="mt-3 mb-2">
-                    <h2 className="text-dark-color text-sm font-bold">
+                    <h2 className="text-dark-blue-color text-sm font-bold">
                         {home?.name}
                     </h2>
                 </div>
@@ -93,20 +93,20 @@ const ListCard = ({ home }) => {
                 <div className="flex items-center space-x-3">
                     <div className="flex items-center space-x-2 my-2">
                         <BiBed className="text-md text-primary-blue cursor-pointer" />
-                        <p className="text-dark-color text-sm font-light">
+                        <p className="text-dark-blue-color text-sm font-light">
                             {home?.bedrooms}
                         </p>
                     </div>
                     <div className="flex items-center space-x-2 my-2">
                         <BiBath className="text-md text-primary-blue cursor-pointer" />
-                        <p className="text-dark-color text-sm font-light">
+                        <p className="text-dark-blue-color text-sm font-light">
                             {home?.bathrooms}
                         </p>
                     </div>
                 </div>
             </div>
             <div className="">
-                <p className="text-dark-color font-medium font-sm">
+                <p className="text-dark-blue-color font-medium font-sm">
                     {priceFormatter(home?.price)}
                 </p>
             </div>

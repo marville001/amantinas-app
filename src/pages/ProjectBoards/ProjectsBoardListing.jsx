@@ -39,7 +39,7 @@ const ProjectsBoardListing = () => {
                         key={board._id}
                         className="
                         rounded w-full sm:w-auto text-white font-medium px-4 
-                        bg-dark-color py-8 min-w-[200px]"
+                        bg-dark-blue-color py-8 min-w-[200px]"
                     >
                         {board.name}
                     </Link>

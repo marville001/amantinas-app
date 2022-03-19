@@ -57,7 +57,7 @@ const AddAdminModal = ({ isOpen, closeModal = () => {} }) => {
                     onChange={(e) => setName(e.target.value)}
                     className="
         outline-none p-2 py-1 text-sm !rounded bg-light-blue ring-1 
-        ring-dark-color text-dark-color
+        ring-dark-blue-color text-dark-blue-color
         "
                 />
             </div>
@@ -69,7 +69,7 @@ const AddAdminModal = ({ isOpen, closeModal = () => {} }) => {
                     onChange={(e) => setEmail(e.target.value)}
                     className="
         outline-none p-2 py-1 text-sm !rounded bg-light-blue ring-1 
-        ring-dark-color text-dark-color
+        ring-dark-blue-color text-dark-blue-color
         "
                 />
             </div>
@@ -81,7 +81,7 @@ const AddAdminModal = ({ isOpen, closeModal = () => {} }) => {
                     onChange={(e) => setPassword(e.target.value)}
                     className="
         outline-none p-2 py-1 text-sm !rounded bg-light-blue ring-1 
-        ring-dark-color text-dark-color
+        ring-dark-blue-color text-dark-blue-color
         "
                 />
             </div>
@@ -89,7 +89,7 @@ const AddAdminModal = ({ isOpen, closeModal = () => {} }) => {
                 <button
                     disabled={isCreatingAdmin}
                     onClick={handleSubmit}
-                    className="disabled:opacity-50 disabled:cursor-not-allowed uppercase px-16 tracking-wider py-2 bg-dark-color text-white text-lg rounded-md mt-8 flex items-center"
+                    className="disabled:opacity-50 disabled:cursor-not-allowed uppercase px-16 tracking-wider py-2 bg-dark-blue-color text-white text-lg rounded-md mt-8 flex items-center"
                 >
                     {isCreatingAdmin ? (
                         <>

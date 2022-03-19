@@ -55,7 +55,7 @@ const Sidebar = () => {
         <div
             className={`w-[300px] fixed ${
                 sidebarOpen ? "translate-x-0" : "-translate-x-full"
-            }  overflow-y-auto h-screen bg-dark-color px-8 py-6 sidebar duration-300 transition-all ease-linear z-10`}
+            }  overflow-y-auto h-screen bg-dark-blue-color px-8 py-6 sidebar duration-300 transition-all ease-linear z-10`}
         >
             <div className="flex items-center justify-center space-x-5 relative">
                 {/* <div className="bg-sky-blue rounded-full w-8 h-8 grid place-items-center font-normal text-2xl text-white">

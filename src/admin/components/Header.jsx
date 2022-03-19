@@ -17,9 +17,9 @@ const Header = ({ title = "Welcome, User" }) => {
             onClick={() => {
               dispatch({ type });
             }}
-            className="lg:hidden text-2xl font-bold text-dark-color mr-4 cursor-pointer"
+            className="lg:hidden text-2xl font-bold text-dark-blue-color mr-4 cursor-pointer"
           />
-          <h2 className="font-bold text-dark-color text-2xl">{title}</h2>
+          <h2 className="font-bold text-dark-blue-color text-2xl">{title}</h2>
         </div>
         <div className="relative">
           <HiOutlineBell className="font-medium text-2xl" />

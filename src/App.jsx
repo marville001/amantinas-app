@@ -49,7 +49,7 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <div className="bg-[#effafb] min-h-screen max-w-[1560px] mx-auto">
+    <div className="bg-[#effafb] dark:bg-dark-primary-color min-h-screen max-w-[1560px] mx-auto">
       <Routes>
         <Route exact path="/" element={<Login />} />
         <Route exact path="/set-pass/:token" element={<SetPassPage />} />

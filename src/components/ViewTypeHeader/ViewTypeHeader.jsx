@@ -16,7 +16,7 @@ const ViewTypeHeader = () => {
         <HiViewGrid
           onClick={() => dispatch({ type: VIEW_TYPE.CARDS })}
           className={`${
-            viewType === "list" && "cursor-pointer text-xl text-dark-color"
+            viewType === "list" && "cursor-pointer text-xl text-dark-blue-color"
           }`}
         />
       </div>
@@ -28,7 +28,7 @@ const ViewTypeHeader = () => {
         <HiViewList
           onClick={() => dispatch({ type: VIEW_TYPE.LIST })}
           className={`${
-            viewType === "cards" && "cursor-pointer text-xl text-dark-color"
+            viewType === "cards" && "cursor-pointer text-xl text-dark-blue-color"
           }`}
         />
       </div>

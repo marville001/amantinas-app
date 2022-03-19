@@ -49,8 +49,8 @@ const AdminHome = () => {
                         Welcome <span className="font-bold">{admin?.name}</span>
                     </h4>
                     <div className="flex items-center mt-6 justify-between">
-                        <p className="text-dark-color">Total no of investors</p>
-                        <div className="text-2xl text-dark-color font-bold">
+                        <p className="text-dark-blue-color">Total no of investors</p>
+                        <div className="text-2xl text-dark-blue-color font-bold">
                             {investors?.length}
                         </div>
                     </div>
@@ -63,7 +63,7 @@ const AdminHome = () => {
                     </Link>
                 </div>
                 <div className="flex-[2] bg-white p-4">
-                    <h4 className="text-dark-color font-bold">Analytics</h4>
+                    <h4 className="text-dark-blue-color font-bold">Analytics</h4>
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4 mt-8">
                         <div className="flex items-center">
                             <div className="rounded-full bg-light-blue p-2">
@@ -117,7 +117,7 @@ const AdminHome = () => {
                     <h2>Admins</h2>
                     <button
                         onClick={() => setAddAdminModalOpen(true)}
-                        className="bg-dark-color py-1 px-6 text-sm text-white rounded-md"
+                        className="bg-dark-blue-color py-1 px-6 text-sm text-white rounded-md"
                     >
                         Add Admin
                     </button>
@@ -145,13 +145,13 @@ const AdminHome = () => {
                                     <td>{ad.email}</td>
                                     <td>
                                         <div className="flex space-x-4">
-                                            <HiPencilAlt className="text-xl text-dark-color hover:text-primary-blue cursor-pointer" />
+                                            <HiPencilAlt className="text-xl text-dark-blue-color hover:text-primary-blue cursor-pointer" />
                                             <HiTrash
                                                 onClick={() => {
                                                     setActive(ad._id);
                                                     setConfirmDeleteOpen(true);
                                                 }}
-                                                className="text-xl text-dark-color hover:text-primary-blue cursor-pointer"
+                                                className="text-xl text-dark-blue-color hover:text-primary-blue cursor-pointer"
                                             />
                                         </div>
                                     </td>

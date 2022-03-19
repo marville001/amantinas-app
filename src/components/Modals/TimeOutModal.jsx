@@ -55,7 +55,7 @@ const TimeOutModal = ({
                     onChange={(e) => setWork(e.target.value)}
                     className="
         outline-none p-2 rounded-md bg-light-blue ring-1 
-        ring-dark-color text-dark-color
+        ring-dark-blue-color text-dark-blue-color
         "
                 ></textarea>
             </div>
@@ -63,7 +63,7 @@ const TimeOutModal = ({
                 <button
                     disabled={loadingTime}
                     onClick={handleSubmit}
-                    className="disabled:opacity-50 disabled:cursor-not-allowed uppercase px-16 tracking-wider py-2 bg-dark-color text-white text-lg rounded-md mt-8 flex items-center"
+                    className="disabled:opacity-50 disabled:cursor-not-allowed uppercase px-16 tracking-wider py-2 bg-dark-blue-color text-white text-lg rounded-md mt-8 flex items-center"
                 >
                     {loadingTime ? (
                         <>

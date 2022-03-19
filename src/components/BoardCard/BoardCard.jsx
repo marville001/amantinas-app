@@ -55,7 +55,7 @@ const BoardCard = ({ item, columnid }) => {
                 />
             )}
             <div className="mt-3 mb-2 flex justify-between">
-                <h2 className="text-dark-color font-bold">{item?.title}</h2>
+                <h2 className="text-dark-blue-color font-bold">{item?.title}</h2>
                 <Menu as="div" className="relative">
                     <Menu.Button>
                         <HiDotsVertical className="text-2xl text-primary-blue cursor-pointer" />
@@ -141,7 +141,7 @@ const BoardCard = ({ item, columnid }) => {
 //                 />
 //             )}
 //             <div className="mt-3 mb-2 flex justify-between">
-//                 <h2 className="text-dark-color font-bold">{item.title}</h2>
+//                 <h2 className="text-dark-blue-color font-bold">{item.title}</h2>
 //                 <HiDotsVertical className="text-2xl text-primary-blue cursor-pointer" />
 //             </div>
 
@@ -154,14 +154,14 @@ const BoardCard = ({ item, columnid }) => {
 //                 <div className="flex items-center space-x-4">
 //                     <div className="flex items-center space-x-2 my-2">
 //                         <FaCar className="text-md text-primary-blue cursor-pointer" />
-//                         <p className="text-dark-color text-sm font-light">5</p>
+//                         <p className="text-dark-blue-color text-sm font-light">5</p>
 //                     </div>
 //                     <div className="flex items-center space-x-2 my-2">
 //                         <FaBabyCarriage className="text-md text-primary-blue cursor-pointer" />
-//                         <p className="text-dark-color text-sm font-light">5</p>
+//                         <p className="text-dark-blue-color text-sm font-light">5</p>
 //                     </div>
 //                 </div>
-//                 <p className="text-dark-color font-medium font-sm">
+//                 <p className="text-dark-blue-color font-medium font-sm">
 //                     $1,700,000
 //                 </p>
 //             </div>

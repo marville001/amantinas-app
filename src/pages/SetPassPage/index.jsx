@@ -60,7 +60,7 @@ const SetPassPage = () => {
 
     return (
         <div className="flex flex-col items-center justify-center py-20">
-            <h1 className="text-4xl font-medium text-dark-color">
+            <h1 className="text-4xl font-medium text-dark-blue-color">
                 Please Create a password
             </h1>
             <div className="form px-6 sm:w-[400px]">

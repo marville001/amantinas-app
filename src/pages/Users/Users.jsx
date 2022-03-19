@@ -116,13 +116,13 @@ const Users = () => {
                                         {user.email}
                                     </div>
                                     <div className="flex-1 flex justify-end space-x-5 capitalize px-2 lg:px-4 first-line:text-sm font-light">
-                                        <HiPencilAlt className="text-xl text-dark-color hover:text-primary-blue" />
+                                        <HiPencilAlt className="text-xl text-dark-blue-color hover:text-primary-blue" />
                                         <HiTrash
                                             onClick={() => {
                                                 setConfirmDeleteOpen(true);
                                                 setActive(user._id);
                                             }}
-                                            className="text-xl text-dark-color hover:text-red-400"
+                                            className="text-xl text-dark-blue-color hover:text-red-400"
                                         />
                                     </div>
                                 </div>

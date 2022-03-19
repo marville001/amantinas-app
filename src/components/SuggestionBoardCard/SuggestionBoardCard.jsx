@@ -26,7 +26,7 @@ const SuggestionBoardCard = ({ item }) => {
             <div className="flex flex-col items-center justify-start p-2">
                 <HiChevronUp
                     onClick={() => handleVote(item.vote + 1)}
-                    className="text-3xl text-brown-color cursor-pointer p-0 hover:text-dark-color"
+                    className="text-3xl text-brown-color cursor-pointer p-0 hover:text-dark-blue-color"
                 />
                 <span className="-mt-2">{item?.vote}</span>
             </div>
@@ -35,7 +35,7 @@ const SuggestionBoardCard = ({ item }) => {
                     {item?.subject}
                 </p>
                 <p className="text-xs mt-2">{item?.suggestion}</p>
-                {/* <div className="cursor-pointer text-brown-color mt-4 hover:text-dark-color">
+                {/* <div className="cursor-pointer text-brown-color mt-4 hover:text-dark-blue-color">
                     Feedback
                 </div> */}
             </div>

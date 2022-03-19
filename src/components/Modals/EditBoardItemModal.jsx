@@ -91,7 +91,7 @@ const EditBoardItemModal = ({
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     id="title"
-                    className="!rounded text-sm p-1  !ring-dark-color"
+                    className="!rounded text-sm p-1  !ring-dark-blue-color"
                 />
             </div>
 
@@ -121,7 +121,7 @@ const EditBoardItemModal = ({
                     disabled={isLoading}
                     onClick={handleUpdate}
                     className="disabled:opacity-50 disabled:cursor-not-allowed 
-                    bg-dark-color flex justify-center items-center p-1 px-10 
+                    bg-dark-blue-color flex justify-center items-center p-1 px-10 
                     text-white rounded-md uppercase text-md"
                 >
                     {isLoading ? (

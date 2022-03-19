@@ -51,7 +51,7 @@ const ProjectBoardColumn = ({ boardId, board }) => {
                     />
                     <button
                         onClick={handleSaveName}
-                        className="bg-dark-color text-xs p-2 py-1 text-white"
+                        className="bg-dark-blue-color text-xs p-2 py-1 text-white"
                     >
                         {isUpdatingColumnName ? <FaSpinner /> : "Save"}
                     </button>
@@ -64,7 +64,7 @@ const ProjectBoardColumn = ({ boardId, board }) => {
                 </div>
             ) : (
                 <div className="flex w-full justify-between items-center group">
-                    <h2 className="text-md font-light ml-3 fo text-dark-color">
+                    <h2 className="text-md font-light ml-3 fo text-dark-blue-color">
                         {board.name}
                     </h2>
                     <HiPencil
@@ -76,7 +76,7 @@ const ProjectBoardColumn = ({ boardId, board }) => {
                     />
                 </div>
             )}
-            <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-color bg-dark-color" />
+            <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-blue-color bg-dark-blue-color" />
             <div
                 onClick={() => {
                     setAddItemModalOpen(true);

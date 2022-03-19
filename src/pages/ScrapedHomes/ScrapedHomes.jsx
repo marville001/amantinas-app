@@ -32,10 +32,10 @@ const ScrapedHomes = () => {
     return (
         <DashboardWrapper title="Scraping Homes">
             <div className="my-6 bg-white rounded-xl p-4 max-w-6xl">
-                <h2 className="text-md font-bold mb-2 ml-3 fo text-dark-color">
+                <h2 className="text-md font-bold mb-2 ml-3 fo text-dark-blue-color">
                     Scraping Homes
                 </h2>
-                <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-color bg-dark-color" />
+                <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-blue-color bg-dark-blue-color" />
 
                 <ViewTypeHeader />
                 {loadingScrapedHomes && (

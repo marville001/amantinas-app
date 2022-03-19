@@ -85,7 +85,7 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                         onChange={(e) => setFirstName(e.target.value)}
                         className="
         outline-none p-2 rounded-md bg-light-blue ring-1 
-        ring-dark-color text-dark-color
+        ring-dark-blue-color text-dark-blue-color
         "
                     />
                 </div>
@@ -97,7 +97,7 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                         onChange={(e) => setLastName(e.target.value)}
                         className="
         outline-none p-2 rounded-md bg-light-blue ring-1 
-        ring-dark-color text-dark-color
+        ring-dark-blue-color text-dark-blue-color
         "
                     />
                 </div>
@@ -111,7 +111,7 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                         onChange={(e) => setEmail(e.target.value)}
                         className="
         outline-none p-2 rounded-md bg-light-blue ring-1 
-        ring-dark-color text-dark-color
+        ring-dark-blue-color text-dark-blue-color
         "
                     />
                 </div>
@@ -123,7 +123,7 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                         onChange={(e) => setRole(e.target.value)}
                         className="
         outline-none p-2 rounded-md bg-light-blue ring-1 
-        ring-dark-color text-dark-color
+        ring-dark-blue-color text-dark-blue-color
         "
                     >
                         <option value="">Select Role</option>
@@ -241,7 +241,7 @@ const AddUserModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                 <button
                     disabled={isCreatingUser}
                     onClick={handleCreateUser}
-                    className="disabled:opacity-50 disabled:cursor-not-allowed uppercase px-16 tracking-wider py-2 bg-dark-color text-white text-lg rounded-md mt-8 flex items-center"
+                    className="disabled:opacity-50 disabled:cursor-not-allowed uppercase px-16 tracking-wider py-2 bg-dark-blue-color text-white text-lg rounded-md mt-8 flex items-center"
                 >
                     {isCreatingUser ? (
                         <>

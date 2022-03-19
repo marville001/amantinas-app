@@ -22,13 +22,13 @@ const SideLink = ({ to = "/home", icon: Icon, text }) => {
             }}
             to={to}
             className={`${
-                pathname === to ? "bg-primary-blue" : "bg-slate-100 "
+                pathname === to ? "bg-primary-blue dark:bg-dark-secondary-color" : "bg-slate-100 dark:bg-gray-secondary-color"
             } px-4 py-3 rounded-md flex items-center space-x-3 overflow-hidden relative group`}
         >
             <div
                 className={`${
                     pathname === to ? "left-0" : " -left-2 group-hover:left-0"
-                } bg-sky-blue transition-all ease-in-out duration-200 absolute inset-y-0 w-2`}
+                } bg-sky-blue dark:bg-gray-primadry-color transition-all ease-in-out duration-200 absolute inset-y-0 w-2`}
             ></div>
             <Icon
                 className={`${
@@ -57,7 +57,7 @@ const Sidebar = () => {
         <div
             className={`w-[300px] fixed ${
                 sidebarOpen ? "translate-x-0" : "-translate-x-full"
-            }  overflow-y-auto h-screen bg-dark-color px-8 py-6 sidebar duration-300 transition-all ease-linear z-10`}
+            }  overflow-y-auto h-screen bg-dark-blue-color dark:bg-gray-primary-color px-8 py-6 sidebar duration-300 transition-all ease-linear z-10`}
         >
             <div className="flex items-center justify-center space-x-5 relative">
                 {/* <div className="bg-sky-blue rounded-full w-8 h-8 grid place-items-center font-normal text-2xl text-white">

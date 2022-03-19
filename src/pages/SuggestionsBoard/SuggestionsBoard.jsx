@@ -102,10 +102,10 @@ const SuggestionsBoard = () => {
                     >
                         <div>
                             <div className="h-full pb-16">
-                                <h2 className="text-md text-center py-3 font-light ml-3 fo text-dark-color">
+                                <h2 className="text-md text-center py-3 font-light ml-3 fo text-dark-blue-color">
                                     {board.name}
                                 </h2>
-                                <hr className="border-0 h-[2px] my-2 mb-8 opacity-50 border-dark-color bg-dark-color" />
+                                <hr className="border-0 h-[2px] my-2 mb-8 opacity-50 border-dark-blue-color bg-dark-blue-color" />
                                 {board.items.length > 0 &&
                                     board.items.map((item, idx) => (
                                         <div key={idx} className="board-item">

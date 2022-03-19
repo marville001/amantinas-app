@@ -82,10 +82,10 @@ const Ledger = () => {
     return (
         <DashboardWrapper title={"Ledger"}>
             <div className="bg-white my-6 rounded-xl p-4 max-w-6xl overflow-hidden">
-                <h2 className="text-md font-bold mb-2 ml-3 fo text-dark-color">
+                <h2 className="text-md font-bold mb-2 ml-3 fo text-dark-blue-color">
                     activities
                 </h2>
-                <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-color bg-dark-color" />
+                <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-blue-color bg-dark-blue-color" />
                 <div className="flex flex-col-reverse md:flex-row justify-between my-6 mt-10">
                     <input
                         type="search"
@@ -213,10 +213,10 @@ const Ledger = () => {
 
             {/* Invoices */}
             <div className="bg-white my-6 rounded-xl p-4 max-w-6xl overflow-hidden">
-                <h2 className="text-md font-bold mb-2 ml-3 fo text-dark-color capitalize">
+                <h2 className="text-md font-bold mb-2 ml-3 fo text-dark-blue-color capitalize">
                     invoices
                 </h2>
-                <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-color bg-dark-color" />
+                <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-blue-color bg-dark-blue-color" />
                 <div className="flex flex-col-reverse md:flex-row justify-between my-6 mt-10">
                     <input
                         type="search"

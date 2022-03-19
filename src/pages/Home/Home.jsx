@@ -64,14 +64,14 @@ const Home = () => {
                 <div className="grid space-y-5 lg:space-y-0 grid-cols-1 lg:grid-cols-4 lg:gap-5">
                     <div className="bg-white px-8 py-6 col-span-3 rounded-xl">
                         <h2 className="text-lg mb-2">Cash Flow</h2>
-                        <hr className="border-0 h-[2px] my-5 opacity-50 border-dark-color bg-dark-color" />
+                        <hr className="border-0 h-[2px] my-5 opacity-50 border-dark-blue-color bg-dark-blue-color" />
                         <h2 className="text-[#0E5359] my-6">Overview</h2>
                         <div className="flex lg:divide-x-2 flex-col lg:flex-row">
                             <div className="flex-1 p-4">
                                 <p className="text-[#666666] text-[13px]">
                                     Net Cashflow YTD
                                 </p>
-                                <div className="text-dark-color mt-2 font-bold text-3xl">
+                                <div className="text-dark-blue-color mt-2 font-bold text-3xl">
                                     {priceFormatter(
                                         transactions.reduce(
                                             (prev, curr) => prev + curr.amount,
@@ -84,7 +84,7 @@ const Home = () => {
                                 <p className="text-[#666666] text-[13px]">
                                     Revenue YTD
                                 </p>
-                                <div className="text-dark-color mt-2 font-bold text-3xl">
+                                <div className="text-dark-blue-color mt-2 font-bold text-3xl">
                                     {priceFormatter(
                                         transactions
                                             .filter((t) => t.type === "income")
@@ -100,7 +100,7 @@ const Home = () => {
                                 <p className="text-[#666666] text-[13px]">
                                     Expense YTD
                                 </p>
-                                <div className="text-dark-color mt-2 font-bold text-3xl">
+                                <div className="text-dark-blue-color mt-2 font-bold text-3xl">
                                     {priceFormatter(
                                         transactions
                                             .filter((t) => t.type === "expense")
@@ -123,14 +123,14 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="bg-white px-8 py-6 rounded-xl">
-                        <h2 className="text-lg mb-2 font-bold text-dark-color">
+                        <h2 className="text-lg mb-2 font-bold text-dark-blue-color">
                             Portfolio Metrics
                         </h2>
-                        <hr className="border-0 h-[2px] my-5 opacity-50 border-dark-color bg-dark-color" />
+                        <hr className="border-0 h-[2px] my-5 opacity-50 border-dark-blue-color bg-dark-blue-color" />
                         <div className="my-16 flex flex-col space-y-4">
                             <div className="flex justify-between">
                                 <h3 className="text-brown-color">Income</h3>
-                                <div className="text-md font-bold text-dark-color">
+                                <div className="text-md font-bold text-dark-blue-color">
                                     {priceFormatter(
                                         transactions
                                             .filter((t) => t.type === "income")
@@ -144,7 +144,7 @@ const Home = () => {
                             </div>
                             <div className="flex justify-between">
                                 <h3 className="text-brown-color">Expernse</h3>
-                                <div className="text-md font-bold text-dark-color">
+                                <div className="text-md font-bold text-dark-blue-color">
                                     {priceFormatter(
                                         transactions
                                             .filter((t) => t.type === "expense")
@@ -158,16 +158,16 @@ const Home = () => {
                             </div>
                         </div>
 
-                        <h2 className="text-lg mb-2 font-bold text-dark-color">
+                        <h2 className="text-lg mb-2 font-bold text-dark-blue-color">
                             Core Metrics
                         </h2>
-                        <hr className="border-0 h-[2px] my-5 opacity-50 border-dark-color bg-dark-color" />
+                        <hr className="border-0 h-[2px] my-5 opacity-50 border-dark-blue-color bg-dark-blue-color" />
                         <div className="my-10 flex flex-col space-y-4">
                             <div className="flex justify-between">
                                 <h3 className="text-brown-color">
                                     Scraped Homes
                                 </h3>
-                                <div className="text-md font-bold text-dark-color">
+                                <div className="text-md font-bold text-dark-blue-color">
                                     {
                                         homes?.filter(
                                             (h) =>
@@ -181,7 +181,7 @@ const Home = () => {
                                 <h3 className="text-brown-color">
                                     Active Offers
                                 </h3>
-                                <div className="text-md font-bold text-dark-color">
+                                <div className="text-md font-bold text-dark-blue-color">
                                     {
                                         homes?.filter(
                                             (h) =>
@@ -193,7 +193,7 @@ const Home = () => {
                             </div>
                             <div className="flex justify-between">
                                 <h3 className="text-brown-color">Deals Lost</h3>
-                                <div className="text-md font-bold text-dark-color">
+                                <div className="text-md font-bold text-dark-blue-color">
                                     0
                                 </div>
                             </div>
@@ -201,7 +201,7 @@ const Home = () => {
                                 <h3 className="text-brown-color">
                                     Managed Homes
                                 </h3>
-                                <div className="text-md font-bold text-dark-color">
+                                <div className="text-md font-bold text-dark-blue-color">
                                     {
                                         homes?.filter(
                                             (h) =>
@@ -217,10 +217,10 @@ const Home = () => {
 
                 <div className="flex flex-col sm:flex-row my-6 gap-5 justify-end">
                     <div className="bg-white p-4 flex-1 lg:flex-none lg:min-w-[280px] rounded-xl">
-                        <h2 className="text-md mb-2 text-center font-bold text-dark-color">
+                        <h2 className="text-md mb-2 text-center font-bold text-dark-blue-color">
                             Project Boards
                         </h2>
-                        <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-color bg-dark-color" />
+                        <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-blue-color bg-dark-blue-color" />
 
                         <div
                             onClick={() => setNewBoardModalOpen(true)}
@@ -230,10 +230,10 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="bg-white p-4 flex-1 lg:flex-none py-4 lg:min-w-[280px] rounded-xl">
-                        <h2 className="text-md mb-2 text-center font-bold text-dark-color">
+                        <h2 className="text-md mb-2 text-center font-bold text-dark-blue-color">
                             Time
                         </h2>
-                        <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-color bg-dark-color" />
+                        <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-blue-color bg-dark-blue-color" />
 
                         {loadingTime ? (
                             <div className="flex justify-center my-4">

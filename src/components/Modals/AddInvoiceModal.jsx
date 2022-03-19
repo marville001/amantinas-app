@@ -153,7 +153,7 @@ const AddInvoiceModal = ({
                                 alt=""
                             />
                             <div className="mt-3 mb-2 flex justify-between">
-                                <h2 className="text-dark-color font-bold">
+                                <h2 className="text-dark-blue-color font-bold">
                                     {homeDets?.name}
                                 </h2>
                             </div>
@@ -169,18 +169,18 @@ const AddInvoiceModal = ({
                                 <div className="flex items-center space-x-4">
                                     <div className="flex items-center space-x-2 my-2">
                                         <BiBed className="text-md text-primary-blue cursor-pointer" />
-                                        <p className="text-dark-color text-sm font-light">
+                                        <p className="text-dark-blue-color text-sm font-light">
                                             {homeDets?.bedrooms}
                                         </p>
                                     </div>
                                     <div className="flex items-center space-x-2 my-2">
                                         <BiBath className="text-md text-primary-blue cursor-pointer " />
-                                        <p className="text-dark-color text-sm font-light">
+                                        <p className="text-dark-blue-color text-sm font-light">
                                             {homeDets?.bathrooms}
                                         </p>
                                     </div>
                                 </div>
-                                <p className="text-dark-color font-medium font-sm">
+                                <p className="text-dark-blue-color font-medium font-sm">
                                     {priceFormatter(homeDets?.price)}
                                 </p>
                             </div>
@@ -196,7 +196,7 @@ const AddInvoiceModal = ({
                             onChange={(e) => setTitle(e.target.value)}
                             className="
         outline-none p-1 px-2 text-sm !rounded bg-light-blue ring-1 
-        ring-dark-color text-dark-color
+        ring-dark-blue-color text-dark-blue-color
         "
                         />
                     </div>
@@ -210,7 +210,7 @@ const AddInvoiceModal = ({
                             onChange={(e) => setDescription(e.target.value)}
                             className="
         outline-none p-1 text-sm !rounded px-2 bg-light-blue ring-1 
-        ring-dark-color text-dark-color
+        ring-dark-blue-color text-dark-blue-color
         "
                         />
                     </div>
@@ -223,7 +223,7 @@ const AddInvoiceModal = ({
                             onChange={(e) => setAmount(e.target.value)}
                             className="
         outline-none p-1 text-sm !rounded px-2 bg-light-blue ring-1 
-        ring-dark-color text-dark-color
+        ring-dark-blue-color text-dark-blue-color
         "
                         />
                     </div>
@@ -238,7 +238,7 @@ const AddInvoiceModal = ({
                             onChange={(e) => setBusiness(e.target.value)}
                             className="
         outline-none p-1 text-sm !rounded px-2 bg-light-blue ring-1 
-        ring-dark-color text-dark-color
+        ring-dark-blue-color text-dark-blue-color
         "
                         />
                     </div>
@@ -253,7 +253,7 @@ const AddInvoiceModal = ({
                             onChange={(e) => setDate(e.target.value)}
                             className="
         outline-none p-1 text-sm !rounded px-2 bg-light-blue ring-1 
-        ring-dark-color text-dark-color
+        ring-dark-blue-color text-dark-blue-color
         "
                         />
                     </div>
@@ -267,7 +267,7 @@ const AddInvoiceModal = ({
                             onChange={(e) => setType(e.target.value)}
                             className="
         outline-none p-1 text-sm rounded px-2 bg-light-blue ring-1 
-        ring-dark-color text-dark-color
+        ring-dark-blue-color text-dark-blue-color
         "
                         >
                             <option value="">Select Type</option>
@@ -284,7 +284,7 @@ const AddInvoiceModal = ({
                                 onChange={(e) => setRecurring(e.target.checked)}
                                 className="
         outline-none p-1 text-sm !rounded px-2 bg-light-blue ring-1 
-        ring-dark-color mr-2
+        ring-dark-blue-color mr-2
         "
                             />
                             Recurring Transaction?
@@ -305,7 +305,7 @@ const AddInvoiceModal = ({
                                         }
                                         className="
         outline-none p-1 text-sm !rounded px-2 bg-light-blue ring-1 
-        ring-dark-color text-dark-color
+        ring-dark-blue-color text-dark-blue-color
         "
                                     />
                                 </div>
@@ -326,7 +326,7 @@ const AddInvoiceModal = ({
                                         }
                                         className="
         outline-none p-1 text-sm !rounded px-2 bg-light-blue ring-1 
-        ring-dark-color text-dark-color
+        ring-dark-blue-color text-dark-blue-color
         "
                                     />
                                 </div>
@@ -377,7 +377,7 @@ const AddInvoiceModal = ({
                                         }
                                         className="
 outline-none p-1 text-sm rounded px-2 bg-light-blue ring-1 
-ring-dark-color text-dark-color
+ring-dark-blue-color text-dark-blue-color
 "
                                     >
                                         <option value="">Select Type</option>
@@ -396,7 +396,7 @@ ring-dark-color text-dark-color
                         <button
                             disabled={isCreatingInvoice}
                             onClick={handleSubmit}
-                            className="disabled:opacity-50 disabled:cursor-not-allowed uppercase px-16 tracking-wider py-2 bg-dark-color text-white text-lg rounded-md mt-8 flex items-center"
+                            className="disabled:opacity-50 disabled:cursor-not-allowed uppercase px-16 tracking-wider py-2 bg-dark-blue-color text-white text-lg rounded-md mt-8 flex items-center"
                         >
                             {isCreatingInvoice ? (
                                 <>

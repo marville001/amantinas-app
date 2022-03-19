@@ -16,7 +16,7 @@ const ConfirmModal = ({ isOpen, message, closeModal = () => {}, action }) => {
                 </button>
                 <button
                     onClick={action}
-                    className="uppercase px-4 tracking-wider py-2 bg-dark-color text-white text-sm rounded-md"
+                    className="uppercase px-4 tracking-wider py-2 bg-dark-blue-color text-white text-sm rounded-md"
                 >
                     Continue
                 </button>

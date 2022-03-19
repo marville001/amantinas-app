@@ -38,7 +38,7 @@ const AdminLogin = () => {
     return (
         <div className="flex min-h-screen justify-center items-center">
             <div className="form px-6 sm:w-[400px] py-12">
-                <h1 className="text-4xl text-center font-medium text-dark-color">
+                <h1 className="text-4xl text-center font-medium text-dark-blue-color">
                     Admin Login
                 </h1>
 

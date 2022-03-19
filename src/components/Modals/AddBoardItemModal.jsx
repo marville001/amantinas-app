@@ -66,7 +66,7 @@ const AddBoardItemModal = ({ isOpen, column, closeModal = () => {} }) => {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     id="title"
-                    className="!rounded text-sm p-1  !ring-dark-color"
+                    className="!rounded text-sm p-1  !ring-dark-blue-color"
                 />
             </div>
 
@@ -83,7 +83,7 @@ const AddBoardItemModal = ({ isOpen, column, closeModal = () => {} }) => {
           "
                     >
                         {picture[0] ? (
-                            <div className="text-dark-color overflow-hidden font-bold">
+                            <div className="text-dark-blue-color overflow-hidden font-bold">
                                 {picture[0].name.length > 20 && "..."}
                                 {picture[0].name.substring(
                                     picture[0].name.length - 20,
@@ -92,7 +92,7 @@ const AddBoardItemModal = ({ isOpen, column, closeModal = () => {} }) => {
                             </div>
                         ) : (
                             <>
-                                <div className="text-dark-color font-bold">
+                                <div className="text-dark-blue-color font-bold">
                                     Click here to select image
                                 </div>
                             </>
@@ -134,7 +134,7 @@ const AddBoardItemModal = ({ isOpen, column, closeModal = () => {} }) => {
                     disabled={isAddingColumnItem}
                     onClick={handleSubmit}
                     className="disabled:opacity-50 disabled:cursor-not-allowed 
-                    bg-dark-color flex justify-center items-center p-1 px-10 
+                    bg-dark-blue-color flex justify-center items-center p-1 px-10 
                     text-white rounded-md uppercase text-md"
                 >
                     {isAddingColumnItem ? (

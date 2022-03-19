@@ -53,7 +53,7 @@ const Login = () => {
     return (
         <div className="flex justify-center">
             <div className="form px-6 sm:w-[400px] py-12">
-                <h1 className="text-4xl text-center font-medium text-dark-color">
+                <h1 className="text-4xl text-center font-medium text-dark-blue-color">
                     Sign In.
                 </h1>
                 <div className="flex space-x-5 my-6 justify-center">
@@ -131,7 +131,7 @@ const Login = () => {
                     </label>
                     <Link
                         to="/forgot-password"
-                        className="cursor-pointer text-dark-color"
+                        className="cursor-pointer text-dark-blue-color"
                     >
                         Forgot Password?
                     </Link>

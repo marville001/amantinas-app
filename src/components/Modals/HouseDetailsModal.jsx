@@ -57,7 +57,7 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => { }, home }) => {
             <div className=" mt-6 flex justify-between">
                 <button
                     onClick={closeModal}
-                    className="capitalize px-4 tracking-wider py-2 bg-red-100  text-xs text-dark-color rounded-md"
+                    className="capitalize px-4 tracking-wider py-2 bg-red-100  text-xs text-dark-blue-color rounded-md"
                 >
                     Close
                 </button>
