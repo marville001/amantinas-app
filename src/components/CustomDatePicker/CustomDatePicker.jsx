@@ -12,13 +12,14 @@ const CustomDatePicker = () => {
         value={startDate}
         onChange={(date) => setStartDate(date)}
         customInput={<ExampleCustomInput />}
+        className="dark:bg-gray-secondary-color"
       />
     </div>
   );
 };
 
 const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
-  <button className="example-custom-input" onClick={onClick} ref={ref}>
+  <button className="example-custom-input dark:text-white" onClick={onClick} ref={ref}>
     {value}
   </button>
 ));
