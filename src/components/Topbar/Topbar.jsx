@@ -10,10 +10,8 @@ const Topbar = ({ title = "Welcome, User" }) => {
     const dispatch = useDispatch();
     const type = sidebarOpen ? SIDEBAR.CLOSE : SIDEBAR.OPEN;
 
-  const [darkTheme, setDarkTheme] = useDarkMode();
-  const handleMode = () => setDarkTheme(!darkTheme);
-  
-  console.log({darkTheme});
+    const [darkTheme, setDarkTheme] = useDarkMode();
+    const handleMode = () => setDarkTheme(!darkTheme);
 
     return (
         <div className="bg-white dark:bg-gray-primary-color py-4 rounded px-4">
@@ -35,7 +33,10 @@ const Topbar = ({ title = "Welcome, User" }) => {
                         <div className="absolute right-1 top-1 h-[6px] w-[6px] bg-sky-blue  rounded-full"></div>
                     </div>
 
-                    <div onClick={handleMode} className="relative cursor-pointer">
+                    <div
+                        onClick={handleMode}
+                        className="relative cursor-pointer"
+                    >
                         {darkTheme ? (
                             <HiSun className="font-medium text-2xl text-white" />
                         ) : (
