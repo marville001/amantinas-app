@@ -108,7 +108,21 @@ const ScrapingTool = () => {
                         {success}
                     </div>
                 )}
-                <div className="grid grid-cols-1 lg:grid-cols-2  gap-8 lg:max-w-4xl mx-auto my-10">
+                <div className="flex flex-col space-y-1 lg:max-w-4xl mx-auto mt-10">
+                    <p className=" text-brown-color font-medium">
+                        Address (single home search)
+                    </p>
+                    <input
+                        type="text"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                        className="border border-primary-blue outline-none bg-light-blue rounded-md p-2 text-primary-blue"
+                    />
+                    <br />
+                    <hr className="mt-6 border-[1px] border-brown-color opacity-70" />
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2  gap-8 lg:max-w-4xl mx-auto my-6">
                     <div className="flex flex-col space-y-6">
                         <div className="flex flex-col space-y-1">
                             <p className=" text-brown-color font-medium">
@@ -174,17 +188,7 @@ const ScrapingTool = () => {
                                 className="border border-primary-blue outline-none bg-light-blue rounded-md p-2 text-primary-blue"
                             />
                         </div>
-                        <div className="flex flex-col space-y-1">
-                            <p className=" text-brown-color font-medium">
-                                Address (single home search)
-                            </p>
-                            <input
-                                type="text"
-                                value={address}
-                                onChange={(e) => setAddress(e.target.value)}
-                                className="border border-primary-blue outline-none bg-light-blue rounded-md p-2 text-primary-blue"
-                            />
-                        </div>
+
                         <div className="flex flex-col space-y-1">
                             <p className=" text-brown-color font-medium">
                                 Since
