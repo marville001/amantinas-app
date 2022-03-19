@@ -38,8 +38,11 @@ const AddProspectModal = ({ isOpen, title, size, closeModal = () => {} }) => {
         setError("");
 
         const formData = new FormData();
-        formData.append("image", picture[0]);
-        formData.append("investorId", user.type && user.type === "subuser"? user.investorId : user?._id);
+        formData.append("image", picture);
+        formData.append(
+            "investorId",
+            user.type && user.type === "subuser" ? user.investorId : user?._id
+        );
         formData.append("name", name);
         formData.append("location", location);
         formData.append("bedrooms", bedrooms);
@@ -150,10 +153,16 @@ const AddProspectModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                     >
                         {picture[0] ? (
                             <div className="text-dark-color overflow-hidden font-bold">
-                                {picture[0].name.length > 20 && "..."}
-                                {picture[0].name.substring(
-                                    picture[0].name.length - 20,
-                                    picture[0].name.length
+                                {picture.length > 1 ? (
+                                    `${picture.length} images selected`
+                                ) : (
+                                    <span>
+                                        {picture[0].name.length > 20 && "..."}
+                                        {picture[0].name.substring(
+                                            picture[0].name.length - 20,
+                                            picture[0].name.length
+                                        )}
+                                    </span>
                                 )}
                             </div>
                         ) : (
@@ -169,7 +178,8 @@ const AddProspectModal = ({ isOpen, title, size, closeModal = () => {} }) => {
                 <input
                     className="hidden"
                     id="picture"
-                    // onChange={(e) => setPicture(e.target.files)}
+                    onChange={(e) => setPicture(e.target.files)}
+                    multiple
                     type="file"
                     accept="image/*"
                 />
