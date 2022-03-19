@@ -8,9 +8,10 @@ import {
     getHomesAction,
     updateProspectAction,
 } from "../../redux/actions/homesActions";
-import {  FaSpinner, FaTrash } from "react-icons/fa";
+import { FaSpinner, FaTrash } from "react-icons/fa";
 import { delete_ } from "../../utils/http";
 import ConfirmModal from "../Modals/ConfirmModal";
+import HouseDetailsModal from "../Modals/HouseDetailsModal";
 
 const HomeCard = ({ home }) => {
     const { user } = useSelector((state) => state.userAuthState);
@@ -18,6 +19,7 @@ const HomeCard = ({ home }) => {
     const [loading, setLoading] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
     const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
+    const [detailsModalOpen, setDetailsModalOpen] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -69,6 +71,9 @@ const HomeCard = ({ home }) => {
                         process.env.REACT_APP_STATIC_URL + home?.images[0]
                     }`}
                     alt=""
+                    onClick={() => {
+                        setDetailsModalOpen(true);
+                    }}
                 />
                 {loading && (
                     <FaSpinner className="absolute animate-spin mr-4 text-2xl right-4 bottom-2 text-primary-blue" />
@@ -194,6 +199,11 @@ const HomeCard = ({ home }) => {
                 closeModal={() => {
                     setConfirmDeleteOpen(false);
                 }}
+            />
+            <HouseDetailsModal
+                isOpen={detailsModalOpen}
+                closeModal={() => setDetailsModalOpen(false)}
+                home={home}
             />
         </div>
     );
