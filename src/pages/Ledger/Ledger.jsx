@@ -81,24 +81,25 @@ const Ledger = () => {
 
     return (
         <DashboardWrapper title={"Ledger"}>
-            <div className="bg-white my-6 rounded-xl p-4 max-w-6xl overflow-hidden">
-                <h2 className="text-md font-bold mb-2 ml-3 fo text-dark-blue-color">
+            <div className="bg-white dark:bg-gray-primary-color my-6 rounded-xl p-4 max-w-6xl overflow-hidden">
+                <h2 className="text-md font-bold mb-2 ml-3 fo text-dark-blue-color dark:text-white capitalize">
                     activities
                 </h2>
-                <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-blue-color bg-dark-blue-color" />
+                <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-blue-color bg-dark-blue-color dark:border-white dark:bg-white" />
                 <div className="flex flex-col-reverse md:flex-row justify-between my-6 mt-10">
                     <input
                         type="search"
-                        className="border mt-4 md:mt-0 px-2 py-2 md:max-w-[400px] text-sm rounded-md placeholder:text-sm outline-none"
+                        className="border mt-4 md:mt-0 px-2 py-2 md:max-w-[400px] text-sm rounded-md
+                         placeholder:text-sm outline-none dark:bg-dark-primary-color dark:text-white"
                         placeholder={`Search Activities`}
                     />
                     <div className="flex space-x-4 ml-auto">
-                        <div className="cursor-pointer border-brown-color border-2 p-1 rounded-md grid place-items-center">
-                            <HiOutlineDownload className="w-8 h-6 text-brown-color" />
+                        <div className="cursor-pointer border-brown-color dark:border-dark-primary-color border-2 p-1 rounded-md grid place-items-center">
+                            <HiOutlineDownload className="w-8 h-6 text-brown-color dark:text-dark-primary-color" />
                         </div>
                         <button
                             onClick={() => setAddTransModalOpen(true)}
-                            className="bg-primary-blue p-2 px-10 w-full text-white rounded-md uppercase text-xs"
+                            className="bg-primary-blue p-2 px-10 w-full text-white rounded-md uppercase text-xs dark:bg-dark-primary-color"
                         >
                             Add transaction
                         </button>
@@ -113,7 +114,7 @@ const Ledger = () => {
                             setActivePage(1);
                         }}
                         name="perPage"
-                        className="w-24"
+                        className="w-24 dark:bg-dark-primary-color dark:text-white"
                         id=""
                     >
                         <option value="5">5</option>
@@ -122,13 +123,13 @@ const Ledger = () => {
                         <option value="50">50</option>
                         <option value="100">100</option>
                     </select>
-                    <h4>Total Rows</h4>
+                    <h4 className="dark:text-white">Total Rows</h4>
                 </div>
                 {/* Table Start*/}
 
                 <div className="overflow-x-auto">
                     {/* Title */}
-                    <div className="flex lg:border-2 lg:border-opacity-70  lg:border-brown-color py-1 bg-fixed bg-light-blue items-center">
+                    <div className="flex lg:border-2 lg:border-opacity-70  lg:border-brown-color py-1 bg-fixed bg-light-blue dark:bg-gray-secondary-color items-center">
                         <div className="px-1 lg:px-3 flex items-center">
                             <input
                                 type="checkbox"
@@ -143,7 +144,7 @@ const Ledger = () => {
                             "Recurring",
                         ]?.map((col, idx) => (
                             <div key={idx} className="flex-1 px-2 lg:px-4">
-                                <h3 className="text-sm lg:text-lg capitalize">
+                                <h3 className="text-sm lg:text-lg capitalize dark:text-white">
                                     {col}
                                 </h3>
                             </div>
@@ -161,7 +162,7 @@ const Ledger = () => {
                                 transactions.map((trans, idx) => (
                                     <div
                                         key={idx}
-                                        className="flex py-2 hover:bg-light-blue cursor-pointer"
+                                        className="flex py-2 hover:bg-light-blue dark:hover:bg-gray-secondary-color cursor-pointer"
                                     >
                                         <div className="px-1 lg:px-3">
                                             <input
@@ -169,21 +170,21 @@ const Ledger = () => {
                                                 className="w-3 h-3 lg:w-3 lg:h-3 mt-1"
                                             />
                                         </div>
-                                        <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light">
+                                        <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light dark:text-white">
                                             {trans.title}
                                         </div>
-                                        <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light">
+                                        <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light dark:text-white">
                                             {new Date(
                                                 trans.date
                                             ).toDateString()}
                                         </div>
-                                        <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light">
+                                        <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light dark:text-white">
                                             {priceFormatter(trans.amount)}
                                         </div>
-                                        <div className="flex-1 capitalize px-2 lg:px-4 first-line:text-sm font-light">
+                                        <div className="flex-1 capitalize px-2 lg:px-4 first-line:text-sm font-light dark:text-white">
                                             {trans.type}
                                         </div>
-                                        <div className="flex-1 capitalize px-2 lg:px-4 first-line:text-sm font-light">
+                                        <div className="flex-1 capitalize px-2 lg:px-4 first-line:text-sm font-light dark:text-white">
                                             {trans.recurring ? "True" : "False"}
                                         </div>
                                     </div>
@@ -194,7 +195,7 @@ const Ledger = () => {
                 {/* Table End*/}
 
                 <div className="m-6 flex justify-end items-center space-x-2">
-                    <h4>
+                    <h4 className="dark:text-white">
                         Showing{" "}
                         {pageSize <= total
                             ? pageSize <= transactions.length
@@ -212,24 +213,25 @@ const Ledger = () => {
             </div>
 
             {/* Invoices */}
-            <div className="bg-white my-6 rounded-xl p-4 max-w-6xl overflow-hidden">
-                <h2 className="text-md font-bold mb-2 ml-3 fo text-dark-blue-color capitalize">
+            <div className="bg-white dark:bg-gray-primary-color my-6 rounded-xl p-4 max-w-6xl overflow-hidden">
+                <h2 className="text-md font-bold mb-2 ml-3 fo text-dark-blue-color dark:text-white capitalize">
                     invoices
                 </h2>
-                <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-blue-color bg-dark-blue-color" />
+                <hr className="border-0 h-[2px] my-2 opacity-50 border-dark-blue-color bg-dark-blue-color dark:border-white dark:bg-white" />
                 <div className="flex flex-col-reverse md:flex-row justify-between my-6 mt-10">
                     <input
                         type="search"
-                        className="border mt-4 md:mt-0 px-2 py-2 md:max-w-[400px] text-sm rounded-md placeholder:text-sm outline-none"
+                        className="border mt-4 md:mt-0 px-2 py-2 md:max-w-[400px] text-sm rounded-md 
+                        placeholder:text-sm outline-none dark:bg-dark-primary-color dark:text-white"
                         placeholder={`Search Invoices`}
                     />
                     <div className="flex space-x-4 ml-auto">
-                        <div className="cursor-pointer border-brown-color border-2 p-1 rounded-md grid place-items-center">
-                            <HiOutlineDownload className="w-8 h-6 text-brown-color" />
+                        <div className="cursor-pointer border-brown-color dark:border-dark-primary-color border-2 p-1 rounded-md grid place-items-center">
+                            <HiOutlineDownload className="w-8 h-6 text-brown-color dark:text-dark-primary-color" />
                         </div>
                         <button
                             onClick={() => setAddInvoiceModalOpen(true)}
-                            className="bg-primary-blue p-2 px-10 w-full text-white rounded-md uppercase text-xs"
+                            className="bg-primary-blue p-2 px-10 w-full text-white rounded-md uppercase text-xs dark:bg-dark-primary-color"
                         >
                             Add invoice
                         </button>
@@ -244,7 +246,7 @@ const Ledger = () => {
                             setActiveInvPage(1);
                         }}
                         name="perPage"
-                        className="w-24"
+                        className="w-24 dark:bg-dark-primary-color dark:text-white"
                         id=""
                     >
                         <option value="5">5</option>
@@ -253,13 +255,13 @@ const Ledger = () => {
                         <option value="50">50</option>
                         <option value="100">100</option>
                     </select>
-                    <h4>Total Rows</h4>
+                    <h4 className="dark:text-white">Total Rows</h4>
                 </div>
                 {/* Table Start*/}
 
                 <div className="overflow-x-auto">
                     {/* Title */}
-                    <div className="flex lg:border-2 lg:border-opacity-70  lg:border-brown-color py-1 bg-fixed bg-light-blue items-center">
+                    <div className="flex lg:border-2 lg:border-opacity-70  lg:border-brown-color py-1 bg-fixed bg-light-blue dark:bg-dark-secondary-color items-center">
                         <div className="px-1 lg:px-3 flex items-center">
                             <input
                                 type="checkbox"
@@ -274,7 +276,7 @@ const Ledger = () => {
                             "Recurring",
                         ]?.map((col, idx) => (
                             <div key={idx} className="flex-1 px-2 lg:px-4">
-                                <h3 className="text-sm lg:text-lg capitalize">
+                                <h3 className="text-sm lg:text-lg capitalize dark:text-white">
                                     {col}
                                 </h3>
                             </div>
@@ -299,19 +301,19 @@ const Ledger = () => {
                                                 className="w-3 h-3 lg:w-3 lg:h-3 mt-1"
                                             />
                                         </div>
-                                        <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light">
+                                        <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light dark:text-white">
                                             {inv.title}
                                         </div>
-                                        <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light">
+                                        <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light dark:text-white">
                                             {new Date(inv.date).toDateString()}
                                         </div>
-                                        <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light">
+                                        <div className="flex-1 px-2 lg:px-4 first-line:text-sm font-light dark:text-white">
                                             {priceFormatter(inv.amount)}
                                         </div>
-                                        <div className="flex-1 capitalize px-2 lg:px-4 first-line:text-sm font-light">
+                                        <div className="flex-1 capitalize px-2 lg:px-4 first-line:text-sm font-light dark:text-white">
                                             {inv.type}
                                         </div>
-                                        <div className="flex-1 capitalize px-2 lg:px-4 first-line:text-sm font-light">
+                                        <div className="flex-1 capitalize px-2 lg:px-4 first-line:text-sm font-light dark:text-white">
                                             {inv.recurring ? "True" : "False"}
                                         </div>
                                     </div>
@@ -322,7 +324,7 @@ const Ledger = () => {
                 {/* Table End*/}
 
                 <div className="m-6 flex justify-end items-center space-x-2">
-                    <h4>
+                    <h4 className="dark:text-white">
                         Showing{" "}
                         {invPageSize <= invTotal
                             ? invPageSize <= invoices.length
