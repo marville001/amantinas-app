@@ -71,7 +71,7 @@ export default function Modal({
                 }
                 p-6 my-8 overflow-hidden 
                 text-left align-middle transition-all transform bg-primary-blue 
-                shadow-2xl shadow-primary-blue/40 rounded-2xl
+                shadow-2xl shadow-primary-blue/40 dark:shadow-dark-primary-color rounded-2xl dark:bg-gray-secondary-color
                 ${classes && classes}
                 
                 `}
