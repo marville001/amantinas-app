@@ -22,6 +22,7 @@ const ScrapingTool = () => {
     const [bedrooms, setBedrooms] = useState("");
     const [bathrooms, setBathrooms] = useState("");
     const [execute, setExecute] = useState("once");
+    const [from, setFrom] = useState("");
     const [pricerange, setPriceRange] = useState({
         min: "",
         max: "",
@@ -54,6 +55,7 @@ const ScrapingTool = () => {
             bedrooms,
             bathrooms,
             execute,
+            from,
             pricerange: [pricerange.min, pricerange.max],
             squarefeets: [squarefeets.min, squarefeets.max],
         };
@@ -61,10 +63,9 @@ const ScrapingTool = () => {
         const res = await dispatch(createScrapeAction(obj));
         if (!res.success) {
             setError(res.message);
-            loadScrapes();
         } else {
             setSuccess(res.message);
-
+            loadScrapes();
             setTimeout(() => {
                 setSuccess("");
             }, 3000);
@@ -339,6 +340,22 @@ const ScrapingTool = () => {
                                 <option value="once-month">
                                     Once Per Month
                                 </option>
+                            </select>
+                        </div>
+
+                        <div className="flex flex-col space-y-1 w-full">
+                            <p className=" text-brown-color font-medium">
+                                Scrape From
+                            </p>
+                            <select
+                                type="text"
+                                value={from}
+                                onChange={(e) => setFrom(e.target.value)}
+                                className="border text-primary-blue border-primary-blue outline-none bg-light-blue rounded-md p-2"
+                            >
+                                <option></option>
+                                <option value="realtor">Realtor</option>
+                                <option value="zillow">Zillow</option>
                             </select>
                         </div>
 

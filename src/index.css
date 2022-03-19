@@ -52,3 +52,8 @@
         @apply rounded-sm border-gray-300;
     }
 }
+
+
+.swiper-button-next, .swiper-button-prev{
+    @apply text-white;
+}
