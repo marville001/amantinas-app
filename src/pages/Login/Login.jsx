@@ -9,6 +9,7 @@ import {
     userLoginAction,
     userLogoutAction,
 } from "../../redux/actions/userAuthActions";
+import useDarkMode from "../../hooks/useDarkMode";
 
 const Login = () => {
     const { user, loading } = useSelector((state) => state.userAuthState);
@@ -49,6 +50,11 @@ const Login = () => {
     useEffect(() => {
         dispatch(userLogoutAction());
     }, [dispatch]);
+
+    const [darkTheme, setDarkTheme] = useDarkMode();
+    useEffect(() => {
+        if (darkTheme) setDarkTheme(!darkTheme);
+    }, [darkTheme, setDarkTheme]);
 
     return (
         <div className="flex justify-center">

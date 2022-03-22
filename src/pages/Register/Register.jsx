@@ -3,6 +3,7 @@ import { FaFacebookF, FaGoogle, FaSpinner } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogoutAction, userRegisterAction } from "../../redux/actions/userAuthActions";
+import useDarkMode from "../../hooks/useDarkMode";
 
 const Register = () => {
     const { user, isCreatingUser } = useSelector(
@@ -50,6 +51,11 @@ const Register = () => {
     useEffect(() => {
         dispatch(userLogoutAction());
     }, [dispatch]);
+
+    const [darkTheme, setDarkTheme] = useDarkMode();
+    useEffect(() => {
+        if (darkTheme) setDarkTheme(!darkTheme);
+    }, [darkTheme, setDarkTheme]);
 
     return (
         <div className="flex justify-center">
