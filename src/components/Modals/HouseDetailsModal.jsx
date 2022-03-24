@@ -15,22 +15,45 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
     const [interestRate, setInterestRate] = useState(4);
     const [termInYears, setTermInYears] = useState(30);
     const [downPaymentAmount, setDownPaymentAmount] = useState(30);
+    const [askingPrice, setAskingPrice] = useState(0);
+    const [afterRepairValue, setAfterRepairValue] = useState(0);
+    const [rehabCost, setRehabCost] = useState(0);
+    const [brrr, setBrrr] = useState(0);
     const downPaymentPercent = 0.2;
     const loanAmount = 240000;
 
-    const calculateClosingCost = () => {
-        return 400;
+    const calculateClosingCost = (aPrice) => {
+        const const1 = home.price * aPrice;
+        const closingcost = const1 * (const1 * 0.03) - const1 * 0.06;
+        return closingcost;
     };
 
-    const claculateMorgage = () => {
+    const calculateMorgage = () => {
         const mortPrice =
             ((home.price - downPaymentAmount) * interestRate) / 360;
         return mortPrice;
     };
 
     useEffect(() => {
-        setDownPaymentAmount(home.price * downPaymentPercent);
+        setDownPaymentAmount((home.price * downPaymentPercent).toFixed(2));
     }, [home.price, downPaymentPercent]);
+
+    useEffect(() => {
+        const _brrr =
+            afterRepairValue * 0.07 -
+            (home.price / downPaymentAmount -
+                rehabCost -
+                calculateClosingCost(askingPrice));
+
+        setBrrr(_brrr > 0 ? _brrr : 0);
+    }, [
+        home.price,
+        afterRepairValue,
+        downPaymentAmount,
+        rehabCost,
+        askingPrice,
+        calculateClosingCost,
+    ]);
 
     return (
         <Modal
@@ -82,8 +105,13 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
 
             <div className="flex gap-4">
                 <div className="flex-[1]">
-                    <h4 className="text-white my-1">Home Price ($)</h4>
-                    <input type="number" className="disabled:bg-brown-color disabled:text-white outline-none ring-0 border-0 py-1" disabled value={home.price} />
+                    <h4 className="text-white my-1">Asking Price ($)</h4>
+                    <input
+                        type="number"
+                        className="disabled:bg-brown-color disabled:text-white outline-none ring-0 border-0 py-1"
+                        onChange={(e) => setAskingPrice(e.target.value)}
+                        value={askingPrice}
+                    />
 
                     <h4 className="text-white my-1">Down Payment ($)</h4>
                     <input
@@ -102,6 +130,24 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
                         onChange={(e) => setInterestRate(e.target.value)}
                         value={interestRate}
                     />
+
+                    <hr className="my-2" />
+
+                    <h4 className="text-white my-1">After Repair Value ($)</h4>
+                    <input
+                        type="number"
+                        className="disabled:bg-brown-color disabled:text-white outline-none ring-0 border-0 py-1"
+                        onChange={(e) => setAfterRepairValue(e.target.value)}
+                        value={afterRepairValue}
+                    />
+
+                    <h4 className="text-white my-1">Rehab Cost ($)</h4>
+                    <input
+                        type="number"
+                        className="disabled:bg-brown-color disabled:text-white outline-none ring-0 border-0 py-1"
+                        onChange={(e) => setRehabCost(e.target.value)}
+                        value={rehabCost}
+                    />
                 </div>
                 <div className="flex-[1]">
                     <div className="ring-2 ring-[#eee] rounded p-2">
@@ -110,17 +156,27 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
                         </h2>
 
                         <div className="mt-2 text-2xl text-white">
-                            {priceFormatter(claculateMorgage())}
+                            {priceFormatter(calculateMorgage())}
                         </div>
                     </div>
 
                     <div className="ring-2 ring-[#eee] rounded p-2 mt-2">
                         <h2 className="text-brown-color">
-                            Projected Rent Calculator{" "}
+                            Projected Rent Calculator
                         </h2>
 
                         <div className="mt-2 text-2xl text-white">
                             {priceFormatter(home.price * 0.014)}
+                        </div>
+                    </div>
+
+                    <div className="ring-2 ring-[#eee] rounded p-2 mt-2">
+                        <h2 className="text-brown-color">
+                            BRRR Method Calculator
+                        </h2>
+
+                        <div className="mt-2 text-2xl text-white">
+                            {priceFormatter(brrr)}
                         </div>
                     </div>
                 </div>
