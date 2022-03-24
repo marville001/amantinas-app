@@ -13,14 +13,14 @@ import { Navigation } from "swiper";
 
 const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
     const [interestRate, setInterestRate] = useState(4);
-    const [termInYears, setTermInYears] = useState(30);
+    // const [termInYears, setTermInYears] = useState(30);
     const [downPaymentAmount, setDownPaymentAmount] = useState(30);
     const [askingPrice, setAskingPrice] = useState(0);
     const [afterRepairValue, setAfterRepairValue] = useState(0);
     const [rehabCost, setRehabCost] = useState(0);
     const [brrr, setBrrr] = useState(0);
-    const downPaymentPercent = 0.2;
-    const loanAmount = 240000;
+    const downPaymentPercent = 0.02;
+    // const loanAmount = 240000;
 
     const calculateClosingCost = useCallback(
         (aPrice) => {
@@ -121,6 +121,7 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
                         className="disabled:bg-brown-color disabled:text-white outline-none ring-0 border-0 py-1"
                         onChange={(e) => setAskingPrice(e.target.value)}
                         value={askingPrice}
+                        min={0}
                     />
 
                     <h4 className="text-white my-1">Down Payment ($)</h4>
@@ -128,6 +129,7 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
                         type="number"
                         className="py-1"
                         value={downPaymentAmount}
+                        min={0}
                     />
 
                     <label className="text-white mt-4 block my-1">
@@ -139,6 +141,7 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
                         step={0.001}
                         onChange={(e) => setInterestRate(e.target.value)}
                         value={interestRate}
+                        min={0}
                     />
 
                     <hr className="my-2" />
@@ -149,6 +152,7 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
                         className="disabled:bg-brown-color disabled:text-white outline-none ring-0 border-0 py-1"
                         onChange={(e) => setAfterRepairValue(e.target.value)}
                         value={afterRepairValue}
+                        min={0}
                     />
 
                     <h4 className="text-white my-1">Rehab Cost ($)</h4>
@@ -157,6 +161,7 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
                         className="disabled:bg-brown-color disabled:text-white outline-none ring-0 border-0 py-1"
                         onChange={(e) => setRehabCost(e.target.value)}
                         value={rehabCost}
+                        min={0}
                     />
                 </div>
                 <div className="flex-[1]">
