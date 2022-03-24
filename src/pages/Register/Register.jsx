@@ -56,6 +56,7 @@ const Register = () => {
     useEffect(() => {
         if (darkTheme) setDarkTheme(!darkTheme);
     }, [darkTheme, setDarkTheme]);
+ 
 
     return (
         <div className="flex justify-center">
