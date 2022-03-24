@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import priceFormatter from "../../utils/priceFormatter";
@@ -22,11 +22,21 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
     const downPaymentPercent = 0.2;
     const loanAmount = 240000;
 
-    const calculateClosingCost = (aPrice) => {
-        const const1 = home.price * aPrice;
-        const closingcost = const1 * (const1 * 0.03) - const1 * 0.06;
-        return closingcost;
-    };
+    const calculateClosingCost = useCallback(
+        (aPrice) => {
+            const const1 = home.price * aPrice;
+            const closingcost = const1 * (const1 * 0.03) - const1 * 0.06;
+            return closingcost;
+        },
+        [home.price]
+    );
+
+    const calculateRent = () => home.price * 0.014;
+
+    const calculateMonthlyIncome = () => {
+        
+        return 20;
+    }
 
     const calculateMorgage = () => {
         const mortPrice =
@@ -86,15 +96,15 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
             </div>
 
             <div className="my-4 grid grid-cols-1 sm:grid-cols-3 gap-4 text-white sm:divide-x-2 divide-red-200 ">
-                <div className="flex items-center space-x-4 justify-between  pr-4">
+                <div className="flex items-center space-x-4 justify-between  sm:pr-4">
                     <span>Bedrooms</span>
                     <strong>{home.bedrooms}</strong>
                 </div>
-                <div className="flex items-center space-x-4  justify-between px-4">
+                <div className="flex items-center space-x-4  justify-between sm:px-4">
                     <span>Bathrooms</span>
                     <strong>{home.bathrooms}</strong>
                 </div>
-                <div className="flex items-center space-x-4  justify-between  pl-4">
+                <div className="flex items-center space-x-4  justify-between  sm:pl-4">
                     <span>Location</span>
                     <strong>{home.location}</strong>
                 </div>
@@ -103,7 +113,7 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
             {/* Calculators */}
             <hr className="my-4 text-brown-color opacity-60" />
 
-            <div className="flex gap-4">
+            <div className="flex gap-4 flex-col md:flex-row">
                 <div className="flex-[1]">
                     <h4 className="text-white my-1">Asking Price ($)</h4>
                     <input
@@ -125,7 +135,7 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
                     </label>
                     <input
                         type="number"
-                        className="!w-auto inline py-1"
+                        className="py-1"
                         step={0.001}
                         onChange={(e) => setInterestRate(e.target.value)}
                         value={interestRate}
@@ -166,7 +176,7 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
                         </h2>
 
                         <div className="mt-2 text-2xl text-white">
-                            {priceFormatter(home.price * 0.014)}
+                            {priceFormatter(calculateRent())}
                         </div>
                     </div>
 
@@ -181,14 +191,29 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
                     </div>
 
                     <div className="ring-2 ring-[#eee] rounded p-2 mt-2">
-                        <h2 className="text-brown-color">
-                            Monthly Income
-                        </h2>
+                        <h2 className="text-brown-color">Monthly Income</h2>
 
                         <div className="mt-2 text-2xl text-white">
-                            {priceFormatter(254)}
+                            {priceFormatter(calculateMonthlyIncome())}
                         </div>
                     </div>
+
+                    <div className="ring-2 ring-[#eee] rounded p-2 mt-2">
+                        <h2 className="text-brown-color">Yearly Income</h2>
+
+                        <div className="mt-2 text-2xl text-white">
+                            {priceFormatter(calculateMonthlyIncome() * 12)}
+                        </div>
+                    </div>
+
+                    <div className="ring-2 ring-[#eee] rounded p-2 mt-2">
+                        <h2 className="text-brown-color"> Yearly ROI Calculator</h2>
+
+                        <div className="mt-2 text-2xl text-white">
+                            {priceFormatter(calculateMonthlyIncome() * 12)}
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
