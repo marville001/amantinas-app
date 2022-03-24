@@ -179,6 +179,16 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
                             {priceFormatter(brrr)}
                         </div>
                     </div>
+
+                    <div className="ring-2 ring-[#eee] rounded p-2 mt-2">
+                        <h2 className="text-brown-color">
+                            Monthly Income
+                        </h2>
+
+                        <div className="mt-2 text-2xl text-white">
+                            {priceFormatter(254)}
+                        </div>
+                    </div>
                 </div>
             </div>
 

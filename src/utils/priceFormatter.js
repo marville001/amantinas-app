@@ -5,7 +5,7 @@ const priceFormatter = (price) => {
         minimumFractionDigits: 0,
     });
 
-    return formatter.format(price);
+    return formatter.format(price).replace("$", "$ ");
 };
 
 export default priceFormatter;
