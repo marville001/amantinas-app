@@ -73,7 +73,9 @@ const ScrapedHomes = () => {
                                 }
                             }}
                             disabled={loadingScrapedHomes}
-                            className="disabled:cursor-not-allowed disabled:opacity-50 bg-primary-blue text-white py-2 px-10 rounded-lg flex items-center space-x-2"
+                            className="disabled:cursor-not-allowed disabled:opacity-50 bg-primary-blue 
+                            text-white py-2 px-10 rounded-lg flex items-center space-x-2
+                            dark:bg-dark-primary-color"
                         >
                             {loadingScrapedHomes ? (
                                 <>
