@@ -14,6 +14,7 @@ import ConfirmModal from "../Modals/ConfirmModal";
 import HouseDetailsModal from "../Modals/HouseDetailsModal";
 
 const HomeCard = ({ home }) => {
+    console.log({home});
     const { user } = useSelector((state) => state.userAuthState);
 
     const [loading, setLoading] = useState(false);
@@ -67,7 +68,7 @@ const HomeCard = ({ home }) => {
             <div className="w-full relative">
                 <img
                     className="w-full h-36 object-cover rounded-lg cursor-pointer"
-                    src={home?.images[0]}
+                    src={home?.images[1] ? home?.images[1] : home?.images[0]}
                     alt=""
                     onClick={() => {
                         setDetailsModalOpen(true);

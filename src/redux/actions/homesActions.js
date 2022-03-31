@@ -44,7 +44,7 @@ export const updateProspectAction = (id, details) => async (dispatch) => {
 };
 
 export const getHomesAction =
-    ({ investorId, scraped = false }) =>
+    ({ investorId, scraped = false, pageSize }) =>
     async (dispatch) => {
         if (scraped) {
             dispatch({ type: GET_SCRAPED_HOMES.REQUEST });
@@ -54,17 +54,21 @@ export const getHomesAction =
 
         try {
             const data = await get(
-                `homes${scraped ? "/scraped" : ""}/${investorId}`
+                `homes${
+                    scraped ? "/scraped" : ""
+                }/${investorId}?pageSize=${pageSize}`
             );
             if (scraped) {
                 dispatch({
                     type: GET_SCRAPED_HOMES.SUCCESS,
                     homes: data.homes,
+                    total: data.total,
                 });
             } else {
                 dispatch({
                     type: GET_HOMES.SUCCESS,
                     homes: data.homes,
+                    total: data.total,
                 });
             }
 

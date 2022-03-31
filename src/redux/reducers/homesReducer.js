@@ -14,18 +14,28 @@ const initialState = {
 const homesReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_HOMES.REQUEST:
-            return { ...state, loadingScrapedHomes: true };
+            return { ...state, loading: true };
         case GET_HOMES.SUCCESS:
-            return { ...state, loadingScrapedHomes: false, homes: action.homes };
+            return {
+                ...state,
+                loading: false,
+                homes: action.homes,
+                total: action.total,
+            };
         case GET_HOMES.FAIL:
-            return { ...state, loadingScrapedHomes: false };
+            return { ...state, loading: false };
 
         case GET_SCRAPED_HOMES.REQUEST:
-            return { ...state, loading: true };
+            return { ...state, loadingScrapedHomes: true };
         case GET_SCRAPED_HOMES.SUCCESS:
-            return { ...state, loading: false, scrapedHomes: action.homes };
+            return {
+                ...state,
+                loadingScrapedHomes: false,
+                scrapedHomes: action.homes,
+                total: action.total,
+            };
         case GET_SCRAPED_HOMES.FAIL:
-            return { ...state, loading: false };
+            return { ...state, loadingScrapedHomes: false };
 
         case CREATE_HOME.REQUEST:
             return { ...state, isCreatingProspect: true };

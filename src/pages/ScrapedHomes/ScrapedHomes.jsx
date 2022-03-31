@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import DashboardWrapper from "../../components/DashboardWrapper/DashboardWrapper";
 import HomeCard from "../../components/HomeCard/HomeCard";
 
@@ -11,9 +11,11 @@ import { getHomesAction } from "../../redux/actions/homesActions";
 const ScrapedHomes = () => {
     const { user } = useSelector((state) => state.userAuthState);
     const { viewType } = useSelector((state) => state.appState);
-    const { scrapedHomes, loadingScrapedHomes } = useSelector(
+    const { scrapedHomes, total, loadingScrapedHomes } = useSelector(
         (state) => state.homesState
     );
+
+    const [pageSize, setPageSize] = useState(10);
 
     const dispatch = useDispatch();
 
@@ -25,9 +27,10 @@ const ScrapedHomes = () => {
                         ? user.investorId
                         : user?._id,
                 scraped: true,
+                pageSize,
             })
         );
-    }, [dispatch, user?._id, user.investorId, user.type]);
+    }, [dispatch, user?._id, user.investorId, user.type, pageSize]);
 
     return (
         <DashboardWrapper title="Scraping Homes">
@@ -44,25 +47,43 @@ const ScrapedHomes = () => {
                     </div>
                 )}
 
-                {scrapedHomes?.length <= 0 ? (
+                {scrapedHomes?.length <= 0 && !loadingScrapedHomes ? (
                     <div className="text-center py-4 text-lg text-slate-900 font-medium rounded-md bg-yellow-300">
                         <h3>No Scraped homes yet from your scrapes</h3>
                     </div>
                 ) : viewType === "cards" ? (
                     <div className="px-12 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-16">
-                        {scrapedHomes
-                            ?.filter((h) => h.scraped === true)
-                            .map((home, idx) => (
-                                <HomeCard key={home._id} home={home} />
-                            ))}
+                        {scrapedHomes.map((home, idx) => (
+                            <HomeCard key={home._id} home={home} />
+                        ))}
                     </div>
                 ) : (
                     <div className="md:px-12 flex flex-col space-y-2">
-                        {scrapedHomes
-                            ?.filter((h) => h.scraped === true)
-                            .map((home, idx) => (
-                                <ListCard key={home._id} home={home} />
-                            ))}
+                        {scrapedHomes.map((home, idx) => (
+                            <ListCard key={home._id} home={home} />
+                        ))}
+                    </div>
+                )}
+                {pageSize < total && (
+                    <div className="flex justify-center my-5">
+                        <button
+                            onClick={() => {
+                                if (total > pageSize) {
+                                    setPageSize(pageSize + 10);
+                                }
+                            }}
+                            disabled={loadingScrapedHomes}
+                            className="disabled:cursor-not-allowed disabled:opacity-50 bg-primary-blue text-white py-2 px-10 rounded-lg flex items-center space-x-2"
+                        >
+                            {loadingScrapedHomes ? (
+                                <>
+                                    <FaSpinner className="animate-spin" />
+                                    <span>Loading...</span>
+                                </>
+                            ) : (
+                                <span>Load More</span>
+                            )}
+                        </button>
                     </div>
                 )}
             </div>
