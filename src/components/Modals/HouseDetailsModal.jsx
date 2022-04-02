@@ -19,20 +19,17 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
     const [afterRepairValue, setAfterRepairValue] = useState(0);
     const [rehabCost, setRehabCost] = useState(0);
     const [brrr, setBrrr] = useState(0);
+    const [insurance, setInsurance] = useState(0);
     const downPaymentPercent = 0.02;
     // const loanAmount = 240000;
+
+    const [monthlyIncome, setMonthlyIncome] = useState(0);
 
     const calculateClosingCost = useCallback((aPrice) => {
         const const1 = parseInt(aPrice);
         const closingcost = const1 * 0.03;
         return closingcost;
     }, []);
-
-    const calculateRent = () => home.price * 0.014;
-
-    const calculateMonthlyIncome = () => {
-        return 20;
-    };
 
     const calculateMorgage = () => {
         const mortPrice =
@@ -43,6 +40,23 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
     useEffect(() => {
         setDownPaymentAmount((home.price * downPaymentPercent).toFixed(2));
     }, [home.price, downPaymentPercent]);
+
+    // Monthly Profit:
+    // Rent - Property Management - Mortgage (if using it) = Monthly Profit
+
+    // if not using mortgage
+
+    // Rent - Property Management - Insurance(monthly so divide by 12) - Taxes (monthly so divide by 12) = Monthly Profit
+
+    const calculateRent = () => home.price * 0.014;
+
+    useEffect(() => {
+        const rent = home.price * 0.014;
+        const project_mngmnt = rent * 0.01;
+        const _mortPrice =
+            ((home.price - downPaymentAmount) * interestRate) / 360;
+        setMonthlyIncome((rent - project_mngmnt - _mortPrice).toFixed(2));
+    }, [home.price, downPaymentAmount, interestRate]);
 
     useEffect(() => {
         //  BRRR Method Calculator
@@ -161,6 +175,15 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
                         value={rehabCost}
                         min={0}
                     />
+
+                    <h4 className="text-white my-1 hidden">Insurance ($)</h4>
+                    <input
+                        type="number"
+                        className="hidden disabled:bg-brown-color disabled:text-white outline-none ring-0 border-0 py-1"
+                        onChange={(e) => setInsurance(e.target.value)}
+                        value={insurance}
+                        min={0}
+                    />
                 </div>
                 <div className="flex-[1]">
                     <div className="ring-2 ring-[#eee] rounded p-2">
@@ -197,7 +220,7 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
                         <h2 className="text-brown-color">Monthly Income</h2>
 
                         <div className="mt-2 text-2xl text-white">
-                            {priceFormatter(calculateMonthlyIncome())}
+                            {priceFormatter(monthlyIncome)}
                         </div>
                     </div>
 
@@ -205,7 +228,7 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
                         <h2 className="text-brown-color">Yearly Income</h2>
 
                         <div className="mt-2 text-2xl text-white">
-                            {priceFormatter(calculateMonthlyIncome() * 12)}
+                            {priceFormatter(monthlyIncome * 12)}
                         </div>
                     </div>
 
@@ -215,9 +238,7 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
                             Yearly ROI Calculator
                         </h2>
 
-                        <div className="mt-2 text-2xl text-white">
-                            {priceFormatter(calculateMonthlyIncome() * 12)}
-                        </div>
+                        <div className="mt-2 text-2xl text-white">55 %</div>
                     </div>
                 </div>
             </div>
