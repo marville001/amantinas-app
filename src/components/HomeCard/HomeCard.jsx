@@ -14,7 +14,6 @@ import ConfirmModal from "../Modals/ConfirmModal";
 import HouseDetailsModal from "../Modals/HouseDetailsModal";
 
 const HomeCard = ({ home }) => {
-    console.log({home});
     const { user } = useSelector((state) => state.userAuthState);
 
     const [loading, setLoading] = useState(false);

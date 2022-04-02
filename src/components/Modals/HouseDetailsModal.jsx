@@ -22,21 +22,17 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
     const downPaymentPercent = 0.02;
     // const loanAmount = 240000;
 
-    const calculateClosingCost = useCallback(
-        (aPrice) => {
-            const const1 = home.price * aPrice;
-            const closingcost = const1 * (const1 * 0.03) - const1 * 0.06;
-            return closingcost;
-        },
-        [home.price]
-    );
+    const calculateClosingCost = useCallback((aPrice) => {
+        const const1 = parseInt(aPrice);
+        const closingcost = const1 * 0.03;
+        return closingcost;
+    }, []);
 
     const calculateRent = () => home.price * 0.014;
 
     const calculateMonthlyIncome = () => {
-        
         return 20;
-    }
+    };
 
     const calculateMorgage = () => {
         const mortPrice =
@@ -49,11 +45,13 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
     }, [home.price, downPaymentPercent]);
 
     useEffect(() => {
-        const _brrr =
-            afterRepairValue * 0.07 -
-            (home.price / downPaymentAmount -
-                rehabCost -
-                calculateClosingCost(askingPrice));
+        //  BRRR Method Calculator
+        // (After Repair Value * 0.7) - (Offer price / Asking price - Rehab Cost - Closing costs)
+        const value1 = afterRepairValue * 0.7;
+        const value2 = parseInt(home.price) / parseInt(askingPrice);
+        const _closingCost = calculateClosingCost(askingPrice);
+
+        const _brrr = value1 - (value2 - rehabCost - _closingCost);
 
         setBrrr(_brrr > 0 ? _brrr : 0);
     }, [
@@ -96,15 +94,15 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
             </div>
 
             <div className="my-4 grid grid-cols-1 sm:grid-cols-3 gap-4 text-white sm:divide-x-2 divide-red-200 ">
-                <div className="flex items-center space-x-4 justify-between  sm:pr-4">
+                <div className="flex space-y-2 sm:pr-4 flex-col">
                     <span>Bedrooms</span>
                     <strong>{home.bedrooms}</strong>
                 </div>
-                <div className="flex items-center space-x-4  justify-between sm:px-4">
+                <div className="flex space-y-2 sm:px-4 flex-col">
                     <span>Bathrooms</span>
                     <strong>{home.bathrooms}</strong>
                 </div>
-                <div className="flex items-center space-x-4  justify-between  sm:pl-4">
+                <div className="flex space-y-2  sm:pl-4 flex-col">
                     <span>Location</span>
                     <strong>{home.location}</strong>
                 </div>
@@ -212,13 +210,15 @@ const HouseDetailsModal = ({ isOpen, closeModal = () => {}, home }) => {
                     </div>
 
                     <div className="ring-2 ring-[#eee] rounded p-2 mt-2">
-                        <h2 className="text-brown-color"> Yearly ROI Calculator</h2>
+                        <h2 className="text-brown-color">
+                            {" "}
+                            Yearly ROI Calculator
+                        </h2>
 
                         <div className="mt-2 text-2xl text-white">
                             {priceFormatter(calculateMonthlyIncome() * 12)}
                         </div>
                     </div>
-
                 </div>
             </div>
 
