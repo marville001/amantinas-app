@@ -2,8 +2,14 @@ import React, { useEffect, useState } from "react";
 import { FaFacebookF, FaGoogle, FaSpinner } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { userLogoutAction, userRegisterAction } from "../../redux/actions/userAuthActions";
+import {
+    userLogoutAction,
+    userRegisterAction,
+} from "../../redux/actions/userAuthActions";
 import useDarkMode from "../../hooks/useDarkMode";
+
+import GoogleLogin from "react-google-login";
+import FacebookLogin from "react-facebook-login";
 
 const Register = () => {
     const { user, isCreatingUser } = useSelector(
@@ -20,6 +26,23 @@ const Register = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const responseGoogle = (response) => {
+        console.log(response);
+    };
+
+    const responseFacebook = async (response) => {
+        if (response.userID) {
+            setError("");
+            const obj = { email: response.email };
+
+            const res = await dispatch(userRegisterAction(obj, "facebook"));
+            if (!res.success) {
+                setError(res.message);
+                return;
+            }
+        }
+    };
 
     const handleEmailSubmit = async () => {
         setError("");
@@ -56,7 +79,6 @@ const Register = () => {
     useEffect(() => {
         if (darkTheme) setDarkTheme(!darkTheme);
     }, [darkTheme, setDarkTheme]);
- 
 
     return (
         <div className="flex justify-center">
@@ -65,13 +87,40 @@ const Register = () => {
                     Sign Up
                 </h1>
                 <div className="flex space-x-5 my-6 justify-center">
-                    <div className="cursor-pointer p-2 px-4 sm:px-12 rounded-lg bg-primary-blue text-white flex justify-center items-center">
-                        <FaGoogle className="text-white font-bold text-lg sm:text-2xl mr-2" />
-                        <span className="text-sm">Sign up with Google</span>
-                    </div>
-                    <div className="cursor-pointer p-3 px-4 rounded-lg bg-white font-bold text-primary-blue">
-                        <FaFacebookF className="text-primary-blue font-bold text-xl sm:text-4xl mr-2" />
-                    </div>
+                    <GoogleLogin
+                        clientId="202471176377-6j6tvqu6ulhuffe440snjbrg5e3bpilo.apps.googleusercontent.com"
+                        buttonText="Login"
+                        onSuccess={responseGoogle}
+                        onFailure={responseGoogle}
+                        cookiePolicy={"single_host_origin"}
+                        render={(props) => (
+                            <button
+                                onClick={props.onClick}
+                                disabled={props.disabled}
+                                className={`
+                                cursor-pointer p-2 px-4 sm:px-12 rounded-lg 
+                                bg-primary-blue text-white flex justify-center 
+                                items-center disabled:opacity-75
+                                `}
+                            >
+                                <FaGoogle className="text-white font-bold text-xl sm:text-2xl mr-2" />
+                                <span className="text-sm">
+                                    Sign in with Google
+                                </span>
+                            </button>
+                        )}
+                    />
+
+                    <FacebookLogin
+                        appId="1626605131030552"
+                        callback={responseFacebook}
+                        fields="name,email,picture"
+                        cssClass="cursor-pointer p-3 px-4 rounded-lg bg-white font-bold text-primary-blue"
+                        textButton=""
+                        icon={
+                            <FaFacebookF className="text-primary-blue font-bold text-xl sm:text-4xl mr-2" />
+                        }
+                    />
                 </div>
 
                 <div className="mt-10">

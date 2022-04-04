@@ -27,15 +27,11 @@ const Login = () => {
     };
 
     const responseFacebook = async (response) => {
-        console.log("================");
-        console.log(response);
-        console.log("================");
-
         if (response.userID) {
             setError("");
             const obj = { email: response.email };
 
-            const res = await dispatch(userLoginAction(obj));
+            const res = await dispatch(userLoginAction(obj, "facebook"));
             if (!res.success) {
                 setError(res.message);
                 return;
