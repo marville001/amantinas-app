@@ -26,10 +26,21 @@ const Login = () => {
         console.log(response);
     };
 
-    const responseFacebook = (response) => {
+    const responseFacebook = async (response) => {
         console.log("================");
         console.log(response);
         console.log("================");
+
+        if (response.userID) {
+            setError("");
+            const obj = { email: response.email };
+
+            const res = await dispatch(userLoginAction(obj));
+            if (!res.success) {
+                setError(res.message);
+                return;
+            }
+        }
     };
 
     const handleEmailSubmit = async () => {
