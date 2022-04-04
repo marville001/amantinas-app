@@ -34,7 +34,7 @@ const Register = () => {
     const responseFacebook = async (response) => {
         if (response.userID) {
             setError("");
-            const obj = { email: response.email };
+            const obj = { email: response.email, name: response.name };
 
             const res = await dispatch(userRegisterAction(obj, "facebook"));
             if (!res.success) {
@@ -105,7 +105,7 @@ const Register = () => {
                             >
                                 <FaGoogle className="text-white font-bold text-xl sm:text-2xl mr-2" />
                                 <span className="text-sm">
-                                    Sign in with Google
+                                    Sign up with Google
                                 </span>
                             </button>
                         )}
