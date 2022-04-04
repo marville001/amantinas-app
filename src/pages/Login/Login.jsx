@@ -27,7 +27,9 @@ const Login = () => {
     };
 
     const responseFacebook = (response) => {
+        console.log("================");
         console.log(response);
+        console.log("================");
     };
 
     const handleEmailSubmit = async () => {
@@ -88,7 +90,7 @@ const Login = () => {
                     />
 
                     <FacebookLogin
-                        appId="498471691691479"
+                        appId="1626605131030552"
                         callback={responseFacebook}
                         fields="name,email,picture"
                         cssClass="cursor-pointer p-3 px-4 rounded-lg bg-white font-bold text-primary-blue"
